@@ -152,11 +152,11 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                7
+                9
                 <span>posts</span>
             </div>
             <div class="article-info-block">
-                8
+                12
                 <span>tags</span>
             </div>
         </div>
@@ -181,6 +181,272 @@
 
             
             <section id="main">
+    <article id="post-20170905-2" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/blog/2017/09/05/20170905-2/">window.open()에 헤더 추가하기</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/blog/2017/09/05/20170905-2/">
+            <time datetime="2017-09-05T05:24:01.000Z" itemprop="datePublished">2017-09-05</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/JavaScript/">JavaScript</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/blog/tags/add-header/">add_header</a>, <a class="tag-link" href="/blog/tags/window-open/">window.open</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p><code>window.open(url);</code> 을 하면 새 창이 열린다.<br>새 창을 열 때 헤더를 추가하려면 아래와 같이 하면 된다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">let</span> xhttp = new XMLHttpRequest();</div><div class="line"></div><div class="line">xhttp.open(<span class="string">"GET"</span>, url, <span class="literal">true</span>);</div><div class="line">xhttp.setRequestHeader(<span class="string">"Content-type"</span>, <span class="string">"application/json"</span>]);</div><div class="line">xhttp.responseType = <span class="string">"blob"</span>;</div><div class="line"></div><div class="line">xhttp.onreadystatechange = <span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">    <span class="keyword">if</span> (this.readyState == 4 &amp;&amp; this.status == 200) &#123;</div><div class="line">        // Typical action to be performed when the document is ready:</div><div class="line">        window.open(URL.createObjectURL(xhttp.response));</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">xhttp.send();</div></pre></td></tr></table></figure>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://kkapkkapchu.github.io/blog/2017/09/05/20170905-2/" data-id="cj776slv80009quwb5p54jfh0" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="https://kkapkkapchu.github.io/blog/2017/09/05/20170905-2/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://kkapkkapchu.github.io/blog/2017/09/05/20170905-2/">Comments</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-20170905" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/blog/2017/09/05/20170905/">Object 의 key/value 값 가져오기</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/blog/2017/09/05/20170905/">
+            <time datetime="2017-09-05T05:24:01.000Z" itemprop="datePublished">2017-09-05</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/JavaScript/">JavaScript</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/blog/tags/key-value/">key/value</a>, <a class="tag-link" href="/blog/tags/object/">object</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h3 id="Object-의-key-값-가져오기"><a href="#Object-의-key-값-가져오기" class="headerlink" title="Object 의 key 값 가져오기"></a>Object 의 key 값 가져오기</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">let</span> requestHeaderObject = &#123;</div><div class="line">    key1: value1,</div><div class="line">    key2: value2,</div><div class="line">&#125;;</div><div class="line"></div><div class="line">console.log(Object.keys(requestHeaderObject)); // [<span class="string">"key1"</span>, <span class="string">"key2"</span>]</div></pre></td></tr></table></figure>
+<p><code>Object.keys</code> 안에 key 값을 가져올 객체를 넣으면 객체의 key 값이 배열로 떨어진다.</p>
+<p>value 를 가져올 때는 객체의 key 배열을 돌면서 value 를 가져오면 된다.</p>
+<h3 id="Object-의-value-값-가져오기"><a href="#Object-의-value-값-가져오기" class="headerlink" title="Object 의 value 값 가져오기"></a>Object 의 value 값 가져오기</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">let</span> requestHeaderObject = &#123;</div><div class="line">    key1: value1,</div><div class="line">    key2: value2,</div><div class="line">&#125;;</div><div class="line"></div><div class="line">Object.keys(requestHeaderObject).map((value) =&gt; &#123;</div><div class="line">    console.log(value, requestHeaderObject[value]);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">// key1 value1</div><div class="line">// key2 value2</div></pre></td></tr></table></figure>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://kkapkkapchu.github.io/blog/2017/09/05/20170905/" data-id="cj776slvg000gquwbf7sd2tlw" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="https://kkapkkapchu.github.io/blog/2017/09/05/20170905/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://kkapkkapchu.github.io/blog/2017/09/05/20170905/">Comments</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
     <article id="post-20170829" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -224,10 +490,8 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>input 요소의 마우스 커서 위치 얻어오기</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 커서의 위치를 반환합니다.</div><div class="line"> */</div><div class="line">getCaretPosition = () =&gt; &#123;</div><div class="line">    <span class="built_in">let</span> targetElement = this.refs.input;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (document.selection) &#123; // IE &lt; 9</div><div class="line">        targetElement.focus();</div><div class="line">        <span class="built_in">let</span> range = document.selection.createRange();</div><div class="line">        <span class="built_in">let</span> rangeLength = range.text.length;</div><div class="line">        range.moveStart(<span class="string">'character'</span>, -targetElement.value.length);</div><div class="line"></div><div class="line">        <span class="built_in">let</span> start = range.text.length - rangeLength;</div><div class="line">        <span class="built_in">return</span> &#123;<span class="string">'start'</span>: start, <span class="string">'end'</span>: start + rangeLength&#125;;</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (targetElement.selectionStart || targetElement.selectionStart == <span class="string">'0'</span>) &#123; // IE &gt;= 9 and Other Browsers</div><div class="line">        <span class="built_in">return</span> &#123;<span class="string">'start'</span>: targetElement.selectionStart, <span class="string">'end'</span>: targetElement.selectionEnd&#125;;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="built_in">return</span> &#123;<span class="string">'start'</span>: 0, <span class="string">'end'</span>: 0&#125;;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<p>input 요소의 마우스 커서 위치 변경하기</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 커서의 위치를 지정합니다.</div><div class="line"> */</div><div class="line">setCaretPosition = (start, end) =&gt; &#123;</div><div class="line">    <span class="built_in">let</span> targetElement = this.refs.input;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (targetElement.setSelectionRange) &#123; // IE &gt;= 9 and Other Browsers</div><div class="line">        targetElement.focus();</div><div class="line">        targetElement.setSelectionRange(start, end);</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (targetElement.createTextRange) &#123; // IE &lt; 9</div><div class="line">        <span class="built_in">let</span> range = targetElement.createTextRange();</div><div class="line">        range.collapse(<span class="literal">true</span>);</div><div class="line">        range.moveEnd(<span class="string">'character'</span>, end);</div><div class="line">        range.moveStart(<span class="string">'character'</span>, start);</div><div class="line">        range.select();</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+            <h3 id="input-요소의-마우스-커서-위치-얻어오기"><a href="#input-요소의-마우스-커서-위치-얻어오기" class="headerlink" title="input 요소의 마우스 커서 위치 얻어오기"></a>input 요소의 마우스 커서 위치 얻어오기</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 커서의 위치를 반환합니다.</div><div class="line"> */</div><div class="line">getCaretPosition = () =&gt; &#123;</div><div class="line">    <span class="built_in">let</span> targetElement = this.refs.input;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (document.selection) &#123; // IE &lt; 9</div><div class="line">        targetElement.focus();</div><div class="line">        <span class="built_in">let</span> range = document.selection.createRange();</div><div class="line">        <span class="built_in">let</span> rangeLength = range.text.length;</div><div class="line">        range.moveStart(<span class="string">'character'</span>, -targetElement.value.length);</div><div class="line"></div><div class="line">        <span class="built_in">let</span> start = range.text.length - rangeLength;</div><div class="line">        <span class="built_in">return</span> &#123;<span class="string">'start'</span>: start, <span class="string">'end'</span>: start + rangeLength&#125;;</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (targetElement.selectionStart || targetElement.selectionStart == <span class="string">'0'</span>) &#123; // IE &gt;= 9 and Other Browsers</div><div class="line">        <span class="built_in">return</span> &#123;<span class="string">'start'</span>: targetElement.selectionStart, <span class="string">'end'</span>: targetElement.selectionEnd&#125;;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="built_in">return</span> &#123;<span class="string">'start'</span>: 0, <span class="string">'end'</span>: 0&#125;;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="input-요소의-마우스-커서-위치-변경하기"><a href="#input-요소의-마우스-커서-위치-변경하기" class="headerlink" title="input 요소의 마우스 커서 위치 변경하기"></a>input 요소의 마우스 커서 위치 변경하기</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 커서의 위치를 지정합니다.</div><div class="line"> */</div><div class="line">setCaretPosition = (start, end) =&gt; &#123;</div><div class="line">    <span class="built_in">let</span> targetElement = this.refs.input;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (targetElement.setSelectionRange) &#123; // IE &gt;= 9 and Other Browsers</div><div class="line">        targetElement.focus();</div><div class="line">        targetElement.setSelectionRange(start, end);</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (targetElement.createTextRange) &#123; // IE &lt; 9</div><div class="line">        <span class="built_in">let</span> range = targetElement.createTextRange();</div><div class="line">        range.collapse(<span class="literal">true</span>);</div><div class="line">        range.moveEnd(<span class="string">'character'</span>, end);</div><div class="line">        range.moveStart(<span class="string">'character'</span>, start);</div><div class="line">        range.select();</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 
         
         </div>
@@ -238,7 +502,7 @@
 
 </div>
 
-    <a data-url="https://kkapkkapchu.github.io/blog/2017/08/28/20170829/" data-id="cj6xa2p2p0004f0wbaqouf064" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://kkapkkapchu.github.io/blog/2017/08/28/20170829/" data-id="cj776slvb000cquwbmhwlcagd" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -372,7 +636,7 @@
 
 </div>
 
-    <a data-url="https://kkapkkapchu.github.io/blog/2017/08/28/20170828/" data-id="cj6xa2p400017f0wb7cjsk74k" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://kkapkkapchu.github.io/blog/2017/08/28/20170828/" data-id="cj776slvc000dquwba3jdnlzl" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -509,7 +773,7 @@
 
 </div>
 
-    <a data-url="https://kkapkkapchu.github.io/blog/2017/08/25/20170825/" data-id="cj6xa2p2s0006f0wb34c9slk4" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://kkapkkapchu.github.io/blog/2017/08/25/20170825/" data-id="cj776slv50008quwbzmxxzb3m" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -642,7 +906,7 @@
 
 </div>
 
-    <a data-url="https://kkapkkapchu.github.io/blog/2017/08/17/20170817/" data-id="cj6xa2p2f0000f0wbgzushd9z" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://kkapkkapchu.github.io/blog/2017/08/17/20170817/" data-id="cj776slup0000quwbrcr70yry" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -780,7 +1044,7 @@
 
 </div>
 
-    <a data-url="https://kkapkkapchu.github.io/blog/2017/08/13/20170813/" data-id="cj6xa2p2r0005f0wbpcku5aqf" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://kkapkkapchu.github.io/blog/2017/08/13/20170813/" data-id="cj776slv30006quwbjbj1p5c1" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -915,7 +1179,7 @@
 
 </div>
 
-    <a data-url="https://kkapkkapchu.github.io/blog/2017/08/03/20170803/" data-id="cj6xa2p2j0001f0wbzsb7ntaz" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://kkapkkapchu.github.io/blog/2017/08/03/20170803/" data-id="cj776sluv0002quwbzxbtrvbe" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1050,7 +1314,7 @@
 
 </div>
 
-    <a data-url="https://kkapkkapchu.github.io/blog/2017/07/24/hello-world/" data-id="cj6xa2p420019f0wb5mjqgem5" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://kkapkkapchu.github.io/blog/2017/07/24/hello-world/" data-id="cj776slvh000iquwbzai6bb5e" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1142,6 +1406,24 @@
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/JavaScript/">JavaScript</a></p>
+                            <p class="item-title"><a href="/blog/2017/09/05/20170905-2/" class="title">window.open()에 헤더 추가하기</a></p>
+                            <p class="item-date"><time datetime="2017-09-05T05:24:01.000Z" itemprop="datePublished">2017-09-05</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/JavaScript/">JavaScript</a></p>
+                            <p class="item-title"><a href="/blog/2017/09/05/20170905/" class="title">Object 의 key/value 값 가져오기</a></p>
+                            <p class="item-date"><time datetime="2017-09-05T05:24:01.000Z" itemprop="datePublished">2017-09-05</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/JavaScript/">JavaScript</a></p>
                             <p class="item-title"><a href="/blog/2017/08/28/20170829/" class="title">input 에서 마우스 커서 위치 얻어오기 및 변경하기</a></p>
                             <p class="item-date"><time datetime="2017-08-28T07:22:44.000Z" itemprop="datePublished">2017-08-28</time></p>
                         </div>
@@ -1165,24 +1447,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/JavaScript/">JavaScript</a></p>
-                            <p class="item-title"><a href="/blog/2017/08/17/20170817/" class="title">keycode 라이브러리 사용시 키보드 오른쪽 keypad 숫자 가져오기</a></p>
-                            <p class="item-date"><time datetime="2017-08-17T02:01:12.000Z" itemprop="datePublished">2017-08-17</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/JavaScript/">JavaScript</a></p>
-                            <p class="item-title"><a href="/blog/2017/08/13/20170813/" class="title">HTML 요소 동적으로 생성하고 속성(Attribute) 추가하기</a></p>
-                            <p class="item-date"><time datetime="2017-08-13T07:18:27.000Z" itemprop="datePublished">2017-08-13</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -1192,7 +1456,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">categories</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/">Web</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/CSS/">CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/Hexo/">Hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/JavaScript/">JavaScript</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/JavaScript/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/JavaScript/library/">library</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/">Web</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/CSS/">CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/Hexo/">Hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/JavaScript/">JavaScript</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/JavaScript/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/JavaScript/library/">library</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul>
         </div>
     </div>
 
@@ -1201,7 +1465,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">archives</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/08/">August 2017</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/09/">September 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/08/">August 2017</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -1210,7 +1474,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">tags</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/HTML/">HTML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/IE/">IE</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/caret-position/">caret_position</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/keycode/">keycode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mouse-click-event/">mouse_click_event</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mouse-cursor-get/">mouse_cursor_get</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mouse-cursor-set/">mouse_cursor_set</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/propTypes/">propTypes</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/HTML/">HTML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/IE/">IE</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/add-header/">add_header</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/caret-position/">caret_position</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/key-value/">key/value</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/keycode/">keycode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mouse-click-event/">mouse_click_event</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mouse-cursor-get/">mouse_cursor_get</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mouse-cursor-set/">mouse_cursor_set</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/object/">object</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/propTypes/">propTypes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/window-open/">window.open</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -1219,7 +1483,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">tag cloud</h3>
         <div class="widget tagcloud">
-            <a href="/blog/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/blog/tags/IE/" style="font-size: 20px;">IE</a> <a href="/blog/tags/caret-position/" style="font-size: 10px;">caret_position</a> <a href="/blog/tags/keycode/" style="font-size: 10px;">keycode</a> <a href="/blog/tags/mouse-click-event/" style="font-size: 10px;">mouse_click_event</a> <a href="/blog/tags/mouse-cursor-get/" style="font-size: 10px;">mouse_cursor_get</a> <a href="/blog/tags/mouse-cursor-set/" style="font-size: 10px;">mouse_cursor_set</a> <a href="/blog/tags/propTypes/" style="font-size: 10px;">propTypes</a>
+            <a href="/blog/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/blog/tags/IE/" style="font-size: 20px;">IE</a> <a href="/blog/tags/add-header/" style="font-size: 10px;">add_header</a> <a href="/blog/tags/caret-position/" style="font-size: 10px;">caret_position</a> <a href="/blog/tags/key-value/" style="font-size: 10px;">key/value</a> <a href="/blog/tags/keycode/" style="font-size: 10px;">keycode</a> <a href="/blog/tags/mouse-click-event/" style="font-size: 10px;">mouse_click_event</a> <a href="/blog/tags/mouse-cursor-get/" style="font-size: 10px;">mouse_cursor_get</a> <a href="/blog/tags/mouse-cursor-set/" style="font-size: 10px;">mouse_cursor_set</a> <a href="/blog/tags/object/" style="font-size: 10px;">object</a> <a href="/blog/tags/propTypes/" style="font-size: 10px;">propTypes</a> <a href="/blog/tags/window-open/" style="font-size: 10px;">window.open</a>
         </div>
     </div>
 
