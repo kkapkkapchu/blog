@@ -152,11 +152,11 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                9
+                12
                 <span>posts</span>
             </div>
             <div class="article-info-block">
-                12
+                17
                 <span>tags</span>
             </div>
         </div>
@@ -181,6 +181,412 @@
 
             
             <section id="main">
+    <article id="post-20180615_3" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/blog/2018/06/15/20180615_3/">new Date(&#39;YYYY-MM-DD HH:MM&#39;) is InvalidDate in IE</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/blog/2018/06/15/20180615_3/">
+            <time datetime="2018-06-15T08:44:00.000Z" itemprop="datePublished">2018-06-15</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/JavaScript/">JavaScript</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/blog/tags/IE/">IE</a>, <a class="tag-link" href="/blog/tags/dateTime/">dateTime</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h3 id="new-Date-으로-날짜-생성하기"><a href="#new-Date-으로-날짜-생성하기" class="headerlink" title="new Date()으로 날짜 생성하기"></a>new Date()으로 날짜 생성하기</h3><p>자바스크립트 자체내에서 new Date() 함수를 지원한다.<br>파라미터를 안 주게 되면 현재 날짜로 생성되고,<br>()안에 <code>컴마(,)/대시(-)/슬래시(/)</code> 등 여러가지 방식으로 파라미터를 줄 수 있다.</p>
+<p>하지만 이 중에 제목처럼 <code>new Date(&#39;YYYY-MM-DD HH:MM&#39;)</code> 을 하게 되면 크롬에서는 잘 나오나,<br>IE에서는 InvalidDate으로 나온다.<br>이 문제를 해결하기 위해서는 연도와 시간 사이에 빈칸대신 <code>T</code>를 넣으면 된다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// <span class="keyword">for</span> Chrome</div><div class="line">new Date(<span class="string">'2018-06-15 17:44'</span>) // FRI JUN 15 2018 17:44:00 GMT+0900 (KST) </div><div class="line"></div><div class="line">// <span class="keyword">for</span> Chrome, IE</div><div class="line">new Date(<span class="string">'2018-06-15T17:44'</span>) // FRI JUN 15 2018 17:44:00 GMT+0900 (KST)</div></pre></td></tr></table></figure>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://kkapkkapchu.github.io/blog/2018/06/15/20180615_3/" data-id="cjifq7h9l002j9ywbxowsf0sf" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="https://kkapkkapchu.github.io/blog/2018/06/15/20180615_3/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://kkapkkapchu.github.io/blog/2018/06/15/20180615_3/">Comments</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-20180615_2" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/blog/2018/06/15/20180615_2/">리액트에서 뒤로가기 시 브라우저 확인 창 띄우기</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/blog/2018/06/15/20180615_2/">
+            <time datetime="2018-06-15T08:08:00.000Z" itemprop="datePublished">2018-06-15</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/JavaScript/">JavaScript</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/JavaScript/React/">React</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/blog/tags/onBeforeUnload/">onBeforeUnload</a>, <a class="tag-link" href="/blog/tags/setRouteLeaveHook/">setRouteLeaveHook</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h3 id="React에서-라우터-이동-시-발생하는-이벤트"><a href="#React에서-라우터-이동-시-발생하는-이벤트" class="headerlink" title="React에서 라우터 이동 시 발생하는 이벤트"></a>React에서 라우터 이동 시 발생하는 이벤트</h3><p>페이지를 벗어날 때(새로고침/닫기/뒤로가기)를 잡고 싶을 때가 있을 것이다.<br>대부분 블로그에서는 <code>onBeforeUnload</code> 이벤트에 대해서만 설명을 하고 있다.</p>
+<p>하지만 <code>onBeforeUnload</code> 이벤트는 React에서 뒤로가기 시에 호출되지 않는다!!!<br>React에서 뒤로가기 이벤트를 잡고 싶을 때에는 <code>setRouteLeaveHook</code>를 사용하면 된다.<br><code>setRouteLeaveHook</code> 는 리액트에서 라우터가 바뀔 때 호출된다.</p>
+<p><code>setRouteLeaveHook</code> 이벤트를 사용하기 위해서는 <code>withRouter</code> 로 컴포넌트를 감싸줘야 한다.<br>그리고 router 는 기본으로 props 로 넘어오지만 route 는 현재 컴포넌트가 하위 레벨이라면 부모 컴포넌트로부터 전달받아야 한다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">import &#123; withRouter &#125; from <span class="string">'react-router'</span>;</div><div class="line"></div><div class="line">class WriteMail extends Component &#123;</div><div class="line"></div><div class="line">    // 라우터 이동시</div><div class="line">    this.props.router.setRouteLeaveHook(this.props.route, () =&gt; &#123;</div><div class="line">        // 변경사항이 없다면 그냥 브라우저를 벗어남</div><div class="line">        <span class="keyword">if</span> (!this.isChange()) <span class="built_in">return</span>;</div><div class="line">    </div><div class="line">        // 뒤로가기 확인 창</div><div class="line">        <span class="keyword">if</span> (!window.confirm(<span class="string">"이 페이지를 벗어나면 마지막 저장 후 수정된 내용은 저장되지 않습니다."</span>)) &#123;</div><div class="line">            // 취소</div><div class="line">            <span class="built_in">let</span> &#123;...states&#125; = this.state;</div><div class="line">            states.contents = this.getContents();</div><div class="line">            _historyBackData = states;</div><div class="line">    </div><div class="line">            window.location.href = `/<span class="comment">#$&#123;MAIL_URL_TYPES.WRITE&#125;`;</span></div><div class="line">            // window.history.back();  // React 에서 주의해서 쓸 것!!</div><div class="line">            <span class="built_in">return</span> <span class="literal">false</span>;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            // 확인</div><div class="line">            _historyBackData = null;</div><div class="line">            this.init();</div><div class="line">            <span class="built_in">return</span> <span class="literal">true</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="built_in">export</span> default withRouter(WriteMail, &#123; withRef: <span class="literal">true</span> &#125;);</div></pre></td></tr></table></figure>
+<p>브라우저를 벗어날지 말지 확인하는 창을 띄운 후 사용자가 취소 버튼을 클릭했다면, 이전 주소로 바꿔주어야 한다.<br>이 때 <code>window.history.back()</code> 는 React 에서 매우 조심해야 한다!!<br>이전 포스팅에서처럼 리액트는 SPA이기 때문에 url 을 바꾼다해도 그게 제대로 history에 들어가지 않는거 같다.<br>그래서 <code>window.location.href</code>로 아예 이전 url 로 바꿔준 것이다.</p>
+<h3 id="Redux를-사용한다면…"><a href="#Redux를-사용한다면…" class="headerlink" title="Redux를 사용한다면…"></a>Redux를 사용한다면…</h3><p>위의 <code>WriteMail</code> 컴포넌트의 상위 컴포넌트에서 하위 컴포넌트에 정의된 함수를 사용하려면<br><code>this.refs.refWriteMail.getWrappedInstance().함수이름()</code> 를 사용했을 것이다.<br>하지만 <code>withRouter</code>로 한번 더 감쌌기 때문에<br><code>this.refs.refWriteMail.getWrappedInstance().refs.wrappedInstance.함수이름()</code>으로 사용해야 한다.</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://kkapkkapchu.github.io/blog/2018/06/15/20180615_2/" data-id="cjifoxvwb002c9ywbtpgqhplo" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="https://kkapkkapchu.github.io/blog/2018/06/15/20180615_2/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://kkapkkapchu.github.io/blog/2018/06/15/20180615_2/">Comments</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-20180615" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/blog/2018/06/15/20180615/">페이지 벗어날 때(새로고침/닫기/뒤로가기) 브라우저 확인 창 띄우기</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/blog/2018/06/15/20180615/">
+            <time datetime="2018-06-15T07:51:00.000Z" itemprop="datePublished">2018-06-15</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/JavaScript/">JavaScript</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/blog/tags/onBeforeUnload/">onBeforeUnload</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h3 id="페이지-벗어날-때-새로고침-닫기-뒤로가기-발생하는-이벤트"><a href="#페이지-벗어날-때-새로고침-닫기-뒤로가기-발생하는-이벤트" class="headerlink" title="페이지 벗어날 때(새로고침/닫기/뒤로가기) 발생하는 이벤트"></a>페이지 벗어날 때(새로고침/닫기/뒤로가기) 발생하는 이벤트</h3><p>메일을 작성 중일 때 화면을 벗어나려고 하면 브라우저 자체 확인 창이 뜬다.<br>화면을 벗어날 때 <code>onBeforeUnload</code> 이벤트가 호출되므로 여기서 작업을 하면 된다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">onBeforeUnload = (event) =&gt; &#123;</div><div class="line">    // 변경사항이 없다면 그냥 브라우저를 벗어남</div><div class="line">    <span class="keyword">if</span> (!this.isChange()) <span class="built_in">return</span>;</div><div class="line"></div><div class="line">    event.returnValue = <span class="string">"변경사항이 저장되지 않을 수 있습니다."</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>하지만 여기서 중요한 거!!</p>
+<p>나는 리액트를 사용하므로 <code>onBeforeUnload</code> 이벤트가 페이지 닫기나 새로고침시에는 잘 호출되지만<br>뒤로가기를 할 때에는 호출이 안된다. 아마도 라우터 때문인듯하다..<br><code>onBeforeUnload</code> 이벤트는 현재 window 를 벗어날 때 호출되는 거 같은데,<br>리액트는 SPA(Single Page App)이기 때문에 url이 바뀌더라도 dom이 바뀌지 window 가 바뀌지 않는다.</p>
+<p>리액트 컴포넌트에서 뒤로가기 이벤트를 잡으려면 <code>setRouteLeaveHook</code> 를 이용하는 방법이 있다.<br>이거에 대해서는 다음 포스팅을 쓰도록 하겠다.</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://kkapkkapchu.github.io/blog/2018/06/15/20180615/" data-id="cjifocqhn00249ywbucjbecg1" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="https://kkapkkapchu.github.io/blog/2018/06/15/20180615/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://kkapkkapchu.github.io/blog/2018/06/15/20180615/">Comments</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
     <article id="post-20170905-2" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -235,7 +641,7 @@
 
 </div>
 
-    <a data-url="https://kkapkkapchu.github.io/blog/2017/09/05/20170905-2/" data-id="cj776slv80009quwb5p54jfh0" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://kkapkkapchu.github.io/blog/2017/09/05/20170905-2/" data-id="cjifo8ffh000a9ywbduvkj3d6" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -369,7 +775,7 @@
 
 </div>
 
-    <a data-url="https://kkapkkapchu.github.io/blog/2017/09/05/20170905/" data-id="cj776slvg000gquwbf7sd2tlw" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://kkapkkapchu.github.io/blog/2017/09/05/20170905/" data-id="cjifo8ffq000e9ywbro2v9xms" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -502,7 +908,7 @@
 
 </div>
 
-    <a data-url="https://kkapkkapchu.github.io/blog/2017/08/28/20170829/" data-id="cj776slvb000cquwbmhwlcagd" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://kkapkkapchu.github.io/blog/2017/08/28/20170829/" data-id="cjifo8ffm000b9ywbw5cfo0r8" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -612,7 +1018,7 @@
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/blog/tags/mouse-click-event/">mouse_click_event</a>
+        <a class="tag-link" href="/blog/tags/mouse-click-event/">mouse_click_event</a>, <a class="tag-link" href="/blog/tags/onTouchTap/">onTouchTap</a>
     </div>
 
                     </div>
@@ -636,7 +1042,7 @@
 
 </div>
 
-    <a data-url="https://kkapkkapchu.github.io/blog/2017/08/28/20170828/" data-id="cj776slvc000dquwba3jdnlzl" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://kkapkkapchu.github.io/blog/2017/08/28/20170828/" data-id="cjifo8ffb00069ywb7xzgvkn3" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -746,7 +1152,7 @@
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/blog/tags/propTypes/">propTypes</a>
+        <a class="tag-link" href="/blog/tags/array/">array</a>, <a class="tag-link" href="/blog/tags/propTypes/">propTypes</a>
     </div>
 
                     </div>
@@ -773,7 +1179,7 @@
 
 </div>
 
-    <a data-url="https://kkapkkapchu.github.io/blog/2017/08/25/20170825/" data-id="cj776slv50008quwbzmxxzb3m" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://kkapkkapchu.github.io/blog/2017/08/25/20170825/" data-id="cjifo8ffa00059ywbb4u7bj1f" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -906,7 +1312,7 @@
 
 </div>
 
-    <a data-url="https://kkapkkapchu.github.io/blog/2017/08/17/20170817/" data-id="cj776slup0000quwbrcr70yry" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://kkapkkapchu.github.io/blog/2017/08/17/20170817/" data-id="cjifo8ff300019ywbjq7nis6h" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1044,7 +1450,7 @@
 
 </div>
 
-    <a data-url="https://kkapkkapchu.github.io/blog/2017/08/13/20170813/" data-id="cj776slv30006quwbjbj1p5c1" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://kkapkkapchu.github.io/blog/2017/08/13/20170813/" data-id="cjifo8ff800049ywbzt0mr2lc" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1122,275 +1528,9 @@
 
 
 
-    <article id="post-20170803" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/blog/2017/08/03/20170803/">CSS에서 calc 함수 중첩해서 쓰기</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/blog/2017/08/03/20170803/">
-            <time datetime="2017-08-03T11:31:27.000Z" itemprop="datePublished">2017-08-03</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/CSS/">CSS</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/blog/tags/IE/">IE</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <h2 id="Calc-function-inside-another-calc-in-CSS"><a href="#Calc-function-inside-another-calc-in-CSS" class="headerlink" title="Calc() function inside another calc() in CSS"></a>Calc() function inside another calc() in CSS</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">// <span class="keyword">for</span> Chrome, IE 9</div><div class="line">div&#123;</div><div class="line">  width: calc(100% - (1% + 30px)); /* calc(1% + 30px) is nested inside calc() */</div><div class="line">&#125;</div><div class="line"></div><div class="line">// <span class="keyword">for</span> Chrome</div><div class="line">div p&#123;</div><div class="line">  width: calc(100% - calc(1% + 30px));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>크롬은 둘 다 지원하지만 IE는 첫 번째만 지원한다.<br>IE에서 calc 함수를 중첩으로 사용하려면 맨 앞에 calc로 한번만 감싸야한다.</p>
-<p>이를 위해서 안의 중첩된 calc 글자를 없애주는 라이브러리(<a href="https://github.com/MoOx/reduce-css-calc" target="_blank" rel="external">reduce-css-calc</a>)도 있는거 같은데,<br>이 라이브러리 안에서 쓰이는 “fs” 라이브러리가 없어진듯 하다… 그래서 못씀..</p>
-<p>아무튼 해결법은 calc를 한번만 사용하도록 식을 바꾸든지, 중첩된 calc 를 계산해서 숫자로 바꿔주는 라이브러리를 만들든지 찾든지 해야한다.</p>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="https://kkapkkapchu.github.io/blog/2017/08/03/20170803/" data-id="cj776sluv0002quwbzxbtrvbe" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="https://kkapkkapchu.github.io/blog/2017/08/03/20170803/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://kkapkkapchu.github.io/blog/2017/08/03/20170803/">Comments</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/blog/2017/07/24/hello-world/">Hello World</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/blog/2017/07/24/hello-world/">
-            <time datetime="2017-07-24T06:31:27.000Z" itemprop="datePublished">2017-07-24</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/Hexo/">Hexo</a>
-    </div>
-
-                        
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="https://kkapkkapchu.github.io/blog/2017/07/24/hello-world/" data-id="cj776slvh000iquwbzai6bb5e" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="https://kkapkkapchu.github.io/blog/2017/07/24/hello-world/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://kkapkkapchu.github.io/blog/2017/07/24/hello-world/">Comments</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
+    <nav id="page-nav">
+        <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><a class="extend next" rel="next" href="/blog/page/2/">Next &raquo;</a>
+    </nav>
 </section>
             
                 
@@ -1401,6 +1541,33 @@
         <h3 class="widget-title">recent</h3>
         <div class="widget">
             <ul id="recent-post" class="no-thumbnail">
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/JavaScript/">JavaScript</a></p>
+                            <p class="item-title"><a href="/blog/2018/06/15/20180615_3/" class="title">new Date(&#39;YYYY-MM-DD HH:MM&#39;) is InvalidDate in IE</a></p>
+                            <p class="item-date"><time datetime="2018-06-15T08:44:00.000Z" itemprop="datePublished">2018-06-15</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/JavaScript/">JavaScript</a></p>
+                            <p class="item-title"><a href="/blog/2018/06/15/20180615_2/" class="title">리액트에서 뒤로가기 시 브라우저 확인 창 띄우기</a></p>
+                            <p class="item-date"><time datetime="2018-06-15T08:08:00.000Z" itemprop="datePublished">2018-06-15</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/JavaScript/">JavaScript</a></p>
+                            <p class="item-title"><a href="/blog/2018/06/15/20180615/" class="title">페이지 벗어날 때(새로고침/닫기/뒤로가기) 브라우저 확인 창 띄우기</a></p>
+                            <p class="item-date"><time datetime="2018-06-15T07:51:00.000Z" itemprop="datePublished">2018-06-15</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -1420,33 +1587,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/JavaScript/">JavaScript</a></p>
-                            <p class="item-title"><a href="/blog/2017/08/28/20170829/" class="title">input 에서 마우스 커서 위치 얻어오기 및 변경하기</a></p>
-                            <p class="item-date"><time datetime="2017-08-28T07:22:44.000Z" itemprop="datePublished">2017-08-28</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/JavaScript/">JavaScript</a></p>
-                            <p class="item-title"><a href="/blog/2017/08/28/20170828/" class="title">마우스 우클릭 이벤트와 좌클릭 이벤트 구분하기</a></p>
-                            <p class="item-date"><time datetime="2017-08-28T07:22:44.000Z" itemprop="datePublished">2017-08-28</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/JavaScript/">JavaScript</a></p>
-                            <p class="item-title"><a href="/blog/2017/08/25/20170825/" class="title">propTypes 에 array 타입으로 지정할 때 array 안에 들어가는 값에 대한 타입 지정하기</a></p>
-                            <p class="item-date"><time datetime="2017-08-25T04:22:54.000Z" itemprop="datePublished">2017-08-25</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -1456,7 +1596,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">categories</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/">Web</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/CSS/">CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/Hexo/">Hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/JavaScript/">JavaScript</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/JavaScript/React/">React</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/JavaScript/library/">library</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/">Web</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/CSS/">CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/Hexo/">Hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/JavaScript/">JavaScript</a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/JavaScript/React/">React</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/JavaScript/library/">library</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul>
         </div>
     </div>
 
@@ -1465,7 +1605,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">archives</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/09/">September 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/08/">August 2017</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/06/">June 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/09/">September 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/08/">August 2017</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -1474,7 +1614,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">tags</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/HTML/">HTML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/IE/">IE</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/add-header/">add_header</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/caret-position/">caret_position</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/key-value/">key/value</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/keycode/">keycode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mouse-click-event/">mouse_click_event</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mouse-cursor-get/">mouse_cursor_get</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mouse-cursor-set/">mouse_cursor_set</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/object/">object</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/propTypes/">propTypes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/window-open/">window.open</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/HTML/">HTML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/IE/">IE</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/add-header/">add_header</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/array/">array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/caret-position/">caret_position</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/dateTime/">dateTime</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/key-value/">key/value</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/keycode/">keycode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mouse-click-event/">mouse_click_event</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mouse-cursor-get/">mouse_cursor_get</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mouse-cursor-set/">mouse_cursor_set</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/object/">object</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/onBeforeUnload/">onBeforeUnload</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/onTouchTap/">onTouchTap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/propTypes/">propTypes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/setRouteLeaveHook/">setRouteLeaveHook</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/window-open/">window.open</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -1483,7 +1623,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">tag cloud</h3>
         <div class="widget tagcloud">
-            <a href="/blog/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/blog/tags/IE/" style="font-size: 20px;">IE</a> <a href="/blog/tags/add-header/" style="font-size: 10px;">add_header</a> <a href="/blog/tags/caret-position/" style="font-size: 10px;">caret_position</a> <a href="/blog/tags/key-value/" style="font-size: 10px;">key/value</a> <a href="/blog/tags/keycode/" style="font-size: 10px;">keycode</a> <a href="/blog/tags/mouse-click-event/" style="font-size: 10px;">mouse_click_event</a> <a href="/blog/tags/mouse-cursor-get/" style="font-size: 10px;">mouse_cursor_get</a> <a href="/blog/tags/mouse-cursor-set/" style="font-size: 10px;">mouse_cursor_set</a> <a href="/blog/tags/object/" style="font-size: 10px;">object</a> <a href="/blog/tags/propTypes/" style="font-size: 10px;">propTypes</a> <a href="/blog/tags/window-open/" style="font-size: 10px;">window.open</a>
+            <a href="/blog/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/blog/tags/IE/" style="font-size: 20px;">IE</a> <a href="/blog/tags/add-header/" style="font-size: 10px;">add_header</a> <a href="/blog/tags/array/" style="font-size: 10px;">array</a> <a href="/blog/tags/caret-position/" style="font-size: 10px;">caret_position</a> <a href="/blog/tags/dateTime/" style="font-size: 10px;">dateTime</a> <a href="/blog/tags/key-value/" style="font-size: 10px;">key/value</a> <a href="/blog/tags/keycode/" style="font-size: 10px;">keycode</a> <a href="/blog/tags/mouse-click-event/" style="font-size: 10px;">mouse_click_event</a> <a href="/blog/tags/mouse-cursor-get/" style="font-size: 10px;">mouse_cursor_get</a> <a href="/blog/tags/mouse-cursor-set/" style="font-size: 10px;">mouse_cursor_set</a> <a href="/blog/tags/object/" style="font-size: 10px;">object</a> <a href="/blog/tags/onBeforeUnload/" style="font-size: 15px;">onBeforeUnload</a> <a href="/blog/tags/onTouchTap/" style="font-size: 10px;">onTouchTap</a> <a href="/blog/tags/propTypes/" style="font-size: 10px;">propTypes</a> <a href="/blog/tags/setRouteLeaveHook/" style="font-size: 10px;">setRouteLeaveHook</a> <a href="/blog/tags/window-open/" style="font-size: 10px;">window.open</a>
         </div>
     </div>
 
@@ -1520,7 +1660,7 @@
         <footer id="footer">
     <div class="outer">
         <div id="footer-info" class="inner">
-            &copy; 2017 깝깝츄<br>
+            &copy; 2018 깝깝츄<br>
             Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
         </div>
     </div>
