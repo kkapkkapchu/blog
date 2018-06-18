@@ -5,18 +5,18 @@
     
     <title>페이지 벗어날 때(새로고침/닫기/뒤로가기) 브라우저 확인 창 띄우기 | 깝깝츄의 개발일기</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="페이지 벗어날 때(새로고침/닫기/뒤로가기) 발생하는 이벤트메일을 작성 중일 때 화면을 벗어나려고 하면 브라우저 자체 확인 창이 뜬다.화면을 벗어날 때 onBeforeUnload 이벤트가 호출되므로 여기서 작업을 하면 된다. 123456onBeforeUnload = (event) =&amp;gt; &amp;#123;    // 변경사항이 없다면 그냥 브라우저를 벗어남">
+    <meta name="description" content="페이지 벗어날 때(새로고침/닫기/뒤로가기) 발생하는 이벤트메일을 작성 중일 때 화면을 벗어나려고 하면 브라우저 자체 확인 창이 뜬다.화면을 벗어날 때 onBeforeUnload 이벤트가 호출되므로 여기서 작업을 하면 된다. 1234567891011121314onBeforeUnload = (event) =&amp;gt; &amp;#123;    // 변경사항이 없다면 그냥">
 <meta name="keywords" content="onBeforeUnload">
 <meta property="og:type" content="article">
 <meta property="og:title" content="페이지 벗어날 때(새로고침&#x2F;닫기&#x2F;뒤로가기) 브라우저 확인 창 띄우기">
 <meta property="og:url" content="https://kkapkkapchu.github.io/blog/2018/06/15/20180615/index.html">
 <meta property="og:site_name" content="깝깝츄의 개발일기">
-<meta property="og:description" content="페이지 벗어날 때(새로고침/닫기/뒤로가기) 발생하는 이벤트메일을 작성 중일 때 화면을 벗어나려고 하면 브라우저 자체 확인 창이 뜬다.화면을 벗어날 때 onBeforeUnload 이벤트가 호출되므로 여기서 작업을 하면 된다. 123456onBeforeUnload = (event) =&amp;gt; &amp;#123;    // 변경사항이 없다면 그냥 브라우저를 벗어남">
+<meta property="og:description" content="페이지 벗어날 때(새로고침/닫기/뒤로가기) 발생하는 이벤트메일을 작성 중일 때 화면을 벗어나려고 하면 브라우저 자체 확인 창이 뜬다.화면을 벗어날 때 onBeforeUnload 이벤트가 호출되므로 여기서 작업을 하면 된다. 1234567891011121314onBeforeUnload = (event) =&amp;gt; &amp;#123;    // 변경사항이 없다면 그냥">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-06-15T08:22:53.000Z">
+<meta property="og:updated_time" content="2018-06-18T00:08:04.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="페이지 벗어날 때(새로고침&#x2F;닫기&#x2F;뒤로가기) 브라우저 확인 창 띄우기">
-<meta name="twitter:description" content="페이지 벗어날 때(새로고침/닫기/뒤로가기) 발생하는 이벤트메일을 작성 중일 때 화면을 벗어나려고 하면 브라우저 자체 확인 창이 뜬다.화면을 벗어날 때 onBeforeUnload 이벤트가 호출되므로 여기서 작업을 하면 된다. 123456onBeforeUnload = (event) =&amp;gt; &amp;#123;    // 변경사항이 없다면 그냥 브라우저를 벗어남">
+<meta name="twitter:description" content="페이지 벗어날 때(새로고침/닫기/뒤로가기) 발생하는 이벤트메일을 작성 중일 때 화면을 벗어나려고 하면 브라우저 자체 확인 창이 뜬다.화면을 벗어날 때 onBeforeUnload 이벤트가 호출되므로 여기서 작업을 하면 된다. 1234567891011121314onBeforeUnload = (event) =&amp;gt; &amp;#123;    // 변경사항이 없다면 그냥">
     
 
     
@@ -229,7 +229,7 @@
         
             
             <h3 id="페이지-벗어날-때-새로고침-닫기-뒤로가기-발생하는-이벤트"><a href="#페이지-벗어날-때-새로고침-닫기-뒤로가기-발생하는-이벤트" class="headerlink" title="페이지 벗어날 때(새로고침/닫기/뒤로가기) 발생하는 이벤트"></a>페이지 벗어날 때(새로고침/닫기/뒤로가기) 발생하는 이벤트</h3><p>메일을 작성 중일 때 화면을 벗어나려고 하면 브라우저 자체 확인 창이 뜬다.<br>화면을 벗어날 때 <code>onBeforeUnload</code> 이벤트가 호출되므로 여기서 작업을 하면 된다.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">onBeforeUnload = (event) =&gt; &#123;</div><div class="line">    // 변경사항이 없다면 그냥 브라우저를 벗어남</div><div class="line">    <span class="keyword">if</span> (!this.isChange()) <span class="built_in">return</span>;</div><div class="line"></div><div class="line">    event.returnValue = <span class="string">"변경사항이 저장되지 않을 수 있습니다."</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">onBeforeUnload = (event) =&gt; &#123;</div><div class="line">    // 변경사항이 없다면 그냥 브라우저를 벗어남</div><div class="line">    <span class="keyword">if</span> (!this.isChange()) <span class="built_in">return</span>;</div><div class="line"></div><div class="line">    event.returnValue = <span class="string">"변경사항이 저장되지 않을 수 있습니다."</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="title">componentDidMount</span></span>() &#123;</div><div class="line">    window.addEventListener(<span class="string">"beforeunload"</span>, this.onBeforeUnload); // 페이지 새로고침, 닫기</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="title">componentWillUnmount</span></span>() &#123;</div><div class="line">    window.removeEventListener(<span class="string">"beforeunload"</span>, this.onBeforeUnload);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>하지만 여기서 중요한 거!!</p>
 <p>나는 리액트를 사용하므로 <code>onBeforeUnload</code> 이벤트가 페이지 닫기나 새로고침시에는 잘 호출되지만<br>뒤로가기를 할 때에는 호출이 안된다. 아마도 라우터 때문인듯하다..<br><code>onBeforeUnload</code> 이벤트는 현재 window 를 벗어날 때 호출되는 거 같은데,<br>리액트는 SPA(Single Page App)이기 때문에 url이 바뀌더라도 dom이 바뀌지 window 가 바뀌지 않는다.</p>
 <p>리액트 컴포넌트에서 뒤로가기 이벤트를 잡으려면 <code>setRouteLeaveHook</code> 를 이용하는 방법이 있다.<br>이거에 대해서는 다음 포스팅을 쓰도록 하겠다.</p>
