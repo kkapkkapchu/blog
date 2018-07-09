@@ -3,20 +3,15 @@
 <head>
     <meta charset="utf-8">
     
-    <title>페이지 벗어날 때(새로고침/닫기/뒤로가기) 브라우저 확인 창 띄우기 | 깝깝츄의 개발일기</title>
+    <title>Archive: 2018/7 | 깝깝츄의 개발일기</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="페이지 벗어날 때(새로고침/닫기/뒤로가기) 발생하는 이벤트메일을 작성 중일 때 화면을 벗어나려고 하면 브라우저 자체 확인 창이 뜬다.화면을 벗어날 때 onBeforeUnload 이벤트가 호출되므로 여기서 작업을 하면 된다. 1234567891011121314onBeforeUnload = (event) =&amp;gt; &amp;#123;    // 변경사항이 없다면 그냥">
-<meta name="keywords" content="onBeforeUnload">
-<meta property="og:type" content="article">
-<meta property="og:title" content="페이지 벗어날 때(새로고침&#x2F;닫기&#x2F;뒤로가기) 브라우저 확인 창 띄우기">
-<meta property="og:url" content="https://kkapkkapchu.github.io/blog/2018/06/15/20180615/index.html">
+    <meta property="og:type" content="website">
+<meta property="og:title" content="깝깝츄의 개발일기">
+<meta property="og:url" content="https://kkapkkapchu.github.io/blog/archives/2018/07/index.html">
 <meta property="og:site_name" content="깝깝츄의 개발일기">
-<meta property="og:description" content="페이지 벗어날 때(새로고침/닫기/뒤로가기) 발생하는 이벤트메일을 작성 중일 때 화면을 벗어나려고 하면 브라우저 자체 확인 창이 뜬다.화면을 벗어날 때 onBeforeUnload 이벤트가 호출되므로 여기서 작업을 하면 된다. 1234567891011121314onBeforeUnload = (event) =&amp;gt; &amp;#123;    // 변경사항이 없다면 그냥">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-06-18T00:08:04.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="페이지 벗어날 때(새로고침&#x2F;닫기&#x2F;뒤로가기) 브라우저 확인 창 띄우기">
-<meta name="twitter:description" content="페이지 벗어날 때(새로고침/닫기/뒤로가기) 발생하는 이벤트메일을 작성 중일 때 화면을 벗어나려고 하면 브라우저 자체 확인 창이 뜬다.화면을 벗어날 때 onBeforeUnload 이벤트가 호출되므로 여기서 작업을 하면 된다. 1234567891011121314onBeforeUnload = (event) =&amp;gt; &amp;#123;    // 변경사항이 없다면 그냥">
+<meta name="twitter:title" content="깝깝츄의 개발일기">
     
 
     
@@ -185,172 +180,50 @@
 </aside>
 
             
-            <section id="main"><article id="post-20180615" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
+            <section id="main"><div class="timeline timeline-wrap">
+    
+            <div class="timeline-row timeline-row-major">
+                <span class="node"><i class="fa fa-calendar"></i></span>
+                <h1 class="title">2018</h1>
+            </div>
         
-        
-            <header class="article-header">
+        <div class="timeline-row">
+            <span class="node"></span>
+            <div class="content">
                 
     
-        <h1 class="article-title" itemprop="name">
-            페이지 벗어날 때(새로고침/닫기/뒤로가기) 브라우저 확인 창 띄우기
+        <h1 itemprop="name">
+            <a class="timeline-article-title" href="/blog/2018/07/07/20180707/">자바스크립트 클로저(Closure)에 대해</a>
         </h1>
     
 
-                
-                    <div class="article-meta">
-                        
+                <div class="article-meta">
+                    
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/blog/2018/06/15/20180615/">
-            <time datetime="2018-06-15T07:51:00.000Z" itemprop="datePublished">2018-06-15</time>
+        <a href="/blog/2018/07/07/20180707/">
+            <time datetime="2018-07-07T14:02:00.000Z" itemprop="datePublished">2018-07-07</time>
         </a>
     </div>
 
 
-                        
+                    
     <div class="article-category">
     	<i class="fa fa-folder"></i>
         <a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/JavaScript/">JavaScript</a>
     </div>
 
-                        
+                    
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/blog/tags/onBeforeUnload/">onBeforeUnload</a>
+        <a class="tag-link" href="/blog/tags/closure/">closure</a>
     </div>
 
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <h3 id="페이지-벗어날-때-새로고침-닫기-뒤로가기-발생하는-이벤트"><a href="#페이지-벗어날-때-새로고침-닫기-뒤로가기-발생하는-이벤트" class="headerlink" title="페이지 벗어날 때(새로고침/닫기/뒤로가기) 발생하는 이벤트"></a>페이지 벗어날 때(새로고침/닫기/뒤로가기) 발생하는 이벤트</h3><p>메일을 작성 중일 때 화면을 벗어나려고 하면 브라우저 자체 확인 창이 뜬다.<br>화면을 벗어날 때 <code>onBeforeUnload</code> 이벤트가 호출되므로 여기서 작업을 하면 된다.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">onBeforeUnload = (event) =&gt; &#123;</div><div class="line">    // 변경사항이 없다면 그냥 브라우저를 벗어남</div><div class="line">    <span class="keyword">if</span> (!this.isChange()) <span class="built_in">return</span>;</div><div class="line"></div><div class="line">    event.returnValue = <span class="string">"변경사항이 저장되지 않을 수 있습니다."</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="title">componentDidMount</span></span>() &#123;</div><div class="line">    window.addEventListener(<span class="string">"beforeunload"</span>, this.onBeforeUnload); // 페이지 새로고침, 닫기</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="title">componentWillUnmount</span></span>() &#123;</div><div class="line">    window.removeEventListener(<span class="string">"beforeunload"</span>, this.onBeforeUnload);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>하지만 여기서 중요한 거!!</p>
-<p>나는 리액트를 사용하므로 <code>onBeforeUnload</code> 이벤트가 페이지 닫기나 새로고침시에는 잘 호출되지만<br>뒤로가기를 할 때에는 호출이 안된다. 아마도 라우터 때문인듯하다..<br><code>onBeforeUnload</code> 이벤트는 현재 window 를 벗어날 때 호출되는 거 같은데,<br>리액트는 SPA(Single Page App)이기 때문에 url이 바뀌더라도 dom이 바뀌지 window 가 바뀌지 않는다.</p>
-<p>리액트 컴포넌트에서 뒤로가기 이벤트를 잡으려면 <code>setRouteLeaveHook</code> 를 이용하는 방법이 있다.<br>이거에 대해서는 다음 포스팅을 쓰도록 하겠다.</p>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="https://kkapkkapchu.github.io/blog/2018/06/15/20180615/" data-id="cjifocqhn00249ywbucjbecg1" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="https://kkapkkapchu.github.io/blog/2018/06/15/20180615/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://kkapkkapchu.github.io/blog/2018/06/15/20180615/">Comments</a>
-    
-
-        </footer>
-    </div>
-    
-        
-<nav id="article-nav">
-    
-        <a href="/blog/2018/06/15/20180615_2/" id="article-nav-newer" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">Newer</strong>
-            <div class="article-nav-title">
-                
-                    리액트에서 뒤로가기 시 브라우저 확인 창 띄우기
-                
+                </div>
             </div>
-        </a>
+        </div>
     
-    
-        <a href="/blog/2017/09/05/20170905-2/" id="article-nav-older" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">Older</strong>
-            <div class="article-nav-title">window.open()에 헤더 추가하기</div>
-        </a>
-    
-</nav>
-
-
-    
-</article>
-
-
-    
-    
-        <section id="comments">
-    <div id="disqus_thread">
-        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    </div>
-</section>
-    
-
+</div>
 </section>
             
                 
@@ -490,13 +363,11 @@
     <script>
     var disqus_config = function () {
         
-            this.page.url = 'https://kkapkkapchu.github.io/blog/2018/06/15/20180615/';
-        
-        this.page.identifier = '20180615';
+        this.page.identifier = 'undefined';
     };
     (function() { 
         var d = document, s = d.createElement('script');  
-        s.src = '//' + 'hexo-theme-icarus' + '.disqus.com/embed.js';
+        s.src = '//' + 'hexo-theme-icarus' + '.disqus.com/count.js';
         s.setAttribute('data-timestamp', +new Date());
         (d.head || d.body).appendChild(s);
     })();

@@ -152,11 +152,11 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                12
+                13
                 <span>posts</span>
             </div>
             <div class="article-info-block">
-                17
+                18
                 <span>tags</span>
             </div>
         </div>
@@ -167,7 +167,7 @@
                     
                     
                     <td>
-                        <a href="http://github.com/ppoffice/hexo-theme-icarus" target="_blank" title="github" class=tooltip>
+                        <a href="https://github.com/kkapkkapchu/" target="_blank" title="github" class=tooltip>
                             <i class="fa fa-github"></i>
                         </a>
                     </td>
@@ -181,6 +181,166 @@
 
             
             <section id="main">
+    <article id="post-20180707" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/blog/2018/07/07/20180707/">자바스크립트 클로저(Closure)에 대해</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/blog/2018/07/07/20180707/">
+            <time datetime="2018-07-07T14:02:00.000Z" itemprop="datePublished">2018-07-07</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/JavaScript/">JavaScript</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/blog/tags/closure/">closure</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h3 id="클로저란-무엇인가"><a href="#클로저란-무엇인가" class="headerlink" title="클로저란 무엇인가"></a>클로저란 무엇인가</h3><p>함수 내부에 함수를 작성할 때마다 이미 클로저를 생성한 것이다.<br>내부에 작성한 함수가 바로 클로저라닛!! 여태껏 클로저가 뭔지도 모르고 사용했다..</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> <span class="function"><span class="title">outerFunction</span></span> () &#123;</div><div class="line">  const outer = <span class="string">'I see the outer variable!'</span></div><div class="line">  </div><div class="line">  <span class="built_in">return</span> <span class="keyword">function</span> <span class="function"><span class="title">innerFunction</span></span>() &#123;</div><div class="line">    console.log(outer)</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">outerFunction()() // I see the outer variable!</div></pre></td></tr></table></figure>
+<h3 id="클로저를-왜-쓸까"><a href="#클로저를-왜-쓸까" class="headerlink" title="클로저를 왜 쓸까"></a>클로저를 왜 쓸까</h3><p>클로저는 외부함수의 변수에 접근이 가능하다. (자바스크립의 스코프를 이해한다면 당연한 것)<br>때문에 일반적으로 두 가지의 목적이 있다.</p>
+<ol>
+<li>사이드 이펙트(side effects) 제어하기</li>
+<li>private 변수 생성하기(캡슐화)</li>
+</ol>
+<h5 id="사이드-이펙트-side-effects-제어하기"><a href="#사이드-이펙트-side-effects-제어하기" class="headerlink" title="사이드 이펙트(side effects) 제어하기"></a>사이드 이펙트(side effects) 제어하기</h5><p>함수에서 값을 반환할 때를 제외하고 무언가를 행할 때 사이드 이펙트(side effects)가 발생한다.<br>여러 가지 것들이 사이드 이펙트가 될 수 있는데, 예를 들어 Ajax 요청이나 timeout을 생성할 때,<br>그리고 심지어 console.log를 선언하는 것도 사이드 이펙트이다.</p>
+<p>보통 Ajax나 timeout과 같이 코드 흐름을 방해하는 것들이 신경 쓰일 때,<br>클로저를 활용하여 사이드 이펙트를 제어한다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var i;</div><div class="line"><span class="keyword">for</span> (i = 0; i &lt; 10; i++) &#123;</div><div class="line">  setTimeout(<span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">    console.log(i);</div><div class="line">  &#125;, 100);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>간단하게 0-9까지의 정수를 출력하는 코드이지만 실제로 돌려보면 엉뚱하게도 10만 열 번 출력되는 걸 볼 수 있다. 왜일까?<br>먼저 <code>setTimeout()</code>에 인자로 넘긴 익명함수는 모두 0.1초 뒤에 호출될 것이다.<br>그 0.1초 동안에 이미 반복문이 모두 순회되면서 <code>i</code>값은 이미 10이 된 상태.<br>그 때 익명함수가 호출되면서 이미 10이 되어버린 <code>i</code>를 참조하는 것이다.</p>
+<p>이 경우에도 클로저를 사용하면 원하는 대로 동작하도록 만들 수 있다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var i;</div><div class="line"><span class="keyword">for</span> (i = 0; i &lt; 10; i++) &#123;</div><div class="line">  (<span class="keyword">function</span>(j) &#123;</div><div class="line">    setTimeout(<span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">      console.log(j);</div><div class="line">    &#125;, 100);</div><div class="line">  &#125;)(i);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>중간에 즉시 실행 함수(IIFE)를 덧붙여 <code>setTimeout()</code>에 걸린 익명함수를 클로저로 만들었다.<br>클로저는 만들어진 환경을 기억한다. 이 코드에서 <code>i</code>는 IIFE내에 <code>j</code>라는 형태로 주입되고, 클로저에 의해 각기 다른 환경속에 포함된다.<br>반복문은 10회 반복되므로 10개의 환경이 생길 것이고, 10개의 서로 다른 환경에 10개의 서로 다른 <code>j</code>가 생긴다.</p>
+<p>위의 예제에서는 IIFE를 통해서 클로저마다 환경이 생긴다.<br>하지만 인자로 <code>i</code>를 넘기지 않는다면 당연히 클로저가 참조하는 IIFE의 함수 스코프에서도 <code>i</code>값이 없으므로 생성 당시의 외부 스코프인 글로벌을 탐색하게 되고 결국 모두 같은 <code>i</code>를 참조하게 된다.<br>반면에, 인자로 <code>i</code>를 넘기게 되면 IIFE로 만든 10개의 스코프에 모두 <code>i</code>라는 변수가 다른 값으로 생기므로 정상적으로 동작할 수 있는 것이다.</p>
+<p>참고로 여기서 콜백으로 넘기는 함수 자체를 IIFE로 만들면 되지 않나 싶지만,<br>그렇게 하면 원하는대로 0-9까지 출력은 되지만 함수 내부가 즉시 실행되어 버리므로 setTimeout()의 0.1초 딜레이가 작동하지 않게 된다.</p>
+<h5 id="private-변수-생성하기-캡슐화"><a href="#private-변수-생성하기-캡슐화" class="headerlink" title="private 변수 생성하기(캡슐화)"></a>private 변수 생성하기(캡슐화)</h5><p>일반적으로 JavaScript에서 객체지향 프로그래밍을 말한다면 <code>Prototype</code>을 통해 객체를 다루는 것을 말한다.<br><code>Prototype</code>을 통한 객체를 만들 때의 주요한 문제 중 하나는 Private variables에 대한 접근 권한 문제이다. 예제 코드를 보자.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> Hello(name) &#123;</div><div class="line">  this._name = name;</div><div class="line">&#125;</div><div class="line"></div><div class="line">Hello.prototype.say = <span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">  console.log(<span class="string">'Hello, '</span> + this._name);</div><div class="line">&#125;</div><div class="line"></div><div class="line">var hello1 = new Hello(<span class="string">'피카츄'</span>);</div><div class="line">var hello2 = new Hello(<span class="string">'이상해씨'</span>);</div><div class="line">var hello3 = new Hello(<span class="string">'잠만보'</span>);</div><div class="line"></div><div class="line">hello1.say(); // <span class="string">'Hello, 피카츄'</span></div><div class="line">hello2.say(); // <span class="string">'Hello, 이상해씨'</span></div><div class="line">hello3.say(); // <span class="string">'Hello, 잠만보'</span></div><div class="line">hello1._name = <span class="string">'anonymous'</span>;</div><div class="line">hello1.say(); // <span class="string">'Hello, anonymous'</span></div></pre></td></tr></table></figure>
+<p>위에서 <code>Hello()</code>로 생성된 객체들은 모두 <code>_name</code>이라는 변수를 가지게 된다.<br>변수명 앞에 underscore(_)를 포함했기 때문에 일반적인 JavaScript 네이밍 컨벤션을 생각해 봤을때<br>이 변수는 Private variable으로 쓰고싶다는 의도를 알 수 있다.<br>하지만 실제로는 여전히 외부에서도 쉽게 접근가능한 변수일 뿐이다.</p>
+<p>이 경우에 클로저를 사용하여 외부에서 변수에 직접 접근하는 것을 제한할 수 있다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> hello(name) &#123;</div><div class="line">  var _name = name;</div><div class="line">  <span class="built_in">return</span> <span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">    console.log(<span class="string">'Hello, '</span> + _name);</div><div class="line">  &#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var hello1 = hello(<span class="string">'피카츄'</span>);</div><div class="line">var hello2 = hello(<span class="string">'이상해씨'</span>);</div><div class="line">var hello3 = hello(<span class="string">'잠만보'</span>);</div><div class="line"></div><div class="line">hello1(); // <span class="string">'Hello, 피카츄'</span></div><div class="line">hello2(); // <span class="string">'Hello, 이상해씨'</span></div><div class="line">hello3(); // <span class="string">'Hello, 잠만보'</span></div></pre></td></tr></table></figure>
+<p>특별히 인터페이스를 제공하는 것이 아니라면, 여기서는 외부에서 _name에 접근할 방법이 전혀 없다.<br>이렇게 은닉화도 생각보다 쉽게 해결할 수 있다.</p>
+<h3 id="클로저의-성능"><a href="#클로저의-성능" class="headerlink" title="클로저의 성능"></a>클로저의 성능</h3><p>클로저는 각자의 환경을 가진다. 이 환경을 기억하기 위해서는 당연히 메모리가 소모될 것이다.<br>클로저를 생성해놓고 참조를 제거하지 않는 것은 C++에서 동적할당으로 객체를 생성해놓고 delete를 사용하지 않는 것과 비슷하다.<br>클로저를 통해 내부 변수를 참조하는 동안에는 내부 변수가 차지하는 메모리를 GC가 회수하지 않는다.<br>따라서 클로저 사용이 끝나면 참조를 제거하는 것이 좋다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> hello(name) &#123;</div><div class="line">  var _name = name;</div><div class="line">  <span class="built_in">return</span> <span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">    console.log(<span class="string">'Hello, '</span> + _name);</div><div class="line">  &#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var hello1 = hello(<span class="string">'피카츄'</span>);</div><div class="line">var hello2 = hello(<span class="string">'이상해씨'</span>);</div><div class="line">var hello3 = hello(<span class="string">'잠만보'</span>);</div><div class="line"></div><div class="line">hello1(); // <span class="string">'Hello, 피카츄'</span></div><div class="line">hello2(); // <span class="string">'Hello, 이상해씨'</span></div><div class="line">hello3(); // <span class="string">'Hello, 잠만보'</span></div><div class="line"></div><div class="line">// 여기서 메모리를 release 시키기 클로저의 참조를 제거해야 한다.</div><div class="line">hello1 = null;</div><div class="line">hello2 = null;</div><div class="line">hello3 = null;</div></pre></td></tr></table></figure>
+<p>이처럼 메모리 관리에 있어서 약점이 있지만 추가로 스코프 체인을 검색하는 시간과 새로운 스코프를 생성하는데 드는 비용도 감안하지 않을 수 없다.<br>이 부분에 대해서는 JavaScript 스코프를 주제로 하는 별도의 글에서 다룰 것이다.</p>
+<h3 id="참고-문서"><a href="#참고-문서" class="headerlink" title="참고 문서"></a>참고 문서</h3><ul>
+<li><a href="https://hyunseob.github.io/2016/08/30/javascript-closure/" target="_blank" rel="external">JavaScript 클로저(Closure)</a></li>
+<li><a href="https://medium.com/@khwsc1/%EB%B2%88%EC%97%AD-%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%8A%A4%EC%BD%94%ED%94%84%EC%99%80-%ED%81%B4%EB%A1%9C%EC%A0%80-javascript-scope-and-closures-8d402c976d19" target="_blank" rel="external">자바스크립트 스코프와 클로저</a></li>
+</ul>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://kkapkkapchu.github.io/blog/2018/07/07/20180707/" data-id="cjjdibk070000cdwb1jhyd9ym" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="https://kkapkkapchu.github.io/blog/2018/07/07/20180707/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://kkapkkapchu.github.io/blog/2018/07/07/20180707/">Comments</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
     <article id="post-20180615_3" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -853,139 +1013,6 @@
 
 
 
-    <article id="post-20170829" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/blog/2017/08/28/20170829/">input 에서 마우스 커서 위치 얻어오기 및 변경하기</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/blog/2017/08/28/20170829/">
-            <time datetime="2017-08-28T07:22:44.000Z" itemprop="datePublished">2017-08-28</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/JavaScript/">JavaScript</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/blog/tags/caret-position/">caret_position</a>, <a class="tag-link" href="/blog/tags/mouse-cursor-get/">mouse_cursor_get</a>, <a class="tag-link" href="/blog/tags/mouse-cursor-set/">mouse_cursor_set</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <h3 id="input-요소의-마우스-커서-위치-얻어오기"><a href="#input-요소의-마우스-커서-위치-얻어오기" class="headerlink" title="input 요소의 마우스 커서 위치 얻어오기"></a>input 요소의 마우스 커서 위치 얻어오기</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 커서의 위치를 반환합니다.</div><div class="line"> */</div><div class="line">getCaretPosition = () =&gt; &#123;</div><div class="line">    <span class="built_in">let</span> targetElement = this.refs.input;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (document.selection) &#123; // IE &lt; 9</div><div class="line">        targetElement.focus();</div><div class="line">        <span class="built_in">let</span> range = document.selection.createRange();</div><div class="line">        <span class="built_in">let</span> rangeLength = range.text.length;</div><div class="line">        range.moveStart(<span class="string">'character'</span>, -targetElement.value.length);</div><div class="line"></div><div class="line">        <span class="built_in">let</span> start = range.text.length - rangeLength;</div><div class="line">        <span class="built_in">return</span> &#123;<span class="string">'start'</span>: start, <span class="string">'end'</span>: start + rangeLength&#125;;</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (targetElement.selectionStart || targetElement.selectionStart == <span class="string">'0'</span>) &#123; // IE &gt;= 9 and Other Browsers</div><div class="line">        <span class="built_in">return</span> &#123;<span class="string">'start'</span>: targetElement.selectionStart, <span class="string">'end'</span>: targetElement.selectionEnd&#125;;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="built_in">return</span> &#123;<span class="string">'start'</span>: 0, <span class="string">'end'</span>: 0&#125;;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h3 id="input-요소의-마우스-커서-위치-변경하기"><a href="#input-요소의-마우스-커서-위치-변경하기" class="headerlink" title="input 요소의 마우스 커서 위치 변경하기"></a>input 요소의 마우스 커서 위치 변경하기</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 커서의 위치를 지정합니다.</div><div class="line"> */</div><div class="line">setCaretPosition = (start, end) =&gt; &#123;</div><div class="line">    <span class="built_in">let</span> targetElement = this.refs.input;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (targetElement.setSelectionRange) &#123; // IE &gt;= 9 and Other Browsers</div><div class="line">        targetElement.focus();</div><div class="line">        targetElement.setSelectionRange(start, end);</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (targetElement.createTextRange) &#123; // IE &lt; 9</div><div class="line">        <span class="built_in">let</span> range = targetElement.createTextRange();</div><div class="line">        range.collapse(<span class="literal">true</span>);</div><div class="line">        range.moveEnd(<span class="string">'character'</span>, end);</div><div class="line">        range.moveStart(<span class="string">'character'</span>, start);</div><div class="line">        range.select();</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="https://kkapkkapchu.github.io/blog/2017/08/28/20170829/" data-id="cjifo8ffm000b9ywbw5cfo0r8" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="https://kkapkkapchu.github.io/blog/2017/08/28/20170829/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://kkapkkapchu.github.io/blog/2017/08/28/20170829/">Comments</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
     <article id="post-20170828" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -1111,6 +1138,139 @@
             
     
         <a href="https://kkapkkapchu.github.io/blog/2017/08/28/20170828/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://kkapkkapchu.github.io/blog/2017/08/28/20170828/">Comments</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-20170829" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/blog/2017/08/28/20170829/">input 에서 마우스 커서 위치 얻어오기 및 변경하기</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/blog/2017/08/28/20170829/">
+            <time datetime="2017-08-28T07:22:44.000Z" itemprop="datePublished">2017-08-28</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/JavaScript/">JavaScript</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/blog/tags/caret-position/">caret_position</a>, <a class="tag-link" href="/blog/tags/mouse-cursor-get/">mouse_cursor_get</a>, <a class="tag-link" href="/blog/tags/mouse-cursor-set/">mouse_cursor_set</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h3 id="input-요소의-마우스-커서-위치-얻어오기"><a href="#input-요소의-마우스-커서-위치-얻어오기" class="headerlink" title="input 요소의 마우스 커서 위치 얻어오기"></a>input 요소의 마우스 커서 위치 얻어오기</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 커서의 위치를 반환합니다.</div><div class="line"> */</div><div class="line">getCaretPosition = () =&gt; &#123;</div><div class="line">    <span class="built_in">let</span> targetElement = this.refs.input;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (document.selection) &#123; // IE &lt; 9</div><div class="line">        targetElement.focus();</div><div class="line">        <span class="built_in">let</span> range = document.selection.createRange();</div><div class="line">        <span class="built_in">let</span> rangeLength = range.text.length;</div><div class="line">        range.moveStart(<span class="string">'character'</span>, -targetElement.value.length);</div><div class="line"></div><div class="line">        <span class="built_in">let</span> start = range.text.length - rangeLength;</div><div class="line">        <span class="built_in">return</span> &#123;<span class="string">'start'</span>: start, <span class="string">'end'</span>: start + rangeLength&#125;;</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (targetElement.selectionStart || targetElement.selectionStart == <span class="string">'0'</span>) &#123; // IE &gt;= 9 and Other Browsers</div><div class="line">        <span class="built_in">return</span> &#123;<span class="string">'start'</span>: targetElement.selectionStart, <span class="string">'end'</span>: targetElement.selectionEnd&#125;;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="built_in">return</span> &#123;<span class="string">'start'</span>: 0, <span class="string">'end'</span>: 0&#125;;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="input-요소의-마우스-커서-위치-변경하기"><a href="#input-요소의-마우스-커서-위치-변경하기" class="headerlink" title="input 요소의 마우스 커서 위치 변경하기"></a>input 요소의 마우스 커서 위치 변경하기</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line"> * 커서의 위치를 지정합니다.</div><div class="line"> */</div><div class="line">setCaretPosition = (start, end) =&gt; &#123;</div><div class="line">    <span class="built_in">let</span> targetElement = this.refs.input;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (targetElement.setSelectionRange) &#123; // IE &gt;= 9 and Other Browsers</div><div class="line">        targetElement.focus();</div><div class="line">        targetElement.setSelectionRange(start, end);</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (targetElement.createTextRange) &#123; // IE &lt; 9</div><div class="line">        <span class="built_in">let</span> range = targetElement.createTextRange();</div><div class="line">        range.collapse(<span class="literal">true</span>);</div><div class="line">        range.moveEnd(<span class="string">'character'</span>, end);</div><div class="line">        range.moveStart(<span class="string">'character'</span>, start);</div><div class="line">        range.select();</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://kkapkkapchu.github.io/blog/2017/08/28/20170829/" data-id="cjifo8ffm000b9ywbw5cfo0r8" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="https://kkapkkapchu.github.io/blog/2017/08/28/20170829/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://kkapkkapchu.github.io/blog/2017/08/28/20170829/">Comments</a>
     
 
         </footer>
@@ -1390,144 +1550,6 @@
 
 
 
-    <article id="post-20170813" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/blog/2017/08/13/20170813/">HTML 요소 동적으로 생성하고 속성(Attribute) 추가하기</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/blog/2017/08/13/20170813/">
-            <time datetime="2017-08-13T07:18:27.000Z" itemprop="datePublished">2017-08-13</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/JavaScript/">JavaScript</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/blog/tags/HTML/">HTML</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <h3 id="요소를-동적으로-생성하고-원하는-위치에-붙이기"><a href="#요소를-동적으로-생성하고-원하는-위치에-붙이기" class="headerlink" title="요소를 동적으로 생성하고 원하는 위치에 붙이기"></a>요소를 동적으로 생성하고 원하는 위치에 붙이기</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// 요소 동적 생성</div><div class="line"><span class="built_in">let</span> div = document.createElement(<span class="string">"div"</span>);</div><div class="line"></div><div class="line">// 원하는 위치에 붙인다</div><div class="line">document.body.appendChild(div);</div><div class="line"></div><div class="line">// React 에서는 요소를 붙이고 싶은 위치를 ref 로 잡아서도 가능 </div><div class="line">this.refs.test.appendChild(div);</div></pre></td></tr></table></figure>
-<h3 id="동적으로-생성한-요소에-속성-Attribute-추가하기"><a href="#동적으로-생성한-요소에-속성-Attribute-추가하기" class="headerlink" title="동적으로 생성한 요소에 속성(Attribute) 추가하기"></a>동적으로 생성한 요소에 속성(Attribute) 추가하기</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">// 요소 동적 생성</div><div class="line"><span class="built_in">let</span> div = document.createElement(<span class="string">"div"</span>);</div><div class="line"></div><div class="line">// 속성을 추가한다</div><div class="line">div.setAttribute(<span class="string">"style"</span>, <span class="string">"width: 100%; height: 100%;"</span>)</div><div class="line"></div><div class="line">// 원하는 위치에 붙인다</div><div class="line">document.body.appendChild(div);</div><div class="line"></div><div class="line">// React 에서는 요소를 붙이고 싶은 위치를 ref 로 잡아서도 가능 </div><div class="line">this.refs.test.appendChild(div);</div></pre></td></tr></table></figure>
-<p>div.setAttribute(“style”, “width: 100%; height: 100%;”) 에서 첫 번째 인자가 추가할 속성의 이름이고,<br>두 번째 인자가 추가할 속성의 값이다.</p>
-<h3 id="동적으로-생성한-요소에-이벤트-속성-추가하기"><a href="#동적으로-생성한-요소에-이벤트-속성-추가하기" class="headerlink" title="동적으로 생성한 요소에 이벤트 속성 추가하기"></a>동적으로 생성한 요소에 이벤트 속성 추가하기</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// 요소 동적 생성</div><div class="line"><span class="built_in">let</span> a = document.createElement(<span class="string">"a"</span>);</div><div class="line"></div><div class="line"><span class="keyword">if</span> (a.addEventListener) &#123;</div><div class="line">    a.addEventListener(<span class="string">'click'</span>, handler, <span class="literal">false</span>); </div><div class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (el.attachEvent) &#123;</div><div class="line">    a.attachEvent(<span class="string">'onclick'</span>, handler);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>onclick, onblur 와 같은 이벤트 속성을 추가하고 싶을 때는 setAttribute 가 아닌 addEventListener 로 하면 된다.</p>
-<h3 id="동적으로-생성한-요소-삭제하기"><a href="#동적으로-생성한-요소-삭제하기" class="headerlink" title="동적으로 생성한 요소 삭제하기"></a>동적으로 생성한 요소 삭제하기</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;ul id=<span class="string">"myList"</span>&gt;</div><div class="line">    &lt;li&gt;Coffee&lt;/li&gt;</div><div class="line">    &lt;li&gt;Tea&lt;/li&gt;</div><div class="line">    &lt;li&gt;Milk&lt;/li&gt;</div><div class="line">&lt;/ul&gt;</div></pre></td></tr></table></figure>
-<p>위의 예제처럼 ul, li 태그가 생성되었다고 할 때, li 태그를 지우고 싶으면 아래 예제처럼 하면 된다.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// 삭제할 요소의 상위(부모) 요소</div><div class="line"><span class="built_in">let</span> myNode = document.getElementById(<span class="string">"myList"</span>);</div><div class="line"></div><div class="line">// 원하는 자식 요소만 지우기</div><div class="line">myNode.removeChild(myNode.childNodes[0]);</div><div class="line"></div><div class="line">// 자식 요소들 한번에 지우기</div><div class="line">myNode.innerHTML = <span class="string">''</span>;</div></pre></td></tr></table></figure></p>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="https://kkapkkapchu.github.io/blog/2017/08/13/20170813/" data-id="cjifo8ff800049ywbzt0mr2lc" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="https://kkapkkapchu.github.io/blog/2017/08/13/20170813/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://kkapkkapchu.github.io/blog/2017/08/13/20170813/">Comments</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
     <nav id="page-nav">
         <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><a class="extend next" rel="next" href="/blog/page/2/">Next &raquo;</a>
     </nav>
@@ -1541,6 +1563,15 @@
         <h3 class="widget-title">recent</h3>
         <div class="widget">
             <ul id="recent-post" class="no-thumbnail">
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/JavaScript/">JavaScript</a></p>
+                            <p class="item-title"><a href="/blog/2018/07/07/20180707/" class="title">자바스크립트 클로저(Closure)에 대해</a></p>
+                            <p class="item-date"><time datetime="2018-07-07T14:02:00.000Z" itemprop="datePublished">2018-07-07</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -1578,15 +1609,6 @@
                         </div>
                     </li>
                 
-                    <li>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/JavaScript/">JavaScript</a></p>
-                            <p class="item-title"><a href="/blog/2017/09/05/20170905/" class="title">Object 의 key/value 값 가져오기</a></p>
-                            <p class="item-date"><time datetime="2017-09-05T05:24:01.000Z" itemprop="datePublished">2017-09-05</time></p>
-                        </div>
-                    </li>
-                
             </ul>
         </div>
     </div>
@@ -1596,7 +1618,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">categories</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/">Web</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/CSS/">CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/Hexo/">Hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/JavaScript/">JavaScript</a><span class="category-list-count">10</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/JavaScript/React/">React</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/JavaScript/library/">library</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/">Web</a><span class="category-list-count">13</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/CSS/">CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/Hexo/">Hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/JavaScript/">JavaScript</a><span class="category-list-count">11</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/JavaScript/React/">React</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/JavaScript/library/">library</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul>
         </div>
     </div>
 
@@ -1605,7 +1627,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">archives</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/06/">June 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/09/">September 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/08/">August 2017</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/07/">July 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/06/">June 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/09/">September 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/08/">August 2017</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -1614,7 +1636,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">tags</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/HTML/">HTML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/IE/">IE</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/add-header/">add_header</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/array/">array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/caret-position/">caret_position</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/dateTime/">dateTime</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/key-value/">key/value</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/keycode/">keycode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mouse-click-event/">mouse_click_event</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mouse-cursor-get/">mouse_cursor_get</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mouse-cursor-set/">mouse_cursor_set</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/object/">object</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/onBeforeUnload/">onBeforeUnload</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/onTouchTap/">onTouchTap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/propTypes/">propTypes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/setRouteLeaveHook/">setRouteLeaveHook</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/window-open/">window.open</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/HTML/">HTML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/IE/">IE</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/add-header/">add_header</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/array/">array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/caret-position/">caret_position</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/closure/">closure</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/dateTime/">dateTime</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/key-value/">key/value</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/keycode/">keycode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mouse-click-event/">mouse_click_event</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mouse-cursor-get/">mouse_cursor_get</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mouse-cursor-set/">mouse_cursor_set</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/object/">object</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/onBeforeUnload/">onBeforeUnload</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/onTouchTap/">onTouchTap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/propTypes/">propTypes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/setRouteLeaveHook/">setRouteLeaveHook</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/window-open/">window.open</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -1623,7 +1645,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">tag cloud</h3>
         <div class="widget tagcloud">
-            <a href="/blog/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/blog/tags/IE/" style="font-size: 20px;">IE</a> <a href="/blog/tags/add-header/" style="font-size: 10px;">add_header</a> <a href="/blog/tags/array/" style="font-size: 10px;">array</a> <a href="/blog/tags/caret-position/" style="font-size: 10px;">caret_position</a> <a href="/blog/tags/dateTime/" style="font-size: 10px;">dateTime</a> <a href="/blog/tags/key-value/" style="font-size: 10px;">key/value</a> <a href="/blog/tags/keycode/" style="font-size: 10px;">keycode</a> <a href="/blog/tags/mouse-click-event/" style="font-size: 10px;">mouse_click_event</a> <a href="/blog/tags/mouse-cursor-get/" style="font-size: 10px;">mouse_cursor_get</a> <a href="/blog/tags/mouse-cursor-set/" style="font-size: 10px;">mouse_cursor_set</a> <a href="/blog/tags/object/" style="font-size: 10px;">object</a> <a href="/blog/tags/onBeforeUnload/" style="font-size: 15px;">onBeforeUnload</a> <a href="/blog/tags/onTouchTap/" style="font-size: 10px;">onTouchTap</a> <a href="/blog/tags/propTypes/" style="font-size: 10px;">propTypes</a> <a href="/blog/tags/setRouteLeaveHook/" style="font-size: 10px;">setRouteLeaveHook</a> <a href="/blog/tags/window-open/" style="font-size: 10px;">window.open</a>
+            <a href="/blog/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/blog/tags/IE/" style="font-size: 20px;">IE</a> <a href="/blog/tags/add-header/" style="font-size: 10px;">add_header</a> <a href="/blog/tags/array/" style="font-size: 10px;">array</a> <a href="/blog/tags/caret-position/" style="font-size: 10px;">caret_position</a> <a href="/blog/tags/closure/" style="font-size: 10px;">closure</a> <a href="/blog/tags/dateTime/" style="font-size: 10px;">dateTime</a> <a href="/blog/tags/key-value/" style="font-size: 10px;">key/value</a> <a href="/blog/tags/keycode/" style="font-size: 10px;">keycode</a> <a href="/blog/tags/mouse-click-event/" style="font-size: 10px;">mouse_click_event</a> <a href="/blog/tags/mouse-cursor-get/" style="font-size: 10px;">mouse_cursor_get</a> <a href="/blog/tags/mouse-cursor-set/" style="font-size: 10px;">mouse_cursor_set</a> <a href="/blog/tags/object/" style="font-size: 10px;">object</a> <a href="/blog/tags/onBeforeUnload/" style="font-size: 15px;">onBeforeUnload</a> <a href="/blog/tags/onTouchTap/" style="font-size: 10px;">onTouchTap</a> <a href="/blog/tags/propTypes/" style="font-size: 10px;">propTypes</a> <a href="/blog/tags/setRouteLeaveHook/" style="font-size: 10px;">setRouteLeaveHook</a> <a href="/blog/tags/window-open/" style="font-size: 10px;">window.open</a>
         </div>
     </div>
 

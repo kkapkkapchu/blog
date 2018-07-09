@@ -3,20 +3,20 @@
 <head>
     <meta charset="utf-8">
     
-    <title>페이지 벗어날 때(새로고침/닫기/뒤로가기) 브라우저 확인 창 띄우기 | 깝깝츄의 개발일기</title>
+    <title>자바스크립트 클로저(Closure)에 대해 | 깝깝츄의 개발일기</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="페이지 벗어날 때(새로고침/닫기/뒤로가기) 발생하는 이벤트메일을 작성 중일 때 화면을 벗어나려고 하면 브라우저 자체 확인 창이 뜬다.화면을 벗어날 때 onBeforeUnload 이벤트가 호출되므로 여기서 작업을 하면 된다. 1234567891011121314onBeforeUnload = (event) =&amp;gt; &amp;#123;    // 변경사항이 없다면 그냥">
-<meta name="keywords" content="onBeforeUnload">
+    <meta name="description" content="클로저란 무엇인가함수 내부에 함수를 작성할 때마다 이미 클로저를 생성한 것이다.내부에 작성한 함수가 바로 클로저라닛!! 여태껏 클로저가 뭔지도 모르고 사용했다.. 12345678function outerFunction () &amp;#123;  const outer = &apos;I see the outer variable!&apos;    return function innerF">
+<meta name="keywords" content="closure">
 <meta property="og:type" content="article">
-<meta property="og:title" content="페이지 벗어날 때(새로고침&#x2F;닫기&#x2F;뒤로가기) 브라우저 확인 창 띄우기">
-<meta property="og:url" content="https://kkapkkapchu.github.io/blog/2018/06/15/20180615/index.html">
+<meta property="og:title" content="자바스크립트 클로저(Closure)에 대해">
+<meta property="og:url" content="https://kkapkkapchu.github.io/blog/2018/07/07/20180707/index.html">
 <meta property="og:site_name" content="깝깝츄의 개발일기">
-<meta property="og:description" content="페이지 벗어날 때(새로고침/닫기/뒤로가기) 발생하는 이벤트메일을 작성 중일 때 화면을 벗어나려고 하면 브라우저 자체 확인 창이 뜬다.화면을 벗어날 때 onBeforeUnload 이벤트가 호출되므로 여기서 작업을 하면 된다. 1234567891011121314onBeforeUnload = (event) =&amp;gt; &amp;#123;    // 변경사항이 없다면 그냥">
+<meta property="og:description" content="클로저란 무엇인가함수 내부에 함수를 작성할 때마다 이미 클로저를 생성한 것이다.내부에 작성한 함수가 바로 클로저라닛!! 여태껏 클로저가 뭔지도 모르고 사용했다.. 12345678function outerFunction () &amp;#123;  const outer = &apos;I see the outer variable!&apos;    return function innerF">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-06-18T00:08:04.000Z">
+<meta property="og:updated_time" content="2018-07-08T04:57:29.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="페이지 벗어날 때(새로고침&#x2F;닫기&#x2F;뒤로가기) 브라우저 확인 창 띄우기">
-<meta name="twitter:description" content="페이지 벗어날 때(새로고침/닫기/뒤로가기) 발생하는 이벤트메일을 작성 중일 때 화면을 벗어나려고 하면 브라우저 자체 확인 창이 뜬다.화면을 벗어날 때 onBeforeUnload 이벤트가 호출되므로 여기서 작업을 하면 된다. 1234567891011121314onBeforeUnload = (event) =&amp;gt; &amp;#123;    // 변경사항이 없다면 그냥">
+<meta name="twitter:title" content="자바스크립트 클로저(Closure)에 대해">
+<meta name="twitter:description" content="클로저란 무엇인가함수 내부에 함수를 작성할 때마다 이미 클로저를 생성한 것이다.내부에 작성한 함수가 바로 클로저라닛!! 여태껏 클로저가 뭔지도 모르고 사용했다.. 12345678function outerFunction () &amp;#123;  const outer = &apos;I see the outer variable!&apos;    return function innerF">
     
 
     
@@ -185,7 +185,7 @@
 </aside>
 
             
-            <section id="main"><article id="post-20180615" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-20180707" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -193,7 +193,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            페이지 벗어날 때(새로고침/닫기/뒤로가기) 브라우저 확인 창 띄우기
+            자바스크립트 클로저(Closure)에 대해
         </h1>
     
 
@@ -202,8 +202,8 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/blog/2018/06/15/20180615/">
-            <time datetime="2018-06-15T07:51:00.000Z" itemprop="datePublished">2018-06-15</time>
+        <a href="/blog/2018/07/07/20180707/">
+            <time datetime="2018-07-07T14:02:00.000Z" itemprop="datePublished">2018-07-07</time>
         </a>
     </div>
 
@@ -217,7 +217,7 @@
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/blog/tags/onBeforeUnload/">onBeforeUnload</a>
+        <a class="tag-link" href="/blog/tags/closure/">closure</a>
     </div>
 
                     </div>
@@ -228,11 +228,35 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <h3 id="페이지-벗어날-때-새로고침-닫기-뒤로가기-발생하는-이벤트"><a href="#페이지-벗어날-때-새로고침-닫기-뒤로가기-발생하는-이벤트" class="headerlink" title="페이지 벗어날 때(새로고침/닫기/뒤로가기) 발생하는 이벤트"></a>페이지 벗어날 때(새로고침/닫기/뒤로가기) 발생하는 이벤트</h3><p>메일을 작성 중일 때 화면을 벗어나려고 하면 브라우저 자체 확인 창이 뜬다.<br>화면을 벗어날 때 <code>onBeforeUnload</code> 이벤트가 호출되므로 여기서 작업을 하면 된다.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">onBeforeUnload = (event) =&gt; &#123;</div><div class="line">    // 변경사항이 없다면 그냥 브라우저를 벗어남</div><div class="line">    <span class="keyword">if</span> (!this.isChange()) <span class="built_in">return</span>;</div><div class="line"></div><div class="line">    event.returnValue = <span class="string">"변경사항이 저장되지 않을 수 있습니다."</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="title">componentDidMount</span></span>() &#123;</div><div class="line">    window.addEventListener(<span class="string">"beforeunload"</span>, this.onBeforeUnload); // 페이지 새로고침, 닫기</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="title">componentWillUnmount</span></span>() &#123;</div><div class="line">    window.removeEventListener(<span class="string">"beforeunload"</span>, this.onBeforeUnload);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>하지만 여기서 중요한 거!!</p>
-<p>나는 리액트를 사용하므로 <code>onBeforeUnload</code> 이벤트가 페이지 닫기나 새로고침시에는 잘 호출되지만<br>뒤로가기를 할 때에는 호출이 안된다. 아마도 라우터 때문인듯하다..<br><code>onBeforeUnload</code> 이벤트는 현재 window 를 벗어날 때 호출되는 거 같은데,<br>리액트는 SPA(Single Page App)이기 때문에 url이 바뀌더라도 dom이 바뀌지 window 가 바뀌지 않는다.</p>
-<p>리액트 컴포넌트에서 뒤로가기 이벤트를 잡으려면 <code>setRouteLeaveHook</code> 를 이용하는 방법이 있다.<br>이거에 대해서는 다음 포스팅을 쓰도록 하겠다.</p>
+            <h3 id="클로저란-무엇인가"><a href="#클로저란-무엇인가" class="headerlink" title="클로저란 무엇인가"></a>클로저란 무엇인가</h3><p>함수 내부에 함수를 작성할 때마다 이미 클로저를 생성한 것이다.<br>내부에 작성한 함수가 바로 클로저라닛!! 여태껏 클로저가 뭔지도 모르고 사용했다..</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> <span class="function"><span class="title">outerFunction</span></span> () &#123;</div><div class="line">  const outer = <span class="string">'I see the outer variable!'</span></div><div class="line">  </div><div class="line">  <span class="built_in">return</span> <span class="keyword">function</span> <span class="function"><span class="title">innerFunction</span></span>() &#123;</div><div class="line">    console.log(outer)</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">outerFunction()() // I see the outer variable!</div></pre></td></tr></table></figure>
+<h3 id="클로저를-왜-쓸까"><a href="#클로저를-왜-쓸까" class="headerlink" title="클로저를 왜 쓸까"></a>클로저를 왜 쓸까</h3><p>클로저는 외부함수의 변수에 접근이 가능하다. (자바스크립의 스코프를 이해한다면 당연한 것)<br>때문에 일반적으로 두 가지의 목적이 있다.</p>
+<ol>
+<li>사이드 이펙트(side effects) 제어하기</li>
+<li>private 변수 생성하기(캡슐화)</li>
+</ol>
+<h5 id="사이드-이펙트-side-effects-제어하기"><a href="#사이드-이펙트-side-effects-제어하기" class="headerlink" title="사이드 이펙트(side effects) 제어하기"></a>사이드 이펙트(side effects) 제어하기</h5><p>함수에서 값을 반환할 때를 제외하고 무언가를 행할 때 사이드 이펙트(side effects)가 발생한다.<br>여러 가지 것들이 사이드 이펙트가 될 수 있는데, 예를 들어 Ajax 요청이나 timeout을 생성할 때,<br>그리고 심지어 console.log를 선언하는 것도 사이드 이펙트이다.</p>
+<p>보통 Ajax나 timeout과 같이 코드 흐름을 방해하는 것들이 신경 쓰일 때,<br>클로저를 활용하여 사이드 이펙트를 제어한다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var i;</div><div class="line"><span class="keyword">for</span> (i = 0; i &lt; 10; i++) &#123;</div><div class="line">  setTimeout(<span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">    console.log(i);</div><div class="line">  &#125;, 100);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>간단하게 0-9까지의 정수를 출력하는 코드이지만 실제로 돌려보면 엉뚱하게도 10만 열 번 출력되는 걸 볼 수 있다. 왜일까?<br>먼저 <code>setTimeout()</code>에 인자로 넘긴 익명함수는 모두 0.1초 뒤에 호출될 것이다.<br>그 0.1초 동안에 이미 반복문이 모두 순회되면서 <code>i</code>값은 이미 10이 된 상태.<br>그 때 익명함수가 호출되면서 이미 10이 되어버린 <code>i</code>를 참조하는 것이다.</p>
+<p>이 경우에도 클로저를 사용하면 원하는 대로 동작하도록 만들 수 있다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var i;</div><div class="line"><span class="keyword">for</span> (i = 0; i &lt; 10; i++) &#123;</div><div class="line">  (<span class="keyword">function</span>(j) &#123;</div><div class="line">    setTimeout(<span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">      console.log(j);</div><div class="line">    &#125;, 100);</div><div class="line">  &#125;)(i);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>중간에 즉시 실행 함수(IIFE)를 덧붙여 <code>setTimeout()</code>에 걸린 익명함수를 클로저로 만들었다.<br>클로저는 만들어진 환경을 기억한다. 이 코드에서 <code>i</code>는 IIFE내에 <code>j</code>라는 형태로 주입되고, 클로저에 의해 각기 다른 환경속에 포함된다.<br>반복문은 10회 반복되므로 10개의 환경이 생길 것이고, 10개의 서로 다른 환경에 10개의 서로 다른 <code>j</code>가 생긴다.</p>
+<p>위의 예제에서는 IIFE를 통해서 클로저마다 환경이 생긴다.<br>하지만 인자로 <code>i</code>를 넘기지 않는다면 당연히 클로저가 참조하는 IIFE의 함수 스코프에서도 <code>i</code>값이 없으므로 생성 당시의 외부 스코프인 글로벌을 탐색하게 되고 결국 모두 같은 <code>i</code>를 참조하게 된다.<br>반면에, 인자로 <code>i</code>를 넘기게 되면 IIFE로 만든 10개의 스코프에 모두 <code>i</code>라는 변수가 다른 값으로 생기므로 정상적으로 동작할 수 있는 것이다.</p>
+<p>참고로 여기서 콜백으로 넘기는 함수 자체를 IIFE로 만들면 되지 않나 싶지만,<br>그렇게 하면 원하는대로 0-9까지 출력은 되지만 함수 내부가 즉시 실행되어 버리므로 setTimeout()의 0.1초 딜레이가 작동하지 않게 된다.</p>
+<h5 id="private-변수-생성하기-캡슐화"><a href="#private-변수-생성하기-캡슐화" class="headerlink" title="private 변수 생성하기(캡슐화)"></a>private 변수 생성하기(캡슐화)</h5><p>일반적으로 JavaScript에서 객체지향 프로그래밍을 말한다면 <code>Prototype</code>을 통해 객체를 다루는 것을 말한다.<br><code>Prototype</code>을 통한 객체를 만들 때의 주요한 문제 중 하나는 Private variables에 대한 접근 권한 문제이다. 예제 코드를 보자.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> Hello(name) &#123;</div><div class="line">  this._name = name;</div><div class="line">&#125;</div><div class="line"></div><div class="line">Hello.prototype.say = <span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">  console.log(<span class="string">'Hello, '</span> + this._name);</div><div class="line">&#125;</div><div class="line"></div><div class="line">var hello1 = new Hello(<span class="string">'피카츄'</span>);</div><div class="line">var hello2 = new Hello(<span class="string">'이상해씨'</span>);</div><div class="line">var hello3 = new Hello(<span class="string">'잠만보'</span>);</div><div class="line"></div><div class="line">hello1.say(); // <span class="string">'Hello, 피카츄'</span></div><div class="line">hello2.say(); // <span class="string">'Hello, 이상해씨'</span></div><div class="line">hello3.say(); // <span class="string">'Hello, 잠만보'</span></div><div class="line">hello1._name = <span class="string">'anonymous'</span>;</div><div class="line">hello1.say(); // <span class="string">'Hello, anonymous'</span></div></pre></td></tr></table></figure>
+<p>위에서 <code>Hello()</code>로 생성된 객체들은 모두 <code>_name</code>이라는 변수를 가지게 된다.<br>변수명 앞에 underscore(_)를 포함했기 때문에 일반적인 JavaScript 네이밍 컨벤션을 생각해 봤을때<br>이 변수는 Private variable으로 쓰고싶다는 의도를 알 수 있다.<br>하지만 실제로는 여전히 외부에서도 쉽게 접근가능한 변수일 뿐이다.</p>
+<p>이 경우에 클로저를 사용하여 외부에서 변수에 직접 접근하는 것을 제한할 수 있다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> hello(name) &#123;</div><div class="line">  var _name = name;</div><div class="line">  <span class="built_in">return</span> <span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">    console.log(<span class="string">'Hello, '</span> + _name);</div><div class="line">  &#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var hello1 = hello(<span class="string">'피카츄'</span>);</div><div class="line">var hello2 = hello(<span class="string">'이상해씨'</span>);</div><div class="line">var hello3 = hello(<span class="string">'잠만보'</span>);</div><div class="line"></div><div class="line">hello1(); // <span class="string">'Hello, 피카츄'</span></div><div class="line">hello2(); // <span class="string">'Hello, 이상해씨'</span></div><div class="line">hello3(); // <span class="string">'Hello, 잠만보'</span></div></pre></td></tr></table></figure>
+<p>특별히 인터페이스를 제공하는 것이 아니라면, 여기서는 외부에서 _name에 접근할 방법이 전혀 없다.<br>이렇게 은닉화도 생각보다 쉽게 해결할 수 있다.</p>
+<h3 id="클로저의-성능"><a href="#클로저의-성능" class="headerlink" title="클로저의 성능"></a>클로저의 성능</h3><p>클로저는 각자의 환경을 가진다. 이 환경을 기억하기 위해서는 당연히 메모리가 소모될 것이다.<br>클로저를 생성해놓고 참조를 제거하지 않는 것은 C++에서 동적할당으로 객체를 생성해놓고 delete를 사용하지 않는 것과 비슷하다.<br>클로저를 통해 내부 변수를 참조하는 동안에는 내부 변수가 차지하는 메모리를 GC가 회수하지 않는다.<br>따라서 클로저 사용이 끝나면 참조를 제거하는 것이 좋다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> hello(name) &#123;</div><div class="line">  var _name = name;</div><div class="line">  <span class="built_in">return</span> <span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">    console.log(<span class="string">'Hello, '</span> + _name);</div><div class="line">  &#125;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">var hello1 = hello(<span class="string">'피카츄'</span>);</div><div class="line">var hello2 = hello(<span class="string">'이상해씨'</span>);</div><div class="line">var hello3 = hello(<span class="string">'잠만보'</span>);</div><div class="line"></div><div class="line">hello1(); // <span class="string">'Hello, 피카츄'</span></div><div class="line">hello2(); // <span class="string">'Hello, 이상해씨'</span></div><div class="line">hello3(); // <span class="string">'Hello, 잠만보'</span></div><div class="line"></div><div class="line">// 여기서 메모리를 release 시키기 클로저의 참조를 제거해야 한다.</div><div class="line">hello1 = null;</div><div class="line">hello2 = null;</div><div class="line">hello3 = null;</div></pre></td></tr></table></figure>
+<p>이처럼 메모리 관리에 있어서 약점이 있지만 추가로 스코프 체인을 검색하는 시간과 새로운 스코프를 생성하는데 드는 비용도 감안하지 않을 수 없다.<br>이 부분에 대해서는 JavaScript 스코프를 주제로 하는 별도의 글에서 다룰 것이다.</p>
+<h3 id="참고-문서"><a href="#참고-문서" class="headerlink" title="참고 문서"></a>참고 문서</h3><ul>
+<li><a href="https://hyunseob.github.io/2016/08/30/javascript-closure/" target="_blank" rel="external">JavaScript 클로저(Closure)</a></li>
+<li><a href="https://medium.com/@khwsc1/%EB%B2%88%EC%97%AD-%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%8A%A4%EC%BD%94%ED%94%84%EC%99%80-%ED%81%B4%EB%A1%9C%EC%A0%80-javascript-scope-and-closures-8d402c976d19" target="_blank" rel="external">자바스크립트 스코프와 클로저</a></li>
+</ul>
 
         
         </div>
@@ -243,7 +267,7 @@
 
 </div>
 
-    <a data-url="https://kkapkkapchu.github.io/blog/2018/06/15/20180615/" data-id="cjifocqhn00249ywbucjbecg1" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="https://kkapkkapchu.github.io/blog/2018/07/07/20180707/" data-id="cjjdibk070000cdwb1jhyd9ym" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -311,7 +335,7 @@
 
             
     
-        <a href="https://kkapkkapchu.github.io/blog/2018/06/15/20180615/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://kkapkkapchu.github.io/blog/2018/06/15/20180615/">Comments</a>
+        <a href="https://kkapkkapchu.github.io/blog/2018/07/07/20180707/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://kkapkkapchu.github.io/blog/2018/07/07/20180707/">Comments</a>
     
 
         </footer>
@@ -320,19 +344,10 @@
         
 <nav id="article-nav">
     
-        <a href="/blog/2018/06/15/20180615_2/" id="article-nav-newer" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">Newer</strong>
-            <div class="article-nav-title">
-                
-                    리액트에서 뒤로가기 시 브라우저 확인 창 띄우기
-                
-            </div>
-        </a>
     
-    
-        <a href="/blog/2017/09/05/20170905-2/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/blog/2018/06/15/20180615_3/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">Older</strong>
-            <div class="article-nav-title">window.open()에 헤더 추가하기</div>
+            <div class="article-nav-title">new Date(&#39;YYYY-MM-DD HH:MM&#39;) is InvalidDate in IE</div>
         </a>
     
 </nav>
@@ -490,9 +505,9 @@
     <script>
     var disqus_config = function () {
         
-            this.page.url = 'https://kkapkkapchu.github.io/blog/2018/06/15/20180615/';
+            this.page.url = 'https://kkapkkapchu.github.io/blog/2018/07/07/20180707/';
         
-        this.page.identifier = '20180615';
+        this.page.identifier = '20180707';
     };
     (function() { 
         var d = document, s = d.createElement('script');  
