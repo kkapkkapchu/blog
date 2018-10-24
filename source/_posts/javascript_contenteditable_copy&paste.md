@@ -54,5 +54,5 @@ render() {
 ![텍스트만 붙여넣기 된 모습](https://user-images.githubusercontent.com/30403198/47073945-56ba9180-d234-11e8-9022-b3134f3659d3.png)
 
 
----------------
-하지만 위의 방식은 IE를 지원하지 않는다. IE 를 지원하는 방법은 [다음 포스팅]()을 참고하자.
+---
+하지만 위의 방식은 IE를 지원하지 않는다. IE 를 지원하는 방법은 [다음 포스팅](https://kkapkkapchu.github.io/blog/2018/10/24/javascript_contenteditable_copy&paste_IE/)을 참고하자.
