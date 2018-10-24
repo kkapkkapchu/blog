@@ -1,8 +1,8 @@
 ---
-title: 자바스크립트 IE 브라우저 체크하기
+title: "[Javascript] IE 브라우저 체크하기"
 categories:
     - Web
-    - JavaScript
+    - Javascript
 tags:
     - IE
 date: 2018-10-17 14:11:00
@@ -12,7 +12,7 @@ date: 2018-10-17 14:11:00
 
 아래 코드는 모든 IE일 경우 체크하게 하는 조건문이다.
 
-```bash
+```jsx
 let agent = navigator.userAgent.toLowerCase();
 if ( (navigator.appName == 'Netscape' && agent.indexOf('trident') != -1) || (agent.indexOf("msie") != -1)) {
      // ie일 경우

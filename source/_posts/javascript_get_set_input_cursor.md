@@ -1,8 +1,8 @@
 ---
-title: input 에서 마우스 커서 위치 얻어오기 및 변경하기
+title: "[Javascript] input 에서 마우스 커서 위치 얻어오기 및 변경하기"
 categories:
     - Web
-    - JavaScript
+    - Javascript
 tags:
     - mouse_cursor_get
     - mouse_cursor_set
@@ -12,7 +12,7 @@ date: 2017-08-28 16:22:44
 
 ### input 요소의 마우스 커서 위치 얻어오기
 
-```bash
+```jsx
 /**
  * 커서의 위치를 반환합니다.
  */
@@ -37,7 +37,7 @@ getCaretPosition = () => {
 
 ### input 요소의 마우스 커서 위치 변경하기
 
-```bash
+```jsx
 /**
  * 커서의 위치를 지정합니다.
  */

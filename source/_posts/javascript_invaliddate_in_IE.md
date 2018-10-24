@@ -1,8 +1,8 @@
 ---
-title: new Date('YYYY-MM-DD HH:MM') is InvalidDate in IE
+title: "[Javascript] new Date('YYYY-MM-DD HH:MM') is InvalidDate in IE"
 categories:
     - Web
-    - JavaScript
+    - Javascript
 tags:
     - IE
     - dateTime
@@ -18,7 +18,7 @@ date: 2018-06-15 17:44:00
 IE에서는 InvalidDate으로 나온다.
 이 문제를 해결하기 위해서는 연도와 시간 사이에 빈칸대신 `T`를 넣으면 된다.
 
-```bash
+```jsx
 // for Chrome
 new Date('2018-06-15 17:44') // FRI JUN 15 2018 17:44:00 GMT+0900 (KST) 
 

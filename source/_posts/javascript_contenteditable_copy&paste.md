@@ -1,8 +1,8 @@
 ---
-title: 자바스크립트 contenteditable 에 복사한 데이터 붙여넣을 때 텍스트만 넣기
+title: "[Javascript] contenteditable 에 복사한 데이터 붙여넣을 때 텍스트만 넣기"
 categories:
     - Web
-    - JavaScript
+    - Javascript
 tags:
     - contenteditable
     - copy&paste
@@ -13,7 +13,7 @@ date: 2018-10-17 17:02:00
 `contenteditable` 에 복사한 데이터를 붙여넣으면 복사했을 때의 스타일(CSS)까지 그대로 적용된다.
 아래 코드를 실행시키고 스타일이 들어간 텍스트를 복사&붙여넣기 해보자.
 
-```bash
+```jsx
 render() {
     return (
         <p contenteditable="true">
@@ -30,7 +30,7 @@ render() {
 이렇게 나오면 안되기 때문에 텍스트만 붙여넣을 수 있도록 작업을 해줘야 한다.
 아래와 같이 하면 된다.
 
-```bash
+```jsx
 /**
  * 텍스트를 붙여넣기 할 때 발생하는 함수입니다.
  */
@@ -52,3 +52,7 @@ render() {
 
 이렇게 붙여넣기 이벤트를 잡아서 `preventDefault`로 기본 동작을 막고 `execCommand` 처리를 해주면 아래 사진과 같이 텍스트만 잘 나오게 된다.
 ![텍스트만 붙여넣기 된 모습](https://user-images.githubusercontent.com/30403198/47073945-56ba9180-d234-11e8-9022-b3134f3659d3.png)
+
+
+---------------
+하지만 위의 방식은 IE를 지원하지 않는다. IE 를 지원하는 방법은 [다음 포스팅]()을 참고하자.

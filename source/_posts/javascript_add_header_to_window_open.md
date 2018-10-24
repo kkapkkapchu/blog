@@ -1,8 +1,8 @@
 ---
-title: window.open()에 헤더 추가하기
+title: "[Javascript] window.open()에 헤더 추가하기"
 categories:
     - Web
-    - JavaScript
+    - Javascript
 tags:
     - window.open
     - add_header
@@ -12,7 +12,7 @@ date: 2017-09-05 14:24:01
 `window.open(url);` 을 하면 새 창이 열린다. 
 새 창을 열 때 헤더를 추가하려면 아래와 같이 하면 된다.
 
-```bash
+```jsx
 let xhttp = new XMLHttpRequest();
 
 xhttp.open("GET", url, true);

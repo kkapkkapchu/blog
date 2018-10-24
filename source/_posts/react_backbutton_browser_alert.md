@@ -1,8 +1,8 @@
 ---
-title: 리액트에서 뒤로가기 시 브라우저 확인 창 띄우기 
+title: "[React] 리액트에서 뒤로가기 시 브라우저 확인 창 띄우기" 
 categories:
     - Web
-    - JavaScript
+    - Javascript
     - React
 tags:
     - onBeforeUnload
@@ -21,7 +21,7 @@ React에서 뒤로가기 이벤트를 잡고 싶을 때에는 `setRouteLeaveHook
 `setRouteLeaveHook` 이벤트를 사용하기 위해서는 `withRouter` 로 컴포넌트를 감싸줘야 한다.
 그리고 router 는 기본으로 props 로 넘어오지만 route 는 현재 컴포넌트가 하위 레벨이라면 부모 컴포넌트로부터 전달받아야 한다.
 
-```bash
+```jsx
 import { withRouter } from 'react-router';
 
 class WriteMail extends Component {

@@ -1,8 +1,8 @@
 ---
-title: 페이지 벗어날 때(새로고침/닫기/뒤로가기) 브라우저 확인 창 띄우기 
+title: "[Javascript] 페이지 벗어날 때(새로고침/닫기/뒤로가기) 브라우저 확인 창 띄우기" 
 categories:
     - Web
-    - JavaScript
+    - Javascript
 tags:
     - onBeforeUnload
 date: 2018-06-15 16:51:00
@@ -12,7 +12,7 @@ date: 2018-06-15 16:51:00
 메일을 작성 중일 때 화면을 벗어나려고 하면 브라우저 자체 확인 창이 뜬다.
 화면을 벗어날 때 `onBeforeUnload` 이벤트가 호출되므로 여기서 작업을 하면 된다.
 
-```bash
+```jsx
 onBeforeUnload = (event) => {
     // 변경사항이 없다면 그냥 브라우저를 벗어남
     if (!this.isChange()) return;

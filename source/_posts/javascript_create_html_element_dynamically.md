@@ -1,15 +1,15 @@
 ---
-title: HTML 요소 동적으로 생성하고 속성(Attribute) 추가하기
+title: "[Javascript] HTML 요소 동적으로 생성하고 속성(Attribute) 추가하기"
 categories:
     - Web
-    - JavaScript
+    - Javascript
 tags:
     - HTML
 date: 2017-08-13 16:18:27
 ---
 
 ### 요소를 동적으로 생성하고 원하는 위치에 붙이기
-```bash
+```jsx
 // 요소 동적 생성
 let div = document.createElement("div");
 
@@ -21,7 +21,7 @@ this.refs.test.appendChild(div);
 ```
 
 ### 동적으로 생성한 요소에 속성(Attribute) 추가하기
-```bash
+```jsx
 // 요소 동적 생성
 let div = document.createElement("div");
 
@@ -39,7 +39,7 @@ div.setAttribute("style", "width: 100%; height: 100%;") 에서 첫 번째 인자
 두 번째 인자가 추가할 속성의 값이다.
 
 ### 동적으로 생성한 요소에 이벤트 속성 추가하기
-```bash
+```jsx
 // 요소 동적 생성
 let a = document.createElement("a");
 
@@ -53,7 +53,7 @@ if (a.addEventListener) {
 onclick, onblur 와 같은 이벤트 속성을 추가하고 싶을 때는 setAttribute 가 아닌 addEventListener 로 하면 된다.
 
 ### 동적으로 생성한 요소 삭제하기
-```bash
+```html
 <ul id="myList">
     <li>Coffee</li>
     <li>Tea</li>
@@ -61,7 +61,7 @@ onclick, onblur 와 같은 이벤트 속성을 추가하고 싶을 때는 setAtt
 </ul>
 ```
 위의 예제처럼 ul, li 태그가 생성되었다고 할 때, li 태그를 지우고 싶으면 아래 예제처럼 하면 된다.
-```bash
+```jsx
 // 삭제할 요소의 상위(부모) 요소
 let myNode = document.getElementById("myList");
 

@@ -1,8 +1,8 @@
 ---
-title: propTypes 에 array 타입으로 지정할 때 array 안에 들어가는 값에 대한 타입 지정하기
+title: "[React] propTypes 에 array 타입으로 지정할 때 array 안에 들어가는 값에 대한 타입 지정하기"
 categories:
     - Web
-    - JavaScript
+    - Javascript
     - React
 tags:
     - propTypes
@@ -14,7 +14,7 @@ React 에서 속성의 타입을 정의할 때 propTypes를 사용하면 편하�
 속성의 타입이 array 라면 배열 안의 값에 대한 타입도 `arrayOf()`로 지정할 수 있다.
 
 아래 예시는 배열 안의 값의 타입을 숫자로 정의한 것이다.
-```bash
+```jsx
 // An array of a certain type
 optionalArrayOf: PropTypes.arrayOf(PropTypes.number),
 ```
@@ -25,7 +25,7 @@ optionalArrayOf: PropTypes.arrayOf(PropTypes.number),
 
 이외에도 아래와 같이 많은 타입을 정의할 수 있도록 제공된다.
 ##### 제공되는 PropTypes
-```bash
+```jsx
 import PropTypes from 'prop-types';
 
 MyComponent.propTypes = {

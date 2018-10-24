@@ -1,8 +1,8 @@
 ---
-title: 자바스크립트 contenteditable 의 커서 맨 뒤로 보내기
+title: "[Javascript] contenteditable 의 커서 맨 뒤로 보내기"
 categories:
     - Web
-    - JavaScript
+    - Javascript
 tags:
     - contenteditable
     - cursor
@@ -25,7 +25,7 @@ date: 2018-10-17 14:17:00
 ### 1. contenteditable 속성을 사용한 div 내부에 힌트텍스트 span 요소가 들어감
 댓글 내용이 비었을 때 댓글을 입력하라는 내용의 힌트텍스트를 보여주어야 했다.
 전달받은 퍼블리싱 결과물은 아래 코드의 구조처럼 되어있었다.
-```bash
+```jsx
 render() {
     return (
         <div contenteditable>
@@ -43,7 +43,7 @@ render() {
 이 이슈는 `contenteditable` 속성을 사용한 태그를 빈 태그로 사용하고, 
 `class="reply_placeholder"` 스타일을 `position: absolute` 해서 위치 잡는 것으로 바꿔달라고 요청해서 css 를 수정하는 것으로 해결했다.
 
-```bash
+```jsx
 render() {
     return (
         <div
@@ -77,7 +77,7 @@ render() {
 
 `contenteditable` 에서 커서를 맨 뒤로 보내는 방법은 아래 코드를 참고하면 된다.  
 
-```bash
+```jsx
 /**
  * 커서를 맨 뒤로 보내는 함수입니다.
  * @param contentEditableElement 커서를 움직일 노드입니다.

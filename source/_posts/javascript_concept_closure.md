@@ -1,8 +1,8 @@
 ---
-title: 자바스크립트 클로저(Closure)에 대해
+title: "[Javascript] 클로저(Closure)에 대해"
 categories:
     - Web
-    - JavaScript
+    - Javascript
 tags:
     - closure
 date: 2018-07-07 23:02:00
@@ -12,7 +12,7 @@ date: 2018-07-07 23:02:00
 함수 내부에 함수를 작성할 때마다 이미 클로저를 생성한 것이다. 
 내부에 작성한 함수가 바로 클로저라닛!! 여태껏 클로저가 뭔지도 모르고 사용했다..
 
-```bash
+```jsx
 function outerFunction () {
   const outer = 'I see the outer variable!'
   
@@ -38,7 +38,7 @@ outerFunction()() // I see the outer variable!
 보통 Ajax나 timeout과 같이 코드 흐름을 방해하는 것들이 신경 쓰일 때, 
 클로저를 활용하여 사이드 이펙트를 제어한다.
 
-```bash
+```jsx
 var i;
 for (i = 0; i < 10; i++) {
   setTimeout(function() {
@@ -54,7 +54,7 @@ for (i = 0; i < 10; i++) {
 
 이 경우에도 클로저를 사용하면 원하는 대로 동작하도록 만들 수 있다.
 
-```bash
+```jsx
 var i;
 for (i = 0; i < 10; i++) {
   (function(j) {
@@ -77,10 +77,10 @@ for (i = 0; i < 10; i++) {
 그렇게 하면 원하는대로 0-9까지 출력은 되지만 함수 내부가 즉시 실행되어 버리므로 setTimeout()의 0.1초 딜레이가 작동하지 않게 된다.
 
 ##### private 변수 생성하기(캡슐화)
-일반적으로 JavaScript에서 객체지향 프로그래밍을 말한다면 `Prototype`을 통해 객체를 다루는 것을 말한다.
+일반적으로 Javascript에서 객체지향 프로그래밍을 말한다면 `Prototype`을 통해 객체를 다루는 것을 말한다.
 `Prototype`을 통한 객체를 만들 때의 주요한 문제 중 하나는 Private variables에 대한 접근 권한 문제이다. 예제 코드를 보자.
 
-```bash
+```jsx
 function Hello(name) {
   this._name = name;
 }
@@ -101,13 +101,13 @@ hello1.say(); // 'Hello, anonymous'
 ```
 
 위에서 `Hello()`로 생성된 객체들은 모두 `_name`이라는 변수를 가지게 된다. 
-변수명 앞에 underscore(_)를 포함했기 때문에 일반적인 JavaScript 네이밍 컨벤션을 생각해 봤을때 
+변수명 앞에 underscore(_)를 포함했기 때문에 일반적인 Javascript 네이밍 컨벤션을 생각해 봤을때 
 이 변수는 Private variable으로 쓰고싶다는 의도를 알 수 있다. 
 하지만 실제로는 여전히 외부에서도 쉽게 접근가능한 변수일 뿐이다.
 
 이 경우에 클로저를 사용하여 외부에서 변수에 직접 접근하는 것을 제한할 수 있다.
 
-```bash
+```jsx
 function hello(name) {
   var _name = name;
   return function() {
@@ -133,7 +133,7 @@ hello3(); // 'Hello, 잠만보'
 클로저를 통해 내부 변수를 참조하는 동안에는 내부 변수가 차지하는 메모리를 GC가 회수하지 않는다. 
 따라서 클로저 사용이 끝나면 참조를 제거하는 것이 좋다.
 
-```bash
+```jsx
 function hello(name) {
   var _name = name;
   return function() {
@@ -156,9 +156,9 @@ hello3 = null;
 ```
 
 이처럼 메모리 관리에 있어서 약점이 있지만 추가로 스코프 체인을 검색하는 시간과 새로운 스코프를 생성하는데 드는 비용도 감안하지 않을 수 없다. 
-이 부분에 대해서는 JavaScript 스코프를 주제로 하는 별도의 글에서 다룰 것이다.
+이 부분에 대해서는 Javascript 스코프를 주제로 하는 별도의 글에서 다룰 것이다.
 
 
 ### 참고 문서
-- [JavaScript 클로저(Closure)](https://hyunseob.github.io/2016/08/30/javascript-closure/)
+- [Javascript 클로저(Closure)](https://hyunseob.github.io/2016/08/30/javascript-closure/)
 - [자바스크립트 스코프와 클로저](https://medium.com/@khwsc1/%EB%B2%88%EC%97%AD-%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%8A%A4%EC%BD%94%ED%94%84%EC%99%80-%ED%81%B4%EB%A1%9C%EC%A0%80-javascript-scope-and-closures-8d402c976d19)
