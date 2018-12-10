@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    
+    <title>[React] 리액트에서 뒤로가기 시 브라우저 확인 창 띄우기 | 깝깝츄의 개발일기</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="React에서 라우터 이동 시 발생하는 이벤트페이지를 벗어날 때(새로고침/닫기/뒤로가기)를 잡고 싶을 때가 있을 것이다.대부분 블로그에서는 onBeforeUnload 이벤트에 대해서만 설명을 하고 있다. 하지만 onBeforeUnload 이벤트는 React에서 뒤로가기 시에 호출되지 않는다!!!React에서 뒤로가기 이벤트를 잡고 싶을 때에는 setRout">
+<meta name="keywords" content="onBeforeUnload,setRouteLeaveHook">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[React] 리액트에서 뒤로가기 시 브라우저 확인 창 띄우기">
+<meta property="og:url" content="https://kkapkkapchu.github.io/blog/2018/06/15/react_backbutton_browser_alert/index.html">
+<meta property="og:site_name" content="깝깝츄의 개발일기">
+<meta property="og:description" content="React에서 라우터 이동 시 발생하는 이벤트페이지를 벗어날 때(새로고침/닫기/뒤로가기)를 잡고 싶을 때가 있을 것이다.대부분 블로그에서는 onBeforeUnload 이벤트에 대해서만 설명을 하고 있다. 하지만 onBeforeUnload 이벤트는 React에서 뒤로가기 시에 호출되지 않는다!!!React에서 뒤로가기 이벤트를 잡고 싶을 때에는 setRout">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-12-07T08:23:35.802Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[React] 리액트에서 뒤로가기 시 브라우저 확인 창 띄우기">
+<meta name="twitter:description" content="React에서 라우터 이동 시 발생하는 이벤트페이지를 벗어날 때(새로고침/닫기/뒤로가기)를 잡고 싶을 때가 있을 것이다.대부분 블로그에서는 onBeforeUnload 이벤트에 대해서만 설명을 하고 있다. 하지만 onBeforeUnload 이벤트는 React에서 뒤로가기 시에 호출되지 않는다!!!React에서 뒤로가기 이벤트를 잡고 싶을 때에는 setRout">
+    
+
+    
+
+    
+
+    <link rel="stylesheet" href="/blog/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/blog/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/blog/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/blog/css/style.css">
+
+    <script src="/blog/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/blog/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/blog/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+</html>
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/blog/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">깝깝츄의 개발일기</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/blog/.">Home</a>
+                
+                    <a class="main-nav-link" href="/blog/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/blog/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/blog/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/blog/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/blog/css/images/pika3.jpeg">
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="Type something...">
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/blog/',
+        CONTENT_URL: '/blog/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/blog/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/blog/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/blog/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="Search">
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/blog/css/images/pika3.jpeg">
+            <h2 id="name">깝깝츄</h2>
+            <h3 id="title">Web Front-end Developer</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>Seoul, Korea</span>
+            <a id="follow" target="_blank" href="https://github.com/kkapkkapchu/">FOLLOW</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                20
+                <span>posts</span>
+            </div>
+            <div class="article-info-block">
+                28
+                <span>tags</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/kkapkkapchu/" target="_blank" title="github" class="tooltip">
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-react_backbutton_browser_alert" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            [React] 리액트에서 뒤로가기 시 브라우저 확인 창 띄우기
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/blog/2018/06/15/react_backbutton_browser_alert/">
+            <time datetime="2018-06-15T08:08:00.000Z" itemprop="datePublished">2018-06-15</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/Javascript/">Javascript</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/Javascript/React/">React</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/blog/tags/onBeforeUnload/">onBeforeUnload</a>, <a class="tag-link" href="/blog/tags/setRouteLeaveHook/">setRouteLeaveHook</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h3 id="React에서-라우터-이동-시-발생하는-이벤트"><a href="#React에서-라우터-이동-시-발생하는-이벤트" class="headerlink" title="React에서 라우터 이동 시 발생하는 이벤트"></a>React에서 라우터 이동 시 발생하는 이벤트</h3><p>페이지를 벗어날 때(새로고침/닫기/뒤로가기)를 잡고 싶을 때가 있을 것이다.<br>대부분 블로그에서는 <code>onBeforeUnload</code> 이벤트에 대해서만 설명을 하고 있다.</p>
+<p>하지만 <code>onBeforeUnload</code> 이벤트는 React에서 뒤로가기 시에 호출되지 않는다!!!<br>React에서 뒤로가기 이벤트를 잡고 싶을 때에는 <code>setRouteLeaveHook</code>를 사용하면 된다.<br><code>setRouteLeaveHook</code> 는 리액트에서 라우터가 바뀔 때 호출된다.</p>
+<p><code>setRouteLeaveHook</code> 이벤트를 사용하기 위해서는 <code>withRouter</code> 로 컴포넌트를 감싸줘야 한다.<br>그리고 router 는 기본으로 props 로 넘어오지만 route 는 현재 컴포넌트가 하위 레벨이라면 부모 컴포넌트로부터 전달받아야 한다.</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; withRouter &#125; <span class="keyword">from</span> <span class="string">'react-router'</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">WriteMail</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    componentDidMount() &#123;</span><br><span class="line">        <span class="comment">// 라우터 이동시</span></span><br><span class="line">        <span class="keyword">this</span>.props.router.setRouteLeaveHook(<span class="keyword">this</span>.props.route, () =&gt; &#123;</span><br><span class="line">            <span class="comment">// 변경사항이 없다면 그냥 브라우저를 벗어남</span></span><br><span class="line">            <span class="keyword">if</span> (!<span class="keyword">this</span>.isChange()) <span class="keyword">return</span>;</span><br><span class="line">        </span><br><span class="line">            <span class="comment">// 뒤로가기 확인 창</span></span><br><span class="line">            <span class="keyword">if</span> (!<span class="built_in">window</span>.confirm(<span class="string">"이 페이지를 벗어나면 마지막 저장 후 수정된 내용은 저장되지 않습니다."</span>)) &#123;</span><br><span class="line">                <span class="comment">// 취소 버튼 클릭</span></span><br><span class="line">                <span class="built_in">window</span>.location.href = <span class="string">'/writeMail'</span>;</span><br><span class="line">                <span class="comment">// window.history.back();  // React 에서 주의해서 쓸 것!!</span></span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// 확인 버튼 클릭</span></span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> withRouter(WriteMail, &#123; <span class="attr">withRef</span>: <span class="literal">true</span> &#125;);</span><br></pre></td></tr></table></figure>
+<p>브라우저를 벗어날지 말지 확인하는 창을 띄운 후 사용자가 취소 버튼을 클릭했다면, 이전 주소로 바꿔주어야 한다.<br>이 때 <code>window.history.back()</code> 는 React 에서 매우 조심해야 한다!!<br>이전 포스팅에서처럼 리액트는 SPA이기 때문에 url 을 바꾼다해도 그게 제대로 history에 들어가지 않는거 같다.<br>그래서 <code>window.location.href</code>로 아예 이전 url 로 바꿔준 것이다.</p>
+<h3 id="Redux를-사용한다면…"><a href="#Redux를-사용한다면…" class="headerlink" title="Redux를 사용한다면…"></a>Redux를 사용한다면…</h3><p>위의 <code>WriteMail</code> 컴포넌트의 상위 컴포넌트에서 하위 컴포넌트에 정의된 함수를 사용하려면<br><code>this.refs.refWriteMail.getWrappedInstance().함수이름()</code> 를 사용했을 것이다.<br>하지만 <code>withRouter</code>로 한번 더 감쌌기 때문에<br><code>this.refs.refWriteMail.getWrappedInstance().refs.wrappedInstance.함수이름()</code>으로 사용해야 한다.</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://kkapkkapchu.github.io/blog/2018/06/15/react_backbutton_browser_alert/" data-id="cjphx32za0019e4yfg6p5f3y9" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="https://kkapkkapchu.github.io/blog/2018/06/15/react_backbutton_browser_alert/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://kkapkkapchu.github.io/blog/2018/06/15/react_backbutton_browser_alert/">Comments</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/blog/2018/06/15/javascript_invaliddate_in_IE/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    [Javascript] new Date(&#39;YYYY-MM-DD HH:MM&#39;) is InvalidDate in IE
+                
+            </div>
+        </a>
+    
+    
+        <a href="/blog/2018/06/15/javascript_onbeforeunload/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Older</strong>
+            <div class="article-nav-title">[Javascript] 페이지 벗어날 때(새로고침/닫기/뒤로가기) 브라우저 확인 창 띄우기</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+        <section id="comments">
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+</section>
+    
+
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">recent</h3>
+        <div class="widget">
+            <ul id="recent-post" class="no-thumbnail">
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/blog/2018/12/10/javascript_library_axios_params/" class="title">[Javascript] axios 로 API 호출 시 request params 보내기</a></p>
+                            <p class="item-date"><time datetime="2018-12-10T05:31:00.000Z" itemprop="datePublished">2018-12-10</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/blog/2018/10/24/javascript_contenteditable_copy&paste_IE/" class="title">[Javascript] contenteditable 에 복사한 데이터 붙여넣을 때 텍스트만 넣기 (IE 지원)</a></p>
+                            <p class="item-date"><time datetime="2018-10-24T06:28:00.000Z" itemprop="datePublished">2018-10-24</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/blog/2018/10/17/javascript_contenteditable_copy&paste/" class="title">[Javascript] contenteditable 에 복사한 데이터 붙여넣을 때 텍스트만 넣기</a></p>
+                            <p class="item-date"><time datetime="2018-10-17T08:02:00.000Z" itemprop="datePublished">2018-10-17</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/blog/2018/10/17/javascript_contenteditable_set_cursor_to_end/" class="title">[Javascript] contenteditable 의 커서 맨 뒤로 보내기</a></p>
+                            <p class="item-date"><time datetime="2018-10-17T05:17:00.000Z" itemprop="datePublished">2018-10-17</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/Javascript/">Javascript</a></p>
+                            <p class="item-title"><a href="/blog/2018/10/17/javascript_check_ie_browser/" class="title">[Javascript] IE 브라우저 체크하기</a></p>
+                            <p class="item-date"><time datetime="2018-10-17T05:11:00.000Z" itemprop="datePublished">2018-10-17</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">categories</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/">Web</a><span class="category-list-count">20</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/CSS/">CSS</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/Hexo/">Hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/Javascript/">Javascript</a><span class="category-list-count">18</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/Javascript/Library/">Library</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/Javascript/React/">React</a><span class="category-list-count">2</span></li></ul></li></ul></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">archives</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/12/">December 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/10/">October 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/07/">July 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/06/">June 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/09/">September 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/08/">August 2017</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">tags</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/HTML/">HTML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/IE/">IE</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/add-header/">add_header</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/array/">array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/axios/">axios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/caret/">caret</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/caret-position/">caret_position</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/closure/">closure</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/contenteditable/">contenteditable</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/copy-paste/">copy&paste</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cursor/">cursor</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/dateTime/">dateTime</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/execCommand/">execCommand</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/key-value/">key/value</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/keycode/">keycode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mouse-click-event/">mouse_click_event</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mouse-cursor-get/">mouse_cursor_get</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mouse-cursor-set/">mouse_cursor_set</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/object/">object</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/onBeforeUnload/">onBeforeUnload</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/onTouchTap/">onTouchTap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/params/">params</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/propTypes/">propTypes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/replace/">replace</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/replaceall/">replaceall</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/setRouteLeaveHook/">setRouteLeaveHook</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/this/">this</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/window-open/">window.open</a><span class="tag-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">tag cloud</h3>
+        <div class="widget tagcloud">
+            <a href="/blog/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/blog/tags/IE/" style="font-size: 20px;">IE</a> <a href="/blog/tags/add-header/" style="font-size: 10px;">add_header</a> <a href="/blog/tags/array/" style="font-size: 10px;">array</a> <a href="/blog/tags/axios/" style="font-size: 10px;">axios</a> <a href="/blog/tags/caret/" style="font-size: 10px;">caret</a> <a href="/blog/tags/caret-position/" style="font-size: 10px;">caret_position</a> <a href="/blog/tags/closure/" style="font-size: 10px;">closure</a> <a href="/blog/tags/contenteditable/" style="font-size: 16.67px;">contenteditable</a> <a href="/blog/tags/copy-paste/" style="font-size: 13.33px;">copy&paste</a> <a href="/blog/tags/cursor/" style="font-size: 10px;">cursor</a> <a href="/blog/tags/dateTime/" style="font-size: 10px;">dateTime</a> <a href="/blog/tags/execCommand/" style="font-size: 13.33px;">execCommand</a> <a href="/blog/tags/key-value/" style="font-size: 10px;">key/value</a> <a href="/blog/tags/keycode/" style="font-size: 10px;">keycode</a> <a href="/blog/tags/mouse-click-event/" style="font-size: 10px;">mouse_click_event</a> <a href="/blog/tags/mouse-cursor-get/" style="font-size: 10px;">mouse_cursor_get</a> <a href="/blog/tags/mouse-cursor-set/" style="font-size: 10px;">mouse_cursor_set</a> <a href="/blog/tags/object/" style="font-size: 10px;">object</a> <a href="/blog/tags/onBeforeUnload/" style="font-size: 13.33px;">onBeforeUnload</a> <a href="/blog/tags/onTouchTap/" style="font-size: 10px;">onTouchTap</a> <a href="/blog/tags/params/" style="font-size: 10px;">params</a> <a href="/blog/tags/propTypes/" style="font-size: 10px;">propTypes</a> <a href="/blog/tags/replace/" style="font-size: 10px;">replace</a> <a href="/blog/tags/replaceall/" style="font-size: 10px;">replaceall</a> <a href="/blog/tags/setRouteLeaveHook/" style="font-size: 10px;">setRouteLeaveHook</a> <a href="/blog/tags/this/" style="font-size: 10px;">this</a> <a href="/blog/tags/window-open/" style="font-size: 10px;">window.open</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">links</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://hexo.io/ko/docs/index.html">Hexo-Documentation</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://velopert.com/1130">React-ComponentLifeCycle</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 깝깝츄<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_config = function () {
+        
+            this.page.url = 'https://kkapkkapchu.github.io/blog/2018/06/15/react_backbutton_browser_alert/';
+        
+        this.page.identifier = 'react_backbutton_browser_alert';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'hexo-theme-icarus' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+
+    
+        <script src="/blog/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/blog/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/blog/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/blog/js/main.js"></script>
+
+    </div>
+</body>
+</html>
