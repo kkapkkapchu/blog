@@ -3,7 +3,7 @@ title: "[Javascript] keycode 라이브러리 사용시 키보드 오른쪽 keypa
 categories:
     - Web
     - Javascript
-    - library
+    - Library
 tags:
     - IE
     - keycode
