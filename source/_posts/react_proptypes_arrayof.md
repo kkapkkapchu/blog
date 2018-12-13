@@ -2,7 +2,6 @@
 title: "[React] propTypes 에 array 타입으로 지정할 때 array 안에 들어가는 값에 대한 타입 지정하기"
 categories:
     - Web
-    - Javascript
     - React
 tags:
     - propTypes

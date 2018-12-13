@@ -2,7 +2,6 @@
 title: "[React] 리액트에서 뒤로가기 시 브라우저 확인 창 띄우기" 
 categories:
     - Web
-    - Javascript
     - React
 tags:
     - onBeforeUnload
