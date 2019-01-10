@@ -9,7 +9,7 @@ tags:
 date: 2019-01-10 15:21:00
 ---
 
-Object 에 들어있는 값을 삭제하려면 `delete` 명려어를 사용하면 된다.
+Object 에 들어있는 값을 삭제하려면 `delete` 명령어를 사용하면 된다.
 
 ```js
 let data = {
