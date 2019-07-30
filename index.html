@@ -154,11 +154,11 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                31
+                35
                 <span>posts</span>
             </div>
             <div class="article-info-block">
-                43
+                48
                 <span>tags</span>
             </div>
         </div>
@@ -183,6 +183,578 @@
 
             
             <section id="main">
+    <article id="post-vue_plugin_with_template" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/blog/2019/07/30/vue_plugin_with_template/">[Vue] Plugin with Template</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/blog/2019/07/30/vue_plugin_with_template/">
+            <time datetime="2019-07-30T07:00:00.000Z" itemprop="datePublished">2019-07-30</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/Vue/">Vue</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/blog/tags/plugin/">plugin</a>, <a class="tag-link" href="/blog/tags/template/">template</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h3 id="Vue-Plugin"><a href="#Vue-Plugin" class="headerlink" title="Vue Plugin"></a>Vue Plugin</h3><p>Vue.js는 외부 라이브러리를 쉽게 불러올 수 있도록 표준 플러그인 기능을 제공한다.<br><a href="https://kr.vuejs.org/v2/guide/plugins.html" target="_blank" rel="noopener">가이드 문서</a>가 아주 잘 나와있어서 그대로 따라하면 된다.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">MyPlugin.install = <span class="function"><span class="keyword">function</span> (<span class="params">Vue, options</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 1. 전역 메소드 또는 속성 추가</span></span><br><span class="line">  Vue.myGlobalMethod = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 필요한 로직 ...</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 2. 전역 에셋 추가</span></span><br><span class="line">  Vue.directive(<span class="string">'my-directive'</span>, &#123;</span><br><span class="line">    bind (el, binding, vnode, oldVnode) &#123;</span><br><span class="line">      <span class="comment">// 필요한 로직 ...</span></span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 3. 컴포넌트 옵션 주입</span></span><br><span class="line">  Vue.mixin(&#123;</span><br><span class="line">    created: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="comment">// 필요한 로직 ...</span></span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 4. 인스턴스 메소드 추가</span></span><br><span class="line">  Vue.prototype.$myMethod = <span class="function"><span class="keyword">function</span> (<span class="params">options</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 필요한 로직 ...</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="전역-메소드-VS-인스턴스-메소드"><a href="#전역-메소드-VS-인스턴스-메소드" class="headerlink" title="전역 메소드 VS 인스턴스 메소드"></a>전역 메소드 VS 인스턴스 메소드</h4><p>인스턴스 메소드 이름에는 앞에 <code>$</code> 구분자를 추가해 명시적으로 표기한다.</p>
+<h3 id="Vue-Plugin-with-Template"><a href="#Vue-Plugin-with-Template" class="headerlink" title="Vue Plugin with Template"></a>Vue Plugin with Template</h3><p>하지만 가이드 문서에서는 기능적인 부분만 다루고 있다.<br>나는 템플릿&amp;스타일과 기능을 입힌 컴포넌트를 사용하는 플러그인을 만들어야 해서 찾아보았다.</p>
+<ol>
+<li>스타일을 입힌 템플릿을 만든다.</li>
+<li>플러그인에서 템플릿을 <code>import</code> 한다.</li>
+<li><code>Vue.extend</code> 로 생성자를 만든다.</li>
+<li><code>new 생성자이름({})</code> 으로 인스턴스를 만든다.</li>
+<li><span style="color:red">document.body.appendChild(인스턴스의 엘리먼트) 로 dom 위에 올린다.</span></li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// plugins/notification/index.js</span></span><br><span class="line"><span class="keyword">import</span> NotificationTemplate <span class="keyword">from</span> <span class="string">"@/components/NotificationTemplate.vue"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> VueNotification = &#123;</span><br><span class="line">  install(Vue) &#123;</span><br><span class="line">    <span class="keyword">const</span> NotiConstructor = Vue.extend(NotificationTemplate);</span><br><span class="line">    <span class="keyword">let</span> NotiInstance = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">showSuccessMsg</span>(<span class="params">msg, successMsg = <span class="string">"successfully"</span></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (!NotiInstance) &#123;</span><br><span class="line">        NotiInstance = <span class="keyword">new</span> NotiConstructor(&#123;</span><br><span class="line">          el: <span class="built_in">document</span>.createElement(<span class="string">"div"</span>)</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">document</span>.body.appendChild(NotiInstance.$el);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">const</span> data = &#123;</span><br><span class="line">        type: <span class="string">"success"</span>,</span><br><span class="line">        text: <span class="string">`&lt;span class="color"&gt;:)&lt;/span&gt; <span class="subst">$&#123;msg&#125;</span> &lt;span class="color"&gt;<span class="subst">$&#123;successMsg&#125;</span>!&lt;/span&gt;`</span></span><br><span class="line">      &#125;;</span><br><span class="line"></span><br><span class="line">      NotiInstance.show(data);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">showErrorMsg</span>(<span class="params">msg</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (!NotiInstance) &#123;</span><br><span class="line">        NotiInstance = <span class="keyword">new</span> NotiConstructor(&#123;</span><br><span class="line">          el: <span class="built_in">document</span>.createElement(<span class="string">"div"</span>)</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">document</span>.body.appendChild(NotiInstance.$el);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">const</span> data = &#123;</span><br><span class="line">        type: <span class="string">"error"</span>,</span><br><span class="line">        text: <span class="string">`&lt;span class="color"&gt;<span class="subst">$&#123;msg&#125;</span>&lt;/span&gt;`</span></span><br><span class="line">      &#125;;</span><br><span class="line"></span><br><span class="line">      NotiInstance.show(data);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Vue.showSuccessMsg = showSuccessMsg;</span><br><span class="line">    Vue.showErrorMsg = showErrorMsg;</span><br><span class="line"></span><br><span class="line">    Vue.prototype.$showSuccessMsg = showSuccessMsg;</span><br><span class="line">    Vue.prototype.$showErrorMsg = showErrorMsg;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> VueNotification;</span><br></pre></td></tr></table></figure>
+<h3 id="참고사이트"><a href="#참고사이트" class="headerlink" title="참고사이트"></a>참고사이트</h3><ul>
+<li><a href="https://kr.vuejs.org/v2/guide/plugins.html" target="_blank" rel="noopener">Vue - 플러그인</a></li>
+<li><a href="http://vuejs.kr/jekyll/update/2017/01/13/vuejs-plugin/" target="_blank" rel="noopener">Vue.js 플러그인 제작 가이드</a></li>
+</ul>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://kkapkkapchu.github.io/blog/2019/07/30/vue_plugin_with_template/" data-id="cjypl6m300003vkyfdvufdopu" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="https://kkapkkapchu.github.io/blog/2019/07/30/vue_plugin_with_template/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://kkapkkapchu.github.io/blog/2019/07/30/vue_plugin_with_template/">Comments</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-vue_recursive_component" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/blog/2019/07/30/vue_recursive_component/">[Vue] Recursive Component</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/blog/2019/07/30/vue_recursive_component/">
+            <time datetime="2019-07-30T07:00:00.000Z" itemprop="datePublished">2019-07-30</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/Vue/">Vue</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/blog/tags/recursive/">recursive</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h3 id="재귀-컴포넌트-Recursive-Component"><a href="#재귀-컴포넌트-Recursive-Component" class="headerlink" title="재귀 컴포넌트 (Recursive Component)"></a>재귀 컴포넌트 (Recursive Component)</h3><p>재귀 함수처럼 컴포넌트 자체를 재귀적으로 사용해야 할 때가 있다.<br><code>재귀 컴포넌트(Recursive Component)</code>는 템플릿에서 자기 자신을 호출하는 컴포넌트이다. 반드시 <code>name</code> 옵션을 지정해야한다.</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- child.vue --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">"(a, index) in examlist"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">recursive</span> <span class="attr">:examlist</span>=<span class="string">"a.examlist"</span>&gt;</span><span class="tag">&lt;/<span class="name">recursive</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line"><span class="javascript">    name: <span class="string">"recursive"</span>,</span></span><br><span class="line"><span class="javascript">    props: [<span class="string">"examlist"</span>]</span></span><br><span class="line"><span class="undefined">  &#125;;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- parent.vue --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">recursive</span> <span class="attr">:examlist</span>=<span class="string">"list"</span>&gt;</span><span class="tag">&lt;/<span class="name">recursive</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line"><span class="javascript">      name: <span class="string">'parent'</span>,</span></span><br><span class="line"><span class="undefined">      components : &#123; Child &#125;,</span></span><br><span class="line"><span class="undefined">      data () &#123;</span></span><br><span class="line"><span class="javascript">          <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="undefined">              list : &#123;</span></span><br><span class="line"><span class="javascript">                  title: <span class="string">"title1"</span>, <span class="attr">type</span>: <span class="string">"title"</span></span></span><br><span class="line"><span class="undefined">                  examlist: [</span></span><br><span class="line"><span class="undefined">                      &#123;</span></span><br><span class="line"><span class="javascript">                          title: <span class="string">"subtitle1"</span>, <span class="attr">type</span>: <span class="string">"subtitle"</span>,</span></span><br><span class="line"><span class="undefined">                          examlist: [</span></span><br><span class="line"><span class="javascript">                              &#123; <span class="attr">title</span>: <span class="string">"A"</span>, <span class="attr">type</span>: <span class="string">"item"</span> &#125;,</span></span><br><span class="line"><span class="javascript">                              &#123; <span class="attr">title</span>: <span class="string">"B"</span>, <span class="attr">type</span>: <span class="string">"item"</span> &#125;,</span></span><br><span class="line"><span class="undefined">                          ]</span></span><br><span class="line"><span class="undefined">                      &#125;,</span></span><br><span class="line"><span class="undefined">                      &#123;</span></span><br><span class="line"><span class="javascript">                          title: <span class="string">"subtitle2"</span>, <span class="attr">type</span>: <span class="string">"subtitle"</span>,</span></span><br><span class="line"><span class="undefined">                          examlist: [</span></span><br><span class="line"><span class="javascript">                              &#123; <span class="attr">title</span>: <span class="string">"C"</span>, <span class="attr">type</span>: <span class="string">"item"</span> &#125;,</span></span><br><span class="line"><span class="javascript">                              &#123; <span class="attr">title</span>: <span class="string">"D"</span>, <span class="attr">type</span>: <span class="string">"item"</span> &#125;,</span></span><br><span class="line"><span class="undefined">                          ]</span></span><br><span class="line"><span class="undefined">                      &#125;,</span></span><br><span class="line"><span class="undefined">                      &#123;</span></span><br><span class="line"><span class="javascript">                          title: <span class="string">"subtitle3"</span>, <span class="attr">type</span>: <span class="string">"subtitle"</span>,</span></span><br><span class="line"><span class="undefined">                          examlist: [</span></span><br><span class="line"><span class="javascript">                              &#123; <span class="attr">title</span>: <span class="string">"E"</span>, <span class="attr">type</span>: <span class="string">"item"</span> &#125;,</span></span><br><span class="line"><span class="javascript">                              &#123; <span class="attr">title</span>: <span class="string">"F"</span>, <span class="attr">type</span>: <span class="string">"item"</span> &#125;,</span></span><br><span class="line"><span class="undefined">                          ]</span></span><br><span class="line"><span class="undefined">                      &#125;</span></span><br><span class="line"><span class="undefined">                  ]</span></span><br><span class="line"><span class="undefined">              &#125;</span></span><br><span class="line"><span class="undefined">          &#125;</span></span><br><span class="line"><span class="undefined">      &#125;</span></span><br><span class="line"><span class="undefined">  &#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="참고사이트"><a href="#참고사이트" class="headerlink" title="참고사이트"></a>참고사이트</h3><ul>
+<li><a href="https://kr.vuejs.org/v2/guide/components.html#%EC%9E%AC%EA%B7%80-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8" target="_blank" rel="noopener">Vue - 재귀 컴포넌트</a></li>
+<li><a href="https://mkki.github.io/vue.js/js/2018/05/06/start-vuejs-9.html" target="_blank" rel="noopener">[Vue.js Quick Start] Webpack, 컴포넌트 심화</a></li>
+</ul>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://kkapkkapchu.github.io/blog/2019/07/30/vue_recursive_component/" data-id="cjypl6m320005vkyfxfu2epyg" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="https://kkapkkapchu.github.io/blog/2019/07/30/vue_recursive_component/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://kkapkkapchu.github.io/blog/2019/07/30/vue_recursive_component/">Comments</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-etc_ie_set_cookie" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/blog/2019/07/30/etc_ie_set_cookie/">[Etc] IE Set Cookie</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/blog/2019/07/30/etc_ie_set_cookie/">
+            <time datetime="2019-07-30T06:00:00.000Z" itemprop="datePublished">2019-07-30</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/etc/">etc</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/blog/tags/cookie/">cookie</a>, <a class="tag-link" href="/blog/tags/ie/">ie</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h3 id="IE-Get-Set-Cookie"><a href="#IE-Get-Set-Cookie" class="headerlink" title="IE Get/Set Cookie"></a>IE Get/Set Cookie</h3><p>IE 는 Chrome 처럼 쿠키 에디터가 잘 되어있지 않다. IE 쿠키 지원을 위한 별도의 프로그램까지 있다.<br>여기서는 콘솔을 이용해 간단하게 쿠키를 가져오고 저장하는 것만 정리하도록 하겠다.</p>
+<p>개발자도구를 열어서 콘솔창에 아래와 같이 입력하면 된다.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Get Cookie</span></span><br><span class="line"><span class="built_in">document</span>.cookie;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Set Cookie</span></span><br><span class="line"><span class="built_in">document</span>.cookie = <span class="string">"YOURKEY=YOURVALUE"</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="참고사이트"><a href="#참고사이트" class="headerlink" title="참고사이트"></a>참고사이트</h3><ul>
+<li><a href="https://stackoverflow.com/a/44946850" target="_blank" rel="noopener">IE 11 cookies in Developer tools</a></li>
+</ul>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://kkapkkapchu.github.io/blog/2019/07/30/etc_ie_set_cookie/" data-id="cjypl6m2q0000vkyf0giqj731" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="https://kkapkkapchu.github.io/blog/2019/07/30/etc_ie_set_cookie/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://kkapkkapchu.github.io/blog/2019/07/30/etc_ie_set_cookie/">Comments</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-vue_ie_support" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/blog/2019/07/30/vue_ie_support/">[Vue] IE Support</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/blog/2019/07/30/vue_ie_support/">
+            <time datetime="2019-07-30T05:00:00.000Z" itemprop="datePublished">2019-07-30</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/Vue/">Vue</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/blog/tags/ie/">ie</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h3 id="Vue-transpileDependencies"><a href="#Vue-transpileDependencies" class="headerlink" title="Vue transpileDependencies"></a>Vue transpileDependencies</h3><p>프로젝트 중 IE 를 지원하지 않는 <a href="https://www.npmjs.com/package/matcher" target="_blank" rel="noopener">matcher</a> 라이브러리를 사용해서 익스플로러 브라우저 <a href="https://github.com/sindresorhus/matcher/issues/17" target="_blank" rel="noopener">오류</a>가 발생했었다.</p>
+<p>이럴때는 <code>vue.config.js</code>에서 <a href="https://cli.vuejs.org/config/#transpiledependencies" target="_blank" rel="noopener">transpileDependencies</a> 속성에 정의해주면 된다.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// vue.config.js</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  transpileDependencies: [<span class="string">"matcher"</span>]</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>이렇게만 하면 해당 라이브러리를 참조할 수 없다고 에러가 뜨는데 아래 코드를 <code>babel.config.js</code>에 추가해주면 된다.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// babel.config.js</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  presets: [</span><br><span class="line">    [</span><br><span class="line">      <span class="string">"@vue/app"</span>,</span><br><span class="line">      &#123;</span><br><span class="line">        useBuiltIns: <span class="string">"entry"</span></span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  ]</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="Unknown-option-useBuiltIns-in-babel-config-js"><a href="#Unknown-option-useBuiltIns-in-babel-config-js" class="headerlink" title="Unknown option: .useBuiltIns. in babel.config.js"></a>Unknown option: .useBuiltIns. in babel.config.js</h4><p>여기서 주의할 점은<br><code>[&quot;@vue/app&quot;,{useBuiltIns: &quot;entry&quot;}]</code> 가 아니라<br><code>[[&quot;@vue/app&quot;,{useBuiltIns: &quot;entry&quot;}]]</code> 이 되어야 한다.</p>
+<p>잘 동작하지 않는다면 배열로 잘 감싸졌는지 확인해보자.</p>
+<h3 id="Promise-이-가-정의되지-않았습니다"><a href="#Promise-이-가-정의되지-않았습니다" class="headerlink" title="Promise 이(가) 정의되지 않았습니다."></a><code>Promise</code> 이(가) 정의되지 않았습니다.</h3><p>http 통신을 위해 주로 <code>Axios</code> 를 사용하는데 이 라이브러리도 IE 지원이 안된다.<br>이럴때는 <code>es6-promise</code> 를 적용하면 된다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># es6-promise 설치</span></span><br><span class="line">npm install es6-promise --save</span><br></pre></td></tr></table></figure>
+<p>라이브러리 설치 후 <code>main.js</code> 최상단에 import 한다. (주의할 것은 <code>vuex</code> 나 <code>axios</code> 보다 먼저 import 가 되어야 정상동작 한다.)</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.js</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"es6-promise/auto"</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="Includes-이-가-정의되지-않았습니다"><a href="#Includes-이-가-정의되지-않았습니다" class="headerlink" title="Includes 이(가) 정의되지 않았습니다."></a><code>Includes</code> 이(가) 정의되지 않았습니다.</h3><p>그 외에 흔히 사용하는 자바스크립트 함수 중 IE가 지원하지 않는 것이 있다면 <code>babel-polyfill</code> 을 적용하면 된다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># babel-polyfill 설치</span></span><br><span class="line">npm install babel-polyfill --save</span><br></pre></td></tr></table></figure>
+<p>라이브러리 설치 후 마찬가지로 <code>main.js</code> 최상단에 import 한다.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.js</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"babel-polyfill"</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">"es6-promise/auto"</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="참고사이트"><a href="#참고사이트" class="headerlink" title="참고사이트"></a>참고사이트</h3><ul>
+<li><a href="https://lovemewithoutall.github.io/it/vue-ie-support-with-es6-promise/" target="_blank" rel="noopener">IE에서 Vue.js 사용하기</a></li>
+<li><a href="https://github.com/vuejs/vue-cli/issues/2594" target="_blank" rel="noopener">Unknown option: .useBuiltIns. in babel.config.js</a></li>
+</ul>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://kkapkkapchu.github.io/blog/2019/07/30/vue_ie_support/" data-id="cjypl6m2t0001vkyfl0e2zsid" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="https://kkapkkapchu.github.io/blog/2019/07/30/vue_ie_support/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://kkapkkapchu.github.io/blog/2019/07/30/vue_ie_support/">Comments</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
     <article id="post-css_text_overflow" class="article article-type-post" itemscope="" itemprop="blogPost">
     <div class="article-inner">
         
@@ -1071,556 +1643,6 @@
 
 
 
-    <article id="post-html_zero_width_space" class="article article-type-post" itemscope="" itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/blog/2019/01/03/html_zero_width_space/">[HTML] 폭 없는 공백</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/blog/2019/01/03/html_zero_width_space/">
-            <time datetime="2019-01-03T06:23:00.000Z" itemprop="datePublished">2019-01-03</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/HTML/">HTML</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/blog/tags/ZWSP/">ZWSP</a>, <a class="tag-link" href="/blog/tags/cursor/">cursor</a>, <a class="tag-link" href="/blog/tags/span/">span</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <h2 id="폭-없는-공백"><a href="#폭-없는-공백" class="headerlink" title="폭 없는 공백"></a>폭 없는 공백</h2><p>유니코드에서 폭 없는 공백은 U+200B (HTML: <code>&amp;#8203;</code>) 에 할당되어있다.</p>
-<h2 id="커서-위치-지정"><a href="#커서-위치-지정" class="headerlink" title="커서 위치 지정"></a>커서 위치 지정</h2><p>폭 없는 공백을 사용하면 커서 위치를 지정할 때 아주 유용하다.</p>
-<p>에디터에서 <code>colorPicker</code> 로 색상 변경 시 선택된 텍스트의 색상을 바꿀 때<br><code>contenteditable</code> 안에 스타일을 입힌 <code>span</code> 태그를 추가하도록 구현했다.</p>
-<p>이때 <code>span</code> 안의 내용이 빈 값이면 커서가 인식을 못하는 문제가 있었다.<br>그래서 텍스트의 선택된 범위가 없다면 <code>span</code> 안에 빈 값(<code>&#39;&#39;</code>) 대신 <code>&amp;#8203;</code> 을 넣어주고 커서 위치를 저장했다가 복구시키니 잘 동작하는 것을 확인했다.</p>
-<p>이거 때문에 한참동안 헤맸는데..<br>다음엔 더 유용하게 사용할 수 있기를..</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">saveCaret(node); <span class="comment">// 커서 위치 저장</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> range = <span class="built_in">window</span>.getSelection().getRangeAt(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">const</span> colorElement = <span class="built_in">document</span>.createElement(<span class="string">"span"</span>);</span><br><span class="line">colorElement.style = <span class="string">`color:<span class="subst">$&#123;color&#125;</span>`</span>;</span><br><span class="line"></span><br><span class="line">colorElement.innerHTML = isSelected ? selectedText : <span class="string">"&amp;#8203;"</span>; <span class="comment">// 폭 없는 공백</span></span><br><span class="line"></span><br><span class="line">restoreCaret(node); <span class="comment">// 커서 위치 복구</span></span><br></pre></td></tr></table></figure>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="https://kkapkkapchu.github.io/blog/2019/01/03/html_zero_width_space/" data-id="cjse7bkn9000cboyfipgfmsjh" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="https://kkapkkapchu.github.io/blog/2019/01/03/html_zero_width_space/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://kkapkkapchu.github.io/blog/2019/01/03/html_zero_width_space/">Comments</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-javascript_span_set_text" class="article article-type-post" itemscope="" itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/blog/2019/01/03/javascript_span_set_text/">[Javascript] Span 태그에 text 넣기</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/blog/2019/01/03/javascript_span_set_text/">
-            <time datetime="2019-01-03T06:23:00.000Z" itemprop="datePublished">2019-01-03</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/Javascript/">Javascript</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/blog/tags/span/">span</a>, <a class="tag-link" href="/blog/tags/text/">text</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <h2 id="Span-태그에-text-넣기"><a href="#Span-태그에-text-넣기" class="headerlink" title="Span 태그에 text 넣기"></a>Span 태그에 text 넣기</h2><p>span 태그에 text 를 넣는 방법은 두 가지가 있다.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">"myspan"</span>).innerHTML = <span class="string">"newtext"</span>;</span><br></pre></td></tr></table></figure>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">"myspan"</span>).textContent = <span class="string">"newtext"</span>; <span class="comment">// for mordern browsers</span></span><br></pre></td></tr></table></figure>
-<p>필요에 따라 선택해서 사용하면 된다.</p>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="https://kkapkkapchu.github.io/blog/2019/01/03/javascript_span_set_text/" data-id="cjse7bknz001sboyf8dah7ipm" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="https://kkapkkapchu.github.io/blog/2019/01/03/javascript_span_set_text/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://kkapkkapchu.github.io/blog/2019/01/03/javascript_span_set_text/">Comments</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-javascript_contenteditable_save&amp;restore_cursor" class="article article-type-post" itemscope="" itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/blog/2019/01/03/javascript_contenteditable_save&restore_cursor/">[Javascript] contenteditable 의 커서 위치 저장/복구 하기</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/blog/2019/01/03/javascript_contenteditable_save&restore_cursor/">
-            <time datetime="2019-01-03T06:03:00.000Z" itemprop="datePublished">2019-01-03</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/Javascript/">Javascript</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/blog/tags/caret/">caret</a>, <a class="tag-link" href="/blog/tags/contenteditable/">contenteditable</a>, <a class="tag-link" href="/blog/tags/cursor/">cursor</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <h2 id="contenteditable-의-커서-위치-저장-복구-안됐던-이유"><a href="#contenteditable-의-커서-위치-저장-복구-안됐던-이유" class="headerlink" title="contenteditable 의 커서 위치 저장/복구 안됐던 이유"></a>contenteditable 의 커서 위치 저장/복구 안됐던 이유</h2><p>지난번에 <code>contenteditable</code> 커서 관련하여 <a href="https://kkapkkapchu.github.io/blog/2018/10/17/javascript_contenteditable_set_cursor_to_end/">쓴 글</a>이 있다.</p>
-<p>이 때는 커서 위치를 저장하고 복구 시키려다가 실패해서 결국 맨 끝으로 보내게 했는데<br>안 되었던 이유를 알았다.</p>
-<p>그것은 바로 <code>contenteditable</code> 의 <code>내용(innerHTML/innerText)</code> 을 바꾸기 전에 입력 창을 <code>blur</code> 시키고, 바꾸고 나서 커서 위치를 복구 시킬때 <code>focus</code> 를 강제로 해줘야 하는데 안해서 그랬던 것!!!</p>
-<p>사실 문서에 다 써있었는데 대충 읽어서 그 부분만 빼고 테스트하다 실패한 것..ㅠ<br>문서 좀 제대로 읽자…!</p>
-<h2 id="contenteditable-의-커서-위치-저장-복구-하기"><a href="#contenteditable-의-커서-위치-저장-복구-하기" class="headerlink" title="contenteditable 의 커서 위치 저장/복구 하기"></a>contenteditable 의 커서 위치 저장/복구 하기</h2><p>커서 위치 저장/복구 하는 방법은 <a href="http://blog.naver.com/PostView.nhn?blogId=writer0713&amp;logNo=220499119278" target="_blank" rel="noopener">여기에</a> 아주 잘 나와있다.<br>그대로만 따라하면 잘 됨.</p>
-<p>나는 <code>set/get</code> 의 의미가 좀 헷갈려서 <code>save/restore</code> 로 바꾸었다.<br>그리고 <code>restore</code> 할 때 에러가 발생하는 경우가 있어서 추가로 예외처리를 해주었다.</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">saveCaret(node) &#123;</span><br><span class="line">    <span class="keyword">const</span> caretID = <span class="string">'caret'</span></span><br><span class="line">    <span class="keyword">const</span> cc = <span class="built_in">document</span>.createElement(<span class="string">'span'</span>)</span><br><span class="line">    cc.id = caretID</span><br><span class="line"></span><br><span class="line">    <span class="built_in">window</span></span><br><span class="line">    .getSelection()</span><br><span class="line">    .getRangeAt(<span class="number">0</span>)</span><br><span class="line">    .insertNode(cc)</span><br><span class="line"></span><br><span class="line">    node.blur()</span><br><span class="line">&#125;,</span><br><span class="line">restoreCaret(node) &#123;</span><br><span class="line">    <span class="keyword">const</span> caretID = <span class="string">'caret'</span></span><br><span class="line">    <span class="keyword">const</span> range = <span class="built_in">document</span>.createRange()</span><br><span class="line">    <span class="keyword">const</span> cc = <span class="built_in">document</span>.getElementById(caretID)</span><br><span class="line"></span><br><span class="line">    node.focus()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!cc) &#123;</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    range.selectNode(cc)</span><br><span class="line">    <span class="keyword">const</span> selection = <span class="built_in">window</span>.getSelection()</span><br><span class="line">    selection.removeAllRanges()</span><br><span class="line">    selection.addRange(range)</span><br><span class="line">    range.deleteContents()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>내용을 바꾸기 전에 <code>saveCaret</code> 으로 마지막 선택된 커서 위치를 저장하고<br>내용을 바꾼 후 <code>restoreCaret</code> 으로 커서 위치를 복구시킨다.</p>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="https://kkapkkapchu.github.io/blog/2019/01/03/javascript_contenteditable_save&restore_cursor/" data-id="cjse7bkng000nboyfqvzrp1x7" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="https://kkapkkapchu.github.io/blog/2019/01/03/javascript_contenteditable_save&restore_cursor/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://kkapkkapchu.github.io/blog/2019/01/03/javascript_contenteditable_save&amp;restore_cursor/">Comments</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-css_invalid_property_value" class="article article-type-post" itemscope="" itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/blog/2019/01/03/css_invalid_property_value/">[CSS] Invalid property value</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/blog/2019/01/03/css_invalid_property_value/">
-            <time datetime="2019-01-03T05:47:00.000Z" itemprop="datePublished">2019-01-03</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/CSS/">CSS</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/blog/tags/property/">property</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <h2 id="CSS-속성에-Invalid-property-value-가-뜰-때"><a href="#CSS-속성에-Invalid-property-value-가-뜰-때" class="headerlink" title="CSS 속성에 Invalid property value 가 뜰 때"></a>CSS 속성에 Invalid property value 가 뜰 때</h2><p>마크업 작업을 하다가 분명히 <code>margin-top</code> 속성을 줬는데 속성이 먹히지도 않고<br>개발자 도구로 보면 노란색 느낌표가 뜨면서 해당 속성에 취소선이 그어져 있다.</p>
-<p><img src="https://user-images.githubusercontent.com/30403198/50624844-1af7b400-0f67-11e9-8bda-5c60344474f1.png" alt="image"></p>
-<p>느낌표에 마우스를 갖다대면 <code>Invalid property value</code> 라는 툴팁이 뜬다.</p>
-<p>하… 진짜 이거때매 한참을 헤맸는데… ㅠㅠ</p>
-<p>리액트를 너무 오래썼나보다..<br>리액트 문법을 css 에서 사용하니 당연히 안되지 ㅠ.ㅠ</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">  margin-top: "33px"; // 이렇게 쓰면 사진처럼 나오고 속성이 안먹힘 ㅠㅠ</span><br><span class="line">  margin-top: 33px; // 이렇게 써야함!!</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>css 에서는 <code>&#39;&#39;</code>로 감싸지 않고 바로 33px 쓰면 된다.</p>
-<p>앞으로 또 저런 이슈를 보게 되면 속성을 잘못 사용하지 않았는지 꼭 확인해보자!</p>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="https://kkapkkapchu.github.io/blog/2019/01/03/css_invalid_property_value/" data-id="cjse7bkn50008boyfki2edoy3" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="https://kkapkkapchu.github.io/blog/2019/01/03/css_invalid_property_value/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://kkapkkapchu.github.io/blog/2019/01/03/css_invalid_property_value/">Comments</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
     <nav id="page-nav">
         <span class="page-number current">1</span><a class="page-number" href="/blog/page/2/">2</a><a class="page-number" href="/blog/page/3/">3</a><a class="page-number" href="/blog/page/4/">4</a><a class="extend next" rel="next" href="/blog/page/2/">Next &raquo;</a>
     </nav>
@@ -1638,45 +1660,45 @@
                     <li>
                         
                         <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/Vue/">Vue</a></p>
+                            <p class="item-title"><a href="/blog/2019/07/30/vue_plugin_with_template/" class="title">[Vue] Plugin with Template</a></p>
+                            <p class="item-date"><time datetime="2019-07-30T07:00:00.000Z" itemprop="datePublished">2019-07-30</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/Vue/">Vue</a></p>
+                            <p class="item-title"><a href="/blog/2019/07/30/vue_recursive_component/" class="title">[Vue] Recursive Component</a></p>
+                            <p class="item-date"><time datetime="2019-07-30T07:00:00.000Z" itemprop="datePublished">2019-07-30</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/etc/">etc</a></p>
+                            <p class="item-title"><a href="/blog/2019/07/30/etc_ie_set_cookie/" class="title">[Etc] IE Set Cookie</a></p>
+                            <p class="item-date"><time datetime="2019-07-30T06:00:00.000Z" itemprop="datePublished">2019-07-30</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/Vue/">Vue</a></p>
+                            <p class="item-title"><a href="/blog/2019/07/30/vue_ie_support/" class="title">[Vue] IE Support</a></p>
+                            <p class="item-date"><time datetime="2019-07-30T05:00:00.000Z" itemprop="datePublished">2019-07-30</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/CSS/">CSS</a></p>
                             <p class="item-title"><a href="/blog/2019/07/03/css_text_overflow/" class="title">[CSS] 말줄임 처리하기</a></p>
                             <p class="item-date"><time datetime="2019-07-03T09:33:00.000Z" itemprop="datePublished">2019-07-03</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/Javascript/">Javascript</a></p>
-                            <p class="item-title"><a href="/blog/2019/07/03/javascript_sse_eventsource/" class="title">[Javascript] EventSource를 이용해서 SSE 받기</a></p>
-                            <p class="item-date"><time datetime="2019-07-03T09:12:00.000Z" itemprop="datePublished">2019-07-03</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/Javascript/">Javascript</a></p>
-                            <p class="item-title"><a href="/blog/2019/07/03/javascript_map_instance_foreach/" class="title">[Javascript] Map 객체의 forEach 구문 주의!!</a></p>
-                            <p class="item-date"><time datetime="2019-07-03T09:08:00.000Z" itemprop="datePublished">2019-07-03</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/GIT/">GIT</a></p>
-                            <p class="item-title"><a href="/blog/2019/02/21/git_command/" class="title">[GIT] GIT 명령어</a></p>
-                            <p class="item-date"><time datetime="2019-02-21T05:21:00.000Z" itemprop="datePublished">2019-02-21</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/Javascript/">Javascript</a></p>
-                            <p class="item-title"><a href="/blog/2019/01/10/javascript_delete_item_in_object/" class="title">[Javascript] Object의 item 삭제하기</a></p>
-                            <p class="item-date"><time datetime="2019-01-10T06:21:00.000Z" itemprop="datePublished">2019-01-10</time></p>
                         </div>
                     </li>
                 
@@ -1689,7 +1711,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">categories</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/">Web</a><span class="category-list-count">31</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/CSS/">CSS</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/GIT/">GIT</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/HTML/">HTML</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/Hexo/">Hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/Javascript/">Javascript</a><span class="category-list-count">21</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/Javascript/Library/">Library</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/React/">React</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/Vue/">Vue</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/Vue/Vuex/">Vuex</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/">Web</a><span class="category-list-count">35</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/CSS/">CSS</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/GIT/">GIT</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/HTML/">HTML</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/Hexo/">Hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/Javascript/">Javascript</a><span class="category-list-count">21</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/Javascript/Library/">Library</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/React/">React</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/Vue/">Vue</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/Vue/Vuex/">Vuex</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/etc/">etc</a><span class="category-list-count">1</span></li></ul></li></ul>
         </div>
     </div>
 
@@ -1698,7 +1720,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">archives</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/07/">July 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/02/">February 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/01/">January 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/12/">December 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/10/">October 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/07/">July 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/06/">June 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/09/">September 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/08/">August 2017</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/07/">July 2019</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/02/">February 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/01/">January 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/12/">December 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/10/">October 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/07/">July 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/06/">June 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/09/">September 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/08/">August 2017</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -1707,7 +1729,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">tags</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/EventSource를/">EventSource를</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/HTML/">HTML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/IE/">IE</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/SSE/">SSE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ZWSP/">ZWSP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/add-header/">add_header</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/align/">align</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/array/">array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/axios/">axios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/caret/">caret</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/caret-position/">caret_position</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/center/">center</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/closure/">closure</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/command/">command</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/contenteditable/">contenteditable</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/copy-paste/">copy&paste</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cursor/">cursor</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/dateTime/">dateTime</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/delete/">delete</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/execCommand/">execCommand</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/forEach/">forEach</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/getters/">getters</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/key-value/">key/value</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/keycode/">keycode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mouse-click-event/">mouse_click_event</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mouse-cursor-get/">mouse_cursor_get</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mouse-cursor-set/">mouse_cursor_set</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/new-map/">new_map</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/object/">object</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/onBeforeUnload/">onBeforeUnload</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/onTouchTap/">onTouchTap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/params/">params</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/propTypes/">propTypes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/property/">property</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/replace/">replace</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/replaceall/">replaceall</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/setRouteLeaveHook/">setRouteLeaveHook</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/span/">span</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/text/">text</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/text-overflow/">text_overflow</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/this/">this</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/window-open/">window.open</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/EventSource를/">EventSource를</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/HTML/">HTML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/IE/">IE</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/SSE/">SSE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ZWSP/">ZWSP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/add-header/">add_header</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/align/">align</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/array/">array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/axios/">axios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/caret/">caret</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/caret-position/">caret_position</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/center/">center</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/closure/">closure</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/command/">command</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/contenteditable/">contenteditable</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cookie/">cookie</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/copy-paste/">copy&paste</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cursor/">cursor</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/dateTime/">dateTime</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/delete/">delete</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/execCommand/">execCommand</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/forEach/">forEach</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/getters/">getters</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ie/">ie</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/key-value/">key/value</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/keycode/">keycode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mouse-click-event/">mouse_click_event</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mouse-cursor-get/">mouse_cursor_get</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mouse-cursor-set/">mouse_cursor_set</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/new-map/">new_map</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/object/">object</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/onBeforeUnload/">onBeforeUnload</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/onTouchTap/">onTouchTap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/params/">params</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/plugin/">plugin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/propTypes/">propTypes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/property/">property</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/recursive/">recursive</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/replace/">replace</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/replaceall/">replaceall</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/setRouteLeaveHook/">setRouteLeaveHook</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/span/">span</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/template/">template</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/text/">text</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/text-overflow/">text_overflow</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/this/">this</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/window-open/">window.open</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -1716,7 +1738,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">tag cloud</h3>
         <div class="widget tagcloud">
-            <a href="/blog/tags/EventSource를/" style="font-size: 10px;">EventSource를</a> <a href="/blog/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/blog/tags/IE/" style="font-size: 20px;">IE</a> <a href="/blog/tags/SSE/" style="font-size: 10px;">SSE</a> <a href="/blog/tags/ZWSP/" style="font-size: 10px;">ZWSP</a> <a href="/blog/tags/add-header/" style="font-size: 10px;">add_header</a> <a href="/blog/tags/align/" style="font-size: 10px;">align</a> <a href="/blog/tags/array/" style="font-size: 10px;">array</a> <a href="/blog/tags/axios/" style="font-size: 10px;">axios</a> <a href="/blog/tags/caret/" style="font-size: 12.5px;">caret</a> <a href="/blog/tags/caret-position/" style="font-size: 10px;">caret_position</a> <a href="/blog/tags/center/" style="font-size: 10px;">center</a> <a href="/blog/tags/closure/" style="font-size: 10px;">closure</a> <a href="/blog/tags/command/" style="font-size: 10px;">command</a> <a href="/blog/tags/contenteditable/" style="font-size: 17.5px;">contenteditable</a> <a href="/blog/tags/copy-paste/" style="font-size: 12.5px;">copy&paste</a> <a href="/blog/tags/cursor/" style="font-size: 15px;">cursor</a> <a href="/blog/tags/dateTime/" style="font-size: 10px;">dateTime</a> <a href="/blog/tags/delete/" style="font-size: 10px;">delete</a> <a href="/blog/tags/execCommand/" style="font-size: 12.5px;">execCommand</a> <a href="/blog/tags/forEach/" style="font-size: 10px;">forEach</a> <a href="/blog/tags/getters/" style="font-size: 10px;">getters</a> <a href="/blog/tags/git/" style="font-size: 10px;">git</a> <a href="/blog/tags/key-value/" style="font-size: 10px;">key/value</a> <a href="/blog/tags/keycode/" style="font-size: 10px;">keycode</a> <a href="/blog/tags/mouse-click-event/" style="font-size: 10px;">mouse_click_event</a> <a href="/blog/tags/mouse-cursor-get/" style="font-size: 10px;">mouse_cursor_get</a> <a href="/blog/tags/mouse-cursor-set/" style="font-size: 10px;">mouse_cursor_set</a> <a href="/blog/tags/new-map/" style="font-size: 10px;">new_map</a> <a href="/blog/tags/object/" style="font-size: 12.5px;">object</a> <a href="/blog/tags/onBeforeUnload/" style="font-size: 12.5px;">onBeforeUnload</a> <a href="/blog/tags/onTouchTap/" style="font-size: 10px;">onTouchTap</a> <a href="/blog/tags/params/" style="font-size: 10px;">params</a> <a href="/blog/tags/propTypes/" style="font-size: 10px;">propTypes</a> <a href="/blog/tags/property/" style="font-size: 10px;">property</a> <a href="/blog/tags/replace/" style="font-size: 10px;">replace</a> <a href="/blog/tags/replaceall/" style="font-size: 10px;">replaceall</a> <a href="/blog/tags/setRouteLeaveHook/" style="font-size: 10px;">setRouteLeaveHook</a> <a href="/blog/tags/span/" style="font-size: 12.5px;">span</a> <a href="/blog/tags/text/" style="font-size: 10px;">text</a> <a href="/blog/tags/text-overflow/" style="font-size: 10px;">text_overflow</a> <a href="/blog/tags/this/" style="font-size: 10px;">this</a> <a href="/blog/tags/window-open/" style="font-size: 10px;">window.open</a>
+            <a href="/blog/tags/EventSource를/" style="font-size: 10px;">EventSource를</a> <a href="/blog/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/blog/tags/IE/" style="font-size: 20px;">IE</a> <a href="/blog/tags/SSE/" style="font-size: 10px;">SSE</a> <a href="/blog/tags/ZWSP/" style="font-size: 10px;">ZWSP</a> <a href="/blog/tags/add-header/" style="font-size: 10px;">add_header</a> <a href="/blog/tags/align/" style="font-size: 10px;">align</a> <a href="/blog/tags/array/" style="font-size: 10px;">array</a> <a href="/blog/tags/axios/" style="font-size: 10px;">axios</a> <a href="/blog/tags/caret/" style="font-size: 12.5px;">caret</a> <a href="/blog/tags/caret-position/" style="font-size: 10px;">caret_position</a> <a href="/blog/tags/center/" style="font-size: 10px;">center</a> <a href="/blog/tags/closure/" style="font-size: 10px;">closure</a> <a href="/blog/tags/command/" style="font-size: 10px;">command</a> <a href="/blog/tags/contenteditable/" style="font-size: 17.5px;">contenteditable</a> <a href="/blog/tags/cookie/" style="font-size: 10px;">cookie</a> <a href="/blog/tags/copy-paste/" style="font-size: 12.5px;">copy&paste</a> <a href="/blog/tags/cursor/" style="font-size: 15px;">cursor</a> <a href="/blog/tags/dateTime/" style="font-size: 10px;">dateTime</a> <a href="/blog/tags/delete/" style="font-size: 10px;">delete</a> <a href="/blog/tags/execCommand/" style="font-size: 12.5px;">execCommand</a> <a href="/blog/tags/forEach/" style="font-size: 10px;">forEach</a> <a href="/blog/tags/getters/" style="font-size: 10px;">getters</a> <a href="/blog/tags/git/" style="font-size: 10px;">git</a> <a href="/blog/tags/ie/" style="font-size: 12.5px;">ie</a> <a href="/blog/tags/key-value/" style="font-size: 10px;">key/value</a> <a href="/blog/tags/keycode/" style="font-size: 10px;">keycode</a> <a href="/blog/tags/mouse-click-event/" style="font-size: 10px;">mouse_click_event</a> <a href="/blog/tags/mouse-cursor-get/" style="font-size: 10px;">mouse_cursor_get</a> <a href="/blog/tags/mouse-cursor-set/" style="font-size: 10px;">mouse_cursor_set</a> <a href="/blog/tags/new-map/" style="font-size: 10px;">new_map</a> <a href="/blog/tags/object/" style="font-size: 12.5px;">object</a> <a href="/blog/tags/onBeforeUnload/" style="font-size: 12.5px;">onBeforeUnload</a> <a href="/blog/tags/onTouchTap/" style="font-size: 10px;">onTouchTap</a> <a href="/blog/tags/params/" style="font-size: 10px;">params</a> <a href="/blog/tags/plugin/" style="font-size: 10px;">plugin</a> <a href="/blog/tags/propTypes/" style="font-size: 10px;">propTypes</a> <a href="/blog/tags/property/" style="font-size: 10px;">property</a> <a href="/blog/tags/recursive/" style="font-size: 10px;">recursive</a> <a href="/blog/tags/replace/" style="font-size: 10px;">replace</a> <a href="/blog/tags/replaceall/" style="font-size: 10px;">replaceall</a> <a href="/blog/tags/setRouteLeaveHook/" style="font-size: 10px;">setRouteLeaveHook</a> <a href="/blog/tags/span/" style="font-size: 12.5px;">span</a> <a href="/blog/tags/template/" style="font-size: 10px;">template</a> <a href="/blog/tags/text/" style="font-size: 10px;">text</a> <a href="/blog/tags/text-overflow/" style="font-size: 10px;">text_overflow</a> <a href="/blog/tags/this/" style="font-size: 10px;">this</a> <a href="/blog/tags/window-open/" style="font-size: 10px;">window.open</a>
         </div>
     </div>
 

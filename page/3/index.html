@@ -154,11 +154,11 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                31
+                35
                 <span>posts</span>
             </div>
             <div class="article-info-block">
-                43
+                48
                 <span>tags</span>
             </div>
         </div>
@@ -183,6 +183,632 @@
 
             
             <section id="main">
+    <article id="post-javascript_replaceall" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/blog/2018/10/17/javascript_replaceall/">[Javascript] replaceAll 하기</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/blog/2018/10/17/javascript_replaceall/">
+            <time datetime="2018-10-17T05:05:00.000Z" itemprop="datePublished">2018-10-17</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/Javascript/">Javascript</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/blog/tags/replace/">replace</a>, <a class="tag-link" href="/blog/tags/replaceall/">replaceall</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>자바스크립트에서 replaceAll 은 없다.<br>정규식을 이용하여 대상 스트링에서 모든 부분을 수정해 줄 수 있다.</p>
+<h3 id="replace-이용"><a href="#replace-이용" class="headerlink" title="replace 이용"></a>replace 이용</h3><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> str = <span class="string">"aaa#bbb#ccc"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// #를 공백으로 변경한다.</span></span><br><span class="line">str.replace(<span class="string">"#"</span>,<span class="string">""</span>); <span class="comment">// aaabbb#ccc</span></span><br></pre></td></tr></table></figure>
+<p>replace 를 이용하면 첫 번째 # 만 공백으로 변경하고 나머지는 변경이 되지 않는다.</p>
+<h3 id="정규식을-이용해서-g로-감싸기"><a href="#정규식을-이용해서-g로-감싸기" class="headerlink" title="정규식을 이용해서 g로 감싸기"></a>정규식을 이용해서 g로 감싸기</h3><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> str = <span class="string">"aaa#bbb#ccc"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// #를 감싼 따옴표를 슬래시(/)로 대체하고 뒤에 gi 를 붙이면 </span></span><br><span class="line"><span class="comment">// replaceAll 과 같은 결과를 볼 수 있다.</span></span><br><span class="line">str.replace(<span class="regexp">/#/g</span>, <span class="string">""</span>); <span class="comment">// aaabbbccc</span></span><br></pre></td></tr></table></figure>
+<h3 id="정규식-사용법"><a href="#정규식-사용법" class="headerlink" title="정규식 사용법"></a>정규식 사용법</h3><ul>
+<li>g : 발생할 모든 pattern에 대한 전역 검색</li>
+<li>i : 대/소문자 구분 안함</li>
+<li>m : 여러 줄 검색 (참고)</li>
+</ul>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://kkapkkapchu.github.io/blog/2018/10/17/javascript_replaceall/" data-id="cjse7bkny001qboyf8irv8ku6" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="https://kkapkkapchu.github.io/blog/2018/10/17/javascript_replaceall/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://kkapkkapchu.github.io/blog/2018/10/17/javascript_replaceall/">Comments</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-javascript_concept_this" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/blog/2018/10/04/javascript_concept_this/">[Javascript] this에 대해</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/blog/2018/10/04/javascript_concept_this/">
+            <time datetime="2018-10-04T11:17:00.000Z" itemprop="datePublished">2018-10-04</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/Javascript/">Javascript</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/blog/tags/this/">this</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h3 id="this-란-무엇인가"><a href="#this-란-무엇인가" class="headerlink" title="this 란 무엇인가"></a>this 란 무엇인가</h3><p>this 란 함수의 현재 실행 문맥이다.<br>자바스크립트에는 4가지의 함수 실행 타입이 있다.</p>
+<p>1) 함수 실행: alert(‘Hello World!’)<br>2) 메소드 실행: console.log(‘Hello World!’)<br>3) 생성자 실행: new RegExp(‘\d’)<br>4) 간접 실행: alert.call(undefined, ‘Hello World!’)</p>
+<p>각각의 타입은 서로 다른 문맥을 가지며, 엄격 모드(strict mode) 역시 실행 문맥에 영향을 끼친다.<br>this 를 이해하려면 함수 실행이 문맥에 어떤 영향을 미치는지 확실히 이해해야 한다.<br>함수 호출이 this 에 어떤 영향을 미치는지 알아보자.</p>
+<h3 id="1-함수-실행"><a href="#1-함수-실행" class="headerlink" title="1. 함수 실행"></a>1. 함수 실행</h3><p>함수 실행은 <code>alert(&#39;Hello World!&#39;)</code> 와 같이 <code>함수이름()</code>으로 호출하는 것이다.</p>
+<blockquote>
+<p>함수 실행에서의 this 는 전역 객체이다.</p>
+</blockquote>
+<p>전역 객체는 실행 환경에 따라 결정된다. 웹 브라우저에서는 <code>window</code>가 전역 객체이다.<br>함수 실행에서의 실행 문맥은 전역 객체이다.</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="keyword">this</span> === <span class="built_in">window</span>); <span class="comment">// =&gt; true</span></span><br><span class="line">   <span class="keyword">this</span>.myNumber = <span class="number">20</span>; <span class="comment">// 전역 객체에 'myNumber'라는 속성을 추가</span></span><br><span class="line">   <span class="keyword">return</span> a + b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// sum()은 함수 호출이다.</span></span><br><span class="line"><span class="comment">// sum()에서의 this는 전역 객체다. (window)</span></span><br><span class="line">sum(<span class="number">15</span>, <span class="number">16</span>);     <span class="comment">// =&gt; 31</span></span><br><span class="line"><span class="built_in">window</span>.myNumber; <span class="comment">// =&gt; 20</span></span><br></pre></td></tr></table></figure>
+<p>this가 함수 스코프 밖(최상단: 전역 실행 문맥)에서 사용되었을 경우, 여기서의 this 역시 전역 객체를 참조하게 된다.<br><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="keyword">this</span> === <span class="built_in">window</span>); <span class="comment">// =&gt; true</span></span><br><span class="line"><span class="keyword">this</span>.myString = <span class="string">'Hello World!'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">window</span>.myString); <span class="comment">// =&gt; 'Hello World!'</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="엄격-모드"><a href="#엄격-모드" class="headerlink" title="엄격 모드"></a>엄격 모드</h4><blockquote>
+<p>엄격 모드에서 함수 실행에서의 this는 undefined 이다.</p>
+</blockquote>
+<p>엄격 모드는 코드 안정성과 더 나은 오류 검증을 제공하기 위해 ECMA Script 5.1 버전에서 처음 소개 되었다. 엄격 모드로 작성하기 위해 함수 내부의 최상단에 ‘use strict’라는 예약어를 적는다. 이 모드는 실행 문맥인 this를 undefined로 만든다. 실행 문맥은 더이상 전역 객체로 되지 않고, 위의 케이스와 반대의 상황이 된다.</p>
+<p>엄격 모드로 실행되는 예제 코드<br><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">multiply</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line"><span class="meta">  'use strict'</span>; <span class="comment">// 엄격 모드</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span> === <span class="literal">undefined</span>); <span class="comment">// =&gt; true</span></span><br><span class="line">  <span class="keyword">return</span> a * b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// multiply() 함수는 엄격 모드로 실행됨</span></span><br><span class="line"><span class="comment">// multiply()에서의 this는 undefined</span></span><br><span class="line">multiply(<span class="number">2</span>, <span class="number">5</span>); <span class="comment">// =&gt; 10</span></span><br></pre></td></tr></table></figure></p>
+<p>multiply(2, 5) 함수가 실행될 때 this는 undefined다.</p>
+<p>엄격 모드는 현재 스코프 뿐만 아니라 내부 스코프에서도 적용된다. (내부에 정의된 모든 함수에 적용됨)</p>
+<h4 id="내부-함수에서-this-를-사용할-때"><a href="#내부-함수에서-this-를-사용할-때" class="headerlink" title="내부 함수에서 this 를 사용할 때"></a>내부 함수에서 this 를 사용할 때</h4><p>함수를 실행할 때 흔히 하는 실수가 외부 함수에서의 this와 내부 함수에서의 this를 동일하게 생각하는 것이다.</p>
+<p>사실 내부 함수의 문맥은 외부 함수의 문맥에 의존되는 게 아니라 오직 실행 환경에 좌우된다. 기대하는 되로 this가 동작되려면 수정이 필요하다. (call이라 apply 메소드를 사용하는 간접 실행, 또는 바인딩 함수를 적용)</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> numbers = &#123;</span><br><span class="line">   numberA: <span class="number">5</span>,</span><br><span class="line">   numberB: <span class="number">10</span>,</span><br><span class="line">   sum: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="built_in">console</span>.log(<span class="keyword">this</span> === numbers); <span class="comment">// =&gt; true</span></span><br><span class="line">     <span class="function"><span class="keyword">function</span> <span class="title">calculate</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">       <span class="comment">// this는 window, 엄격 모드였으면 undefined</span></span><br><span class="line">       <span class="built_in">console</span>.log(<span class="keyword">this</span> === numbers); <span class="comment">// =&gt; false</span></span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">this</span>.numberA + <span class="keyword">this</span>.numberB;</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">return</span> calculate();</span><br><span class="line">     <span class="comment">// 문맥을 수정하기 위해 .call() 메소드를 적용해야함</span></span><br><span class="line">     <span class="comment">// return calculate.call(this);</span></span><br><span class="line">   &#125;</span><br><span class="line">&#125;;</span><br><span class="line">numbers.sum(); <span class="comment">// NaN, 엄격 모드였으면 TypeError</span></span><br></pre></td></tr></table></figure>
+<h3 id="메소드-실행"><a href="#메소드-실행" class="headerlink" title="메소드 실행"></a>메소드 실행</h3><p>메소드는 객체의 속성으로 있는 함수이다.</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myObject = &#123;</span><br><span class="line">  <span class="comment">// helloFunction is a method</span></span><br><span class="line">  helloFunction: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'Hello World!'</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> message = myObject.helloFunction(); <span class="comment">// 메소드 실행</span></span><br></pre></td></tr></table></figure>
+<p>여기서 <code>helloFunction</code>는 myOjbect의 메소드다. 메소드에 접근하기 위해서는 <code>myObject.helloFunction</code>와 같은 속성 접근자를 이용하면 된다.</p>
+<p>메소드 실행은 속성 접근자 형태의 표현식이 함수 객체로 계산되면서 실행된다. </p>
+<p>앞서 설명한 함수 실행과 메소드 실행이 다르다는 점은 중요하다. 왜냐하면 둘은 서로 다른 타입이기 때문이다. 둘의 가장 큰 차이점은 메소드 실행은 속성 접근자를 통해 function (.functionProperty() or ‘functionProperty’)를 호출한다. 반면에 함수 실행은 속성 접근자를 사용하지 않고, (())와 같이 바로 호출한다.</p>
+<h4 id="메소드-실행에서의-this"><a href="#메소드-실행에서의-this" class="headerlink" title="메소드 실행에서의 this"></a>메소드 실행에서의 this</h4><blockquote>
+<p>메소드 실행에서의 this는 메소드를 소유하고 있는 객체이다.</p>
+</blockquote>
+<p>객체 내에 있는 메소드를 실행할 때, 여기서의 this는 객체 자신이다.<br><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> calc = &#123;</span><br><span class="line">  num: <span class="number">0</span>,</span><br><span class="line">  increment: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span> === calc); <span class="comment">// =&gt; true</span></span><br><span class="line">    <span class="keyword">this</span>.num += <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.num;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 메소드 실행. 여기서의 this는 calc.</span></span><br><span class="line">calc.increment(); <span class="comment">// =&gt; 1</span></span><br><span class="line">calc.increment(); <span class="comment">// =&gt; 2</span></span><br></pre></td></tr></table></figure></p>
+<p>ECMAScript 6의 <code>class</code> 예약어에서 메소드 실행 문맥은 위와 마찬가지로 인스턴스 자신을 가리킨다.<br><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Planet</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(name) &#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">  &#125;</span><br><span class="line">  getName() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span> === earth); <span class="comment">// =&gt; true</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> earth = <span class="keyword">new</span> Planet(<span class="string">'Earth'</span>);</span><br><span class="line"><span class="comment">// 메소드 실행. 여기서의 this는 earth.</span></span><br><span class="line">earth.getName(); <span class="comment">// =&gt; 'Earth'</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="객체로부터-메소드를-분리할-때"><a href="#객체로부터-메소드를-분리할-때" class="headerlink" title="객체로부터 메소드를 분리할 때"></a>객체로부터 메소드를 분리할 때</h4><p>객체 내에 있는 메소드는 별도의 변수로 분리할 수 있다. 이 변수를 통해 메소드를 호출할 때, 당신은 아마도 여기서의 <code>this</code>가 메소드가 정의되어있는 객체라고 생각할 것이다.</p>
+<p>객체 밖에 있는 메소드를 호출할 경우, 함수 실행을 한 결과와 같다. 함수 실행을 할 경우 <code>this</code>는 전역 객체인 <code>window</code>를 가리킨다. (엄격 모드에서는 undefined) <code>.bind()</code> 바인딩 함수를 사용해서 문맥을 수정할 경우, 메소드를 객체에 포함시킬 수 있다.</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Animal</span>(<span class="params">type, legs</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.type = type;</span><br><span class="line">  <span class="keyword">this</span>.legs = legs;</span><br><span class="line">  <span class="keyword">this</span>.logInfo = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span> === myCat); <span class="comment">// =&gt; false</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'The '</span> + <span class="keyword">this</span>.type + <span class="string">' has '</span> + <span class="keyword">this</span>.legs + <span class="string">' legs'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> myCat = <span class="keyword">new</span> Animal(<span class="string">'Cat'</span>, <span class="number">4</span>);</span><br><span class="line"><span class="comment">// "The undefined has undefined legs" 출력</span></span><br><span class="line"><span class="comment">// 혹은 엄격모드라면 TypeError 출력</span></span><br><span class="line">setTimeout(myCat.logInfo, <span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// .bind 메소드를 사용해 문맥을 강제로 지정시킬 수 있다</span></span><br><span class="line"><span class="comment">// setTimeout(myCat.logInfo.bind(myCat), 1000);</span></span><br></pre></td></tr></table></figure>
+<p><code>.bind</code> 함수로 실행 문맥을 myCat 으로 지정해주면 함수 실행임에도 불구하고, 여기서의 this는 myCat을 가리키게 된다.</p>
+<h3 id="생성자-실행"><a href="#생성자-실행" class="headerlink" title="생성자 실행"></a>생성자 실행</h3><p>생성자 실행은 표현식 앞에 new라는 키워드가 붙었을 때, 함수 객체로 계산되어 수행된다.</p>
+<blockquote>
+<p>생성자 실행에서의 this 는 새롭게 만들어진 객체이다.</p>
+</blockquote>
+<p>생성자 실행에서의 문맥은 새롭게 만들어진 객체다. 생성자 실행은 객체에 초기값을 셋팅하기 위해 사용된다. 초기값 셋팅의 예로는 생성자 함수의 매개 변수로 받은 데이터, 속성을 위한 환경 변수, 이벤드 핸들러 등이 있다.</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Foo</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span> <span class="keyword">instanceof</span> Foo); <span class="comment">// =&gt; true</span></span><br><span class="line">  <span class="keyword">this</span>.property = <span class="string">'Default Value'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 생성자 실행</span></span><br><span class="line"><span class="keyword">var</span> fooInstance = <span class="keyword">new</span> Foo();</span><br><span class="line">fooInstance.property; <span class="comment">// =&gt; 'Default Value'</span></span><br></pre></td></tr></table></figure>
+<p>ES6에서 사용 가능한 <code>class</code> 문법 역시 같은 형식이다. 초기값 셋팅은 오직 생성자 메소드에서 할 수 있다.<br><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bar</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span> <span class="keyword">instanceof</span> Bar); <span class="comment">// =&gt; true</span></span><br><span class="line">    <span class="keyword">this</span>.property = <span class="string">'Default Value'</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Constructor invocation</span></span><br><span class="line"><span class="keyword">var</span> barInstance = <span class="keyword">new</span> Bar();</span><br><span class="line">barInstance.property; <span class="comment">// =&gt; 'Default Value'</span></span><br></pre></td></tr></table></figure></p>
+<p>생성자를 호출할 때에는 꼭 <code>new</code> 연산자를 사용해야 한다.</p>
+<p>new 연산자를 사용하지 않으면 객체 안의 this는 함수 실행이 되므로 window 객체를 가리키게 된다. 그리고 Vehicle(‘Car’, 4)은 속성을 window 객체에 추가한다. 잘못된 사용이다. 새로운 객체가 만들어지지 않는다.</p>
+<h2 id="결론"><a href="#결론" class="headerlink" title="결론"></a>결론</h2><ul>
+<li><code>this</code> 는 함수의 실행 문맥이다.</li>
+<li>함수 실행은 아래와 같이 4가지 타입으로 나뉘며, 이에 따라 함수의 실행 문맥이 달라진다.<ul>
+<li>함수 실행 / 엄격 모드</li>
+<li>메소드 실행</li>
+<li>생성자 실행</li>
+<li>간접 실행</li>
+</ul>
+</li>
+<li>함수 실행에서의 <code>this</code> 는 전역 객체이다. 웹 브라우저에서는 <code>window</code> 이다.</li>
+<li>엄격 모드에서 함수를 실행한다면, 이 함수의 <code>this</code> 는 <code>undefined</code> 이다.</li>
+<li>메소드 실행에서의 <code>this</code> 는 메소드를 소유하는 객체이다.</li>
+<li>생성자 실행에서의 <code>this</code> 는 새로 생성된 객체이다.</li>
+<li>주의 - 메소드가 함수로 사용될 때 <code>.bind</code> 를 사용해 문맥 강제시키기.</li>
+<li>주의 - 생성자 호출시에는 <code>new</code> 키워드 꼭 사용할 것.</li>
+</ul>
+<h3 id="참고-문서"><a href="#참고-문서" class="headerlink" title="참고 문서"></a>참고 문서</h3><ul>
+<li><a href="http://webframeworks.kr/tutorials/translate/explanation-of-this-in-javascript-1/" target="_blank" rel="noopener">자바스크립트에서 사용되는 this에 대한 설명 1</a></li>
+</ul>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://kkapkkapchu.github.io/blog/2018/10/04/javascript_concept_this/" data-id="cjse7bkpj005uboyfm12ee1j7" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="https://kkapkkapchu.github.io/blog/2018/10/04/javascript_concept_this/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://kkapkkapchu.github.io/blog/2018/10/04/javascript_concept_this/">Comments</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-javascript_concept_closure" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/blog/2018/07/07/javascript_concept_closure/">[Javascript] 클로저(Closure)에 대해</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/blog/2018/07/07/javascript_concept_closure/">
+            <time datetime="2018-07-07T14:02:00.000Z" itemprop="datePublished">2018-07-07</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/Javascript/">Javascript</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/blog/tags/closure/">closure</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h3 id="클로저란-무엇인가"><a href="#클로저란-무엇인가" class="headerlink" title="클로저란 무엇인가"></a>클로저란 무엇인가</h3><p>함수 내부에 함수를 작성할 때마다 이미 클로저를 생성한 것이다.<br>내부에 작성한 함수가 바로 클로저라닛!! 여태껏 클로저가 뭔지도 모르고 사용했다..</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">outerFunction</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> outer = <span class="string">'I see the outer variable!'</span></span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">innerFunction</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(outer)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">outerFunction()() <span class="comment">// I see the outer variable!</span></span><br></pre></td></tr></table></figure>
+<h3 id="클로저를-왜-쓸까"><a href="#클로저를-왜-쓸까" class="headerlink" title="클로저를 왜 쓸까"></a>클로저를 왜 쓸까</h3><p>클로저는 외부함수의 변수에 접근이 가능하다. (자바스크립의 스코프를 이해한다면 당연한 것)<br>때문에 일반적으로 두 가지의 목적이 있다.</p>
+<ol>
+<li>사이드 이펙트(side effects) 제어하기</li>
+<li>private 변수 생성하기(캡슐화)</li>
+</ol>
+<h5 id="사이드-이펙트-side-effects-제어하기"><a href="#사이드-이펙트-side-effects-제어하기" class="headerlink" title="사이드 이펙트(side effects) 제어하기"></a>사이드 이펙트(side effects) 제어하기</h5><p>함수에서 값을 반환할 때를 제외하고 무언가를 행할 때 사이드 이펙트(side effects)가 발생한다.<br>여러 가지 것들이 사이드 이펙트가 될 수 있는데, 예를 들어 Ajax 요청이나 timeout을 생성할 때,<br>그리고 심지어 console.log를 선언하는 것도 사이드 이펙트이다.</p>
+<p>보통 Ajax나 timeout과 같이 코드 흐름을 방해하는 것들이 신경 쓰일 때,<br>클로저를 활용하여 사이드 이펙트를 제어한다.</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> i;</span><br><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">  setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(i);</span><br><span class="line">  &#125;, <span class="number">100</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>간단하게 0-9까지의 정수를 출력하는 코드이지만 실제로 돌려보면 엉뚱하게도 10만 열 번 출력되는 걸 볼 수 있다. 왜일까?<br>먼저 <code>setTimeout()</code>에 인자로 넘긴 익명함수는 모두 0.1초 뒤에 호출될 것이다.<br>그 0.1초 동안에 이미 반복문이 모두 순회되면서 <code>i</code>값은 이미 10이 된 상태.<br>그 때 익명함수가 호출되면서 이미 10이 되어버린 <code>i</code>를 참조하는 것이다.</p>
+<p>이 경우에도 클로저를 사용하면 원하는 대로 동작하도록 만들 수 있다.</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> i;</span><br><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">  (<span class="function"><span class="keyword">function</span>(<span class="params">j</span>) </span>&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(j);</span><br><span class="line">    &#125;, <span class="number">100</span>);</span><br><span class="line">  &#125;)(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>중간에 즉시 실행 함수(IIFE)를 덧붙여 <code>setTimeout()</code>에 걸린 익명함수를 클로저로 만들었다.<br>클로저는 만들어진 환경을 기억한다. 이 코드에서 <code>i</code>는 IIFE내에 <code>j</code>라는 형태로 주입되고, 클로저에 의해 각기 다른 환경속에 포함된다.<br>반복문은 10회 반복되므로 10개의 환경이 생길 것이고, 10개의 서로 다른 환경에 10개의 서로 다른 <code>j</code>가 생긴다.</p>
+<p>위의 예제에서는 IIFE를 통해서 클로저마다 환경이 생긴다.<br>하지만 인자로 <code>i</code>를 넘기지 않는다면 당연히 클로저가 참조하는 IIFE의 함수 스코프에서도 <code>i</code>값이 없으므로 생성 당시의 외부 스코프인 글로벌을 탐색하게 되고 결국 모두 같은 <code>i</code>를 참조하게 된다.<br>반면에, 인자로 <code>i</code>를 넘기게 되면 IIFE로 만든 10개의 스코프에 모두 <code>i</code>라는 변수가 다른 값으로 생기므로 정상적으로 동작할 수 있는 것이다.</p>
+<p>참고로 여기서 콜백으로 넘기는 함수 자체를 IIFE로 만들면 되지 않나 싶지만,<br>그렇게 하면 원하는대로 0-9까지 출력은 되지만 함수 내부가 즉시 실행되어 버리므로 setTimeout()의 0.1초 딜레이가 작동하지 않게 된다.</p>
+<h5 id="private-변수-생성하기-캡슐화"><a href="#private-변수-생성하기-캡슐화" class="headerlink" title="private 변수 생성하기(캡슐화)"></a>private 변수 생성하기(캡슐화)</h5><p>일반적으로 Javascript에서 객체지향 프로그래밍을 말한다면 <code>Prototype</code>을 통해 객체를 다루는 것을 말한다.<br><code>Prototype</code>을 통한 객체를 만들 때의 주요한 문제 중 하나는 Private variables에 대한 접근 권한 문제이다. 예제 코드를 보자.</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Hello</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>._name = name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Hello.prototype.say = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Hello, '</span> + <span class="keyword">this</span>._name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> hello1 = <span class="keyword">new</span> Hello(<span class="string">'피카츄'</span>);</span><br><span class="line"><span class="keyword">var</span> hello2 = <span class="keyword">new</span> Hello(<span class="string">'이상해씨'</span>);</span><br><span class="line"><span class="keyword">var</span> hello3 = <span class="keyword">new</span> Hello(<span class="string">'잠만보'</span>);</span><br><span class="line"></span><br><span class="line">hello1.say(); <span class="comment">// 'Hello, 피카츄'</span></span><br><span class="line">hello2.say(); <span class="comment">// 'Hello, 이상해씨'</span></span><br><span class="line">hello3.say(); <span class="comment">// 'Hello, 잠만보'</span></span><br><span class="line">hello1._name = <span class="string">'anonymous'</span>;</span><br><span class="line">hello1.say(); <span class="comment">// 'Hello, anonymous'</span></span><br></pre></td></tr></table></figure>
+<p>위에서 <code>Hello()</code>로 생성된 객체들은 모두 <code>_name</code>이라는 변수를 가지게 된다.<br>변수명 앞에 underscore(_)를 포함했기 때문에 일반적인 Javascript 네이밍 컨벤션을 생각해 봤을때<br>이 변수는 Private variable으로 쓰고싶다는 의도를 알 수 있다.<br>하지만 실제로는 여전히 외부에서도 쉽게 접근가능한 변수일 뿐이다.</p>
+<p>이 경우에 클로저를 사용하여 외부에서 변수에 직접 접근하는 것을 제한할 수 있다.</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hello</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> _name = name;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Hello, '</span> + _name);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> hello1 = hello(<span class="string">'피카츄'</span>);</span><br><span class="line"><span class="keyword">var</span> hello2 = hello(<span class="string">'이상해씨'</span>);</span><br><span class="line"><span class="keyword">var</span> hello3 = hello(<span class="string">'잠만보'</span>);</span><br><span class="line"></span><br><span class="line">hello1(); <span class="comment">// 'Hello, 피카츄'</span></span><br><span class="line">hello2(); <span class="comment">// 'Hello, 이상해씨'</span></span><br><span class="line">hello3(); <span class="comment">// 'Hello, 잠만보'</span></span><br></pre></td></tr></table></figure>
+<p>특별히 인터페이스를 제공하는 것이 아니라면, 여기서는 외부에서 _name에 접근할 방법이 전혀 없다.<br>이렇게 은닉화도 생각보다 쉽게 해결할 수 있다.</p>
+<h3 id="클로저의-성능"><a href="#클로저의-성능" class="headerlink" title="클로저의 성능"></a>클로저의 성능</h3><p>클로저는 각자의 환경을 가진다. 이 환경을 기억하기 위해서는 당연히 메모리가 소모될 것이다.<br>클로저를 생성해놓고 참조를 제거하지 않는 것은 C++에서 동적할당으로 객체를 생성해놓고 delete를 사용하지 않는 것과 비슷하다.<br>클로저를 통해 내부 변수를 참조하는 동안에는 내부 변수가 차지하는 메모리를 GC가 회수하지 않는다.<br>따라서 클로저 사용이 끝나면 참조를 제거하는 것이 좋다.</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hello</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> _name = name;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Hello, '</span> + _name);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> hello1 = hello(<span class="string">'피카츄'</span>);</span><br><span class="line"><span class="keyword">var</span> hello2 = hello(<span class="string">'이상해씨'</span>);</span><br><span class="line"><span class="keyword">var</span> hello3 = hello(<span class="string">'잠만보'</span>);</span><br><span class="line"></span><br><span class="line">hello1(); <span class="comment">// 'Hello, 피카츄'</span></span><br><span class="line">hello2(); <span class="comment">// 'Hello, 이상해씨'</span></span><br><span class="line">hello3(); <span class="comment">// 'Hello, 잠만보'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 여기서 메모리를 release 시키기 클로저의 참조를 제거해야 한다.</span></span><br><span class="line">hello1 = <span class="literal">null</span>;</span><br><span class="line">hello2 = <span class="literal">null</span>;</span><br><span class="line">hello3 = <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
+<p>이처럼 메모리 관리에 있어서 약점이 있지만 추가로 스코프 체인을 검색하는 시간과 새로운 스코프를 생성하는데 드는 비용도 감안하지 않을 수 없다.<br>이 부분에 대해서는 Javascript 스코프를 주제로 하는 별도의 글에서 다룰 것이다.</p>
+<h3 id="참고-문서"><a href="#참고-문서" class="headerlink" title="참고 문서"></a>참고 문서</h3><ul>
+<li><a href="https://hyunseob.github.io/2016/08/30/javascript-closure/" target="_blank" rel="noopener">Javascript 클로저(Closure)</a></li>
+<li><a href="https://medium.com/@khwsc1/%EB%B2%88%EC%97%AD-%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%8A%A4%EC%BD%94%ED%94%84%EC%99%80-%ED%81%B4%EB%A1%9C%EC%A0%80-javascript-scope-and-closures-8d402c976d19" target="_blank" rel="noopener">자바스크립트 스코프와 클로저</a></li>
+</ul>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://kkapkkapchu.github.io/blog/2018/07/07/javascript_concept_closure/" data-id="cjse7bknf000mboyfd2va64cr" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="https://kkapkkapchu.github.io/blog/2018/07/07/javascript_concept_closure/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://kkapkkapchu.github.io/blog/2018/07/07/javascript_concept_closure/">Comments</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-javascript_invaliddate_in_IE" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/blog/2018/06/15/javascript_invaliddate_in_IE/">[Javascript] new Date(&#39;YYYY-MM-DD HH:MM&#39;) is InvalidDate in IE</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/blog/2018/06/15/javascript_invaliddate_in_IE/">
+            <time datetime="2018-06-15T08:44:00.000Z" itemprop="datePublished">2018-06-15</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/Javascript/">Javascript</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/blog/tags/IE/">IE</a>, <a class="tag-link" href="/blog/tags/dateTime/">dateTime</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h3 id="new-Date-으로-날짜-생성하기"><a href="#new-Date-으로-날짜-생성하기" class="headerlink" title="new Date()으로 날짜 생성하기"></a>new Date()으로 날짜 생성하기</h3><p>자바스크립트 자체내에서 new Date() 함수를 지원한다.<br>파라미터를 안 주게 되면 현재 날짜로 생성되고,<br>()안에 <code>컴마(,)/대시(-)/슬래시(/)</code> 등 여러가지 방식으로 파라미터를 줄 수 있다.</p>
+<p>하지만 이 중에 제목처럼 <code>new Date(&#39;YYYY-MM-DD HH:MM&#39;)</code> 을 하게 되면 크롬에서는 잘 나오나,<br>IE에서는 InvalidDate으로 나온다.<br>이 문제를 해결하기 위해서는 연도와 시간 사이에 빈칸대신 <code>T</code>를 넣으면 된다.</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// for Chrome</span></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">'2018-06-15 17:44'</span>) <span class="comment">// FRI JUN 15 2018 17:44:00 GMT+0900 (KST) </span></span><br><span class="line"></span><br><span class="line"><span class="comment">// for Chrome, IE</span></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">'2018-06-15T17:44'</span>) <span class="comment">// FRI JUN 15 2018 17:44:00 GMT+0900 (KST)</span></span><br></pre></td></tr></table></figure>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://kkapkkapchu.github.io/blog/2018/06/15/javascript_invaliddate_in_IE/" data-id="cjse7bknp0016boyfcksrtgzz" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="https://kkapkkapchu.github.io/blog/2018/06/15/javascript_invaliddate_in_IE/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://kkapkkapchu.github.io/blog/2018/06/15/javascript_invaliddate_in_IE/">Comments</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
     <article id="post-react_backbutton_browser_alert" class="article article-type-post" itemscope="" itemprop="blogPost">
     <div class="article-inner">
         
@@ -989,549 +1615,6 @@
 
 
 
-    <article id="post-react_proptypes_arrayof" class="article article-type-post" itemscope="" itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/blog/2017/08/25/react_proptypes_arrayof/">[React] propTypes 에 array 타입으로 지정할 때 array 안에 들어가는 값에 대한 타입 지정하기</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/blog/2017/08/25/react_proptypes_arrayof/">
-            <time datetime="2017-08-25T04:22:54.000Z" itemprop="datePublished">2017-08-25</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/React/">React</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/blog/tags/array/">array</a>, <a class="tag-link" href="/blog/tags/propTypes/">propTypes</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <p>React 에서 속성의 타입을 정의할 때 propTypes를 사용하면 편하다.<br>속성의 타입이 array 라면 배열 안의 값에 대한 타입도 <code>arrayOf()</code>로 지정할 수 있다.</p>
-<p>아래 예시는 배열 안의 값의 타입을 숫자로 정의한 것이다.<br><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// An array of a certain type</span></span><br><span class="line">optionalArrayOf: PropTypes.arrayOf(PropTypes.number),</span><br></pre></td></tr></table></figure></p>
-<p>배열 안의 값의 타입을 <code>PropTypes.number</code> 로 지정했기 때문에 숫자말고 다른 타입이 들어오면 에러가 난다.<br>부모 컴포넌트에서 넘어오는 속성 값은 숫자로 된 배열이어야 한다. (ex) optionalArrayOf=[1, 2, 3])</p>
-<p>이외에도 아래와 같이 많은 타입을 정의할 수 있도록 제공된다.</p>
-<h5 id="제공되는-PropTypes"><a href="#제공되는-PropTypes" class="headerlink" title="제공되는 PropTypes"></a>제공되는 PropTypes</h5><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> PropTypes <span class="keyword">from</span> <span class="string">'prop-types'</span>;</span><br><span class="line"></span><br><span class="line">MyComponent.propTypes = &#123;</span><br><span class="line">  <span class="comment">// You can declare that a prop is a specific JS primitive. By default, these</span></span><br><span class="line">  <span class="comment">// are all optional.</span></span><br><span class="line">  optionalArray: PropTypes.array,</span><br><span class="line">  optionalBool: PropTypes.bool,</span><br><span class="line">  optionalFunc: PropTypes.func,</span><br><span class="line">  optionalNumber: PropTypes.number,</span><br><span class="line">  optionalObject: PropTypes.object,</span><br><span class="line">  optionalString: PropTypes.string,</span><br><span class="line">  optionalSymbol: PropTypes.symbol,</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Anything that can be rendered: numbers, strings, elements or an array</span></span><br><span class="line">  <span class="comment">// (or fragment) containing these types.</span></span><br><span class="line">  optionalNode: PropTypes.node,</span><br><span class="line"></span><br><span class="line">  <span class="comment">// A React element.</span></span><br><span class="line">  optionalElement: PropTypes.element,</span><br><span class="line"></span><br><span class="line">  <span class="comment">// You can also declare that a prop is an instance of a class. This uses</span></span><br><span class="line">  <span class="comment">// JS's instanceof operator.</span></span><br><span class="line">  optionalMessage: PropTypes.instanceOf(Message),</span><br><span class="line"></span><br><span class="line">  <span class="comment">// You can ensure that your prop is limited to specific values by treating</span></span><br><span class="line">  <span class="comment">// it as an enum.</span></span><br><span class="line">  optionalEnum: PropTypes.oneOf([<span class="string">'News'</span>, <span class="string">'Photos'</span>]),</span><br><span class="line"></span><br><span class="line">  <span class="comment">// An object that could be one of many types</span></span><br><span class="line">  optionalUnion: PropTypes.oneOfType([</span><br><span class="line">    PropTypes.string,</span><br><span class="line">    PropTypes.number,</span><br><span class="line">    PropTypes.instanceOf(Message)</span><br><span class="line">  ]),</span><br><span class="line"></span><br><span class="line">  <span class="comment">// An array of a certain type</span></span><br><span class="line">  optionalArrayOf: PropTypes.arrayOf(PropTypes.number),</span><br><span class="line"></span><br><span class="line">  <span class="comment">// An object with property values of a certain type</span></span><br><span class="line">  optionalObjectOf: PropTypes.objectOf(PropTypes.number),</span><br><span class="line"></span><br><span class="line">  <span class="comment">// An object taking on a particular shape</span></span><br><span class="line">  optionalObjectWithShape: PropTypes.shape(&#123;</span><br><span class="line">    color: PropTypes.string,</span><br><span class="line">    fontSize: PropTypes.number</span><br><span class="line">  &#125;),</span><br><span class="line"></span><br><span class="line">  <span class="comment">// You can chain any of the above with `isRequired` to make sure a warning</span></span><br><span class="line">  <span class="comment">// is shown if the prop isn't provided.</span></span><br><span class="line">  requiredFunc: PropTypes.func.isRequired,</span><br><span class="line"></span><br><span class="line">  <span class="comment">// A value of any data type</span></span><br><span class="line">  requiredAny: PropTypes.any.isRequired,</span><br><span class="line"></span><br><span class="line">  <span class="comment">// You can also specify a custom validator. It should return an Error</span></span><br><span class="line">  <span class="comment">// object if the validation fails. Don't `console.warn` or throw, as this</span></span><br><span class="line">  <span class="comment">// won't work inside `oneOfType`.</span></span><br><span class="line">  customProp: <span class="function"><span class="keyword">function</span>(<span class="params">props, propName, componentName</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="regexp">/matchme/</span>.test(props[propName])) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Error</span>(</span><br><span class="line">        <span class="string">'Invalid prop `'</span> + propName + <span class="string">'` supplied to'</span> +</span><br><span class="line">        <span class="string">' `'</span> + componentName + <span class="string">'`. Validation failed.'</span></span><br><span class="line">      );</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="comment">// You can also supply a custom validator to `arrayOf` and `objectOf`.</span></span><br><span class="line">  <span class="comment">// It should return an Error object if the validation fails. The validator</span></span><br><span class="line">  <span class="comment">// will be called for each key in the array or object. The first two</span></span><br><span class="line">  <span class="comment">// arguments of the validator are the array or object itself, and the</span></span><br><span class="line">  <span class="comment">// current item's key.</span></span><br><span class="line">  customArrayProp: PropTypes.arrayOf(<span class="function"><span class="keyword">function</span>(<span class="params">propValue, key, componentName, location, propFullName</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="regexp">/matchme/</span>.test(propValue[key])) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Error</span>(</span><br><span class="line">        <span class="string">'Invalid prop `'</span> + propFullName + <span class="string">'` supplied to'</span> +</span><br><span class="line">        <span class="string">' `'</span> + componentName + <span class="string">'`. Validation failed.'</span></span><br><span class="line">      );</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>참고사이트: <a href="https://facebook.github.io/react/docs/typechecking-with-proptypes.html" target="_blank" rel="noopener">https://facebook.github.io/react/docs/typechecking-with-proptypes.html</a></p>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="https://kkapkkapchu.github.io/blog/2017/08/25/react_proptypes_arrayof/" data-id="cjse7bko30023boyf5jq3plm1" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="https://kkapkkapchu.github.io/blog/2017/08/25/react_proptypes_arrayof/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://kkapkkapchu.github.io/blog/2017/08/25/react_proptypes_arrayof/">Comments</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-javascript_library_keycode_keypad" class="article article-type-post" itemscope="" itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/blog/2017/08/17/javascript_library_keycode_keypad/">[Javascript] keycode 라이브러리 사용시 키보드 오른쪽 keypad 숫자 가져오기</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/blog/2017/08/17/javascript_library_keycode_keypad/">
-            <time datetime="2017-08-17T02:01:12.000Z" itemprop="datePublished">2017-08-17</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/Javascript/">Javascript</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/Javascript/Library/">Library</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/blog/tags/IE/">IE</a>, <a class="tag-link" href="/blog/tags/keycode/">keycode</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <p><code>keycode</code> 라이브러리를 사용해서 값을 가져오고 숫자만 뽑아내기 위해서 정규식을 쓰는 경우가 있다.<br>이때 조심해야 하는 경우가 있는데 바로 키보드 오른쪽의 keypad 로 입력했을 때이다.</p>
-<p>IE에서는 keypad 로 숫자 입력시 <code>keycode</code> 라이브러리로 값을 가져오면 “<code>numpad 숫자</code>“ 로 찍힌다.<br>그래서 숫자 정규식을 쓰려면 숫자만 뽑아내야 한다. </p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> keycode <span class="keyword">from</span> <span class="string">'keycode'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 맨 뒤의 숫자만 가져오기</span></span><br><span class="line"><span class="comment">// console.log(keycode(event));  // IE: "numpad 숫자", Others: "숫자"</span></span><br><span class="line"><span class="keyword">let</span> keycodeStr = keycode(event).slice(<span class="number">-1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 숫자만인지 체크하는 정규식</span></span><br><span class="line"><span class="keyword">const</span> regNumber = <span class="regexp">/^[0-9]*$/</span>;</span><br><span class="line"><span class="keyword">if</span> ( !regNumber.test(keycodeStr) ) <span class="keyword">return</span>;</span><br></pre></td></tr></table></figure>
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="https://kkapkkapchu.github.io/blog/2017/08/17/javascript_library_keycode_keypad/" data-id="cjse7bknt001gboyf54o70v3k" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="https://kkapkkapchu.github.io/blog/2017/08/17/javascript_library_keycode_keypad/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://kkapkkapchu.github.io/blog/2017/08/17/javascript_library_keycode_keypad/">Comments</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-javascript_create_html_element_dynamically" class="article article-type-post" itemscope="" itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/blog/2017/08/13/javascript_create_html_element_dynamically/">[Javascript] HTML 요소 동적으로 생성하고 속성(Attribute) 추가하기</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/blog/2017/08/13/javascript_create_html_element_dynamically/">
-            <time datetime="2017-08-13T07:18:27.000Z" itemprop="datePublished">2017-08-13</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/Javascript/">Javascript</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/blog/tags/HTML/">HTML</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <h3 id="요소를-동적으로-생성하고-원하는-위치에-붙이기"><a href="#요소를-동적으로-생성하고-원하는-위치에-붙이기" class="headerlink" title="요소를 동적으로 생성하고 원하는 위치에 붙이기"></a>요소를 동적으로 생성하고 원하는 위치에 붙이기</h3><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 요소 동적 생성</span></span><br><span class="line"><span class="keyword">let</span> div = <span class="built_in">document</span>.createElement(<span class="string">"div"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 원하는 위치에 붙인다</span></span><br><span class="line"><span class="built_in">document</span>.body.appendChild(div);</span><br><span class="line"></span><br><span class="line"><span class="comment">// React 에서는 요소를 붙이고 싶은 위치를 ref 로 잡아서도 가능 </span></span><br><span class="line"><span class="keyword">this</span>.refs.test.appendChild(div);</span><br></pre></td></tr></table></figure>
-<h3 id="동적으로-생성한-요소에-속성-Attribute-추가하기"><a href="#동적으로-생성한-요소에-속성-Attribute-추가하기" class="headerlink" title="동적으로 생성한 요소에 속성(Attribute) 추가하기"></a>동적으로 생성한 요소에 속성(Attribute) 추가하기</h3><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 요소 동적 생성</span></span><br><span class="line"><span class="keyword">let</span> div = <span class="built_in">document</span>.createElement(<span class="string">"div"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 속성을 추가한다</span></span><br><span class="line">div.setAttribute(<span class="string">"style"</span>, <span class="string">"width: 100%; height: 100%;"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 원하는 위치에 붙인다</span></span><br><span class="line"><span class="built_in">document</span>.body.appendChild(div);</span><br><span class="line"></span><br><span class="line"><span class="comment">// React 에서는 요소를 붙이고 싶은 위치를 ref 로 잡아서도 가능 </span></span><br><span class="line"><span class="keyword">this</span>.refs.test.appendChild(div);</span><br></pre></td></tr></table></figure>
-<p>div.setAttribute(“style”, “width: 100%; height: 100%;”) 에서 첫 번째 인자가 추가할 속성의 이름이고,<br>두 번째 인자가 추가할 속성의 값이다.</p>
-<h3 id="동적으로-생성한-요소에-이벤트-속성-추가하기"><a href="#동적으로-생성한-요소에-이벤트-속성-추가하기" class="headerlink" title="동적으로 생성한 요소에 이벤트 속성 추가하기"></a>동적으로 생성한 요소에 이벤트 속성 추가하기</h3><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 요소 동적 생성</span></span><br><span class="line"><span class="keyword">let</span> a = <span class="built_in">document</span>.createElement(<span class="string">"a"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (a.addEventListener) &#123;</span><br><span class="line">    a.addEventListener(<span class="string">'click'</span>, handler, <span class="literal">false</span>); </span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (el.attachEvent) &#123;</span><br><span class="line">    a.attachEvent(<span class="string">'onclick'</span>, handler);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>onclick, onblur 와 같은 이벤트 속성을 추가하고 싶을 때는 setAttribute 가 아닌 addEventListener 로 하면 된다.</p>
-<h3 id="동적으로-생성한-요소-삭제하기"><a href="#동적으로-생성한-요소-삭제하기" class="headerlink" title="동적으로 생성한 요소 삭제하기"></a>동적으로 생성한 요소 삭제하기</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">"myList"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>Coffee<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>Tea<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>Milk<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>위의 예제처럼 ul, li 태그가 생성되었다고 할 때, li 태그를 지우고 싶으면 아래 예제처럼 하면 된다.<br><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 삭제할 요소의 상위(부모) 요소</span></span><br><span class="line"><span class="keyword">let</span> myNode = <span class="built_in">document</span>.getElementById(<span class="string">"myList"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 원하는 자식 요소만 지우기</span></span><br><span class="line">myNode.removeChild(myNode.childNodes[<span class="number">0</span>]);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 자식 요소들 한번에 지우기</span></span><br><span class="line">myNode.innerHTML = <span class="string">''</span>;</span><br></pre></td></tr></table></figure></p>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="https://kkapkkapchu.github.io/blog/2017/08/13/javascript_create_html_element_dynamically/" data-id="cjse7bkno0013boyfjwqhi7j5" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="https://kkapkkapchu.github.io/blog/2017/08/13/javascript_create_html_element_dynamically/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://kkapkkapchu.github.io/blog/2017/08/13/javascript_create_html_element_dynamically/">Comments</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-css_calc_in_calc_for_ie" class="article article-type-post" itemscope="" itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/blog/2017/08/03/css_calc_in_calc_for_ie/">[CSS] CSS에서 calc 함수 중첩해서 쓰기</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/blog/2017/08/03/css_calc_in_calc_for_ie/">
-            <time datetime="2017-08-03T11:31:27.000Z" itemprop="datePublished">2017-08-03</time>
-        </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/CSS/">CSS</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/blog/tags/IE/">IE</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <h2 id="Calc-function-inside-another-calc-in-CSS"><a href="#Calc-function-inside-another-calc-in-CSS" class="headerlink" title="Calc() function inside another calc() in CSS"></a>Calc() function inside another calc() in CSS</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// <span class="keyword">for</span> Chrome, IE 9</span><br><span class="line">div&#123;</span><br><span class="line">  width: calc(100% - (1% + 30px)); /* calc(1% + 30px) is nested inside calc() */</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// <span class="keyword">for</span> Chrome</span><br><span class="line">div p&#123;</span><br><span class="line">  width: calc(100% - calc(1% + 30px));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>크롬은 둘 다 지원하지만 IE는 첫 번째만 지원한다.<br>IE에서 calc 함수를 중첩으로 사용하려면 맨 앞에 calc로 한번만 감싸야한다.</p>
-<p>이를 위해서 안의 중첩된 calc 글자를 없애주는 라이브러리(<a href="https://github.com/MoOx/reduce-css-calc" target="_blank" rel="noopener">reduce-css-calc</a>)도 있는거 같은데,<br>이 라이브러리 안에서 쓰이는 “fs” 라이브러리가 없어진듯 하다… 그래서 못씀..</p>
-<p>아무튼 해결법은 calc를 한번만 사용하도록 식을 바꾸든지, 중첩된 calc 를 계산해서 숫자로 바꿔주는 라이브러리를 만들든지 찾든지 해야한다.</p>
-
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="https://kkapkkapchu.github.io/blog/2017/08/03/css_calc_in_calc_for_ie/" data-id="cjse7bkn40007boyfpq4wrotm" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="https://kkapkkapchu.github.io/blog/2017/08/03/css_calc_in_calc_for_ie/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="https://kkapkkapchu.github.io/blog/2017/08/03/css_calc_in_calc_for_ie/">Comments</a>
-    
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
     <nav id="page-nav">
         <a class="extend prev" rel="prev" href="/blog/page/2/">&laquo; Prev</a><a class="page-number" href="/blog/">1</a><a class="page-number" href="/blog/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/blog/page/4/">4</a><a class="extend next" rel="next" href="/blog/page/4/">Next &raquo;</a>
     </nav>
@@ -1549,45 +1632,45 @@
                     <li>
                         
                         <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/Vue/">Vue</a></p>
+                            <p class="item-title"><a href="/blog/2019/07/30/vue_plugin_with_template/" class="title">[Vue] Plugin with Template</a></p>
+                            <p class="item-date"><time datetime="2019-07-30T07:00:00.000Z" itemprop="datePublished">2019-07-30</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/Vue/">Vue</a></p>
+                            <p class="item-title"><a href="/blog/2019/07/30/vue_recursive_component/" class="title">[Vue] Recursive Component</a></p>
+                            <p class="item-date"><time datetime="2019-07-30T07:00:00.000Z" itemprop="datePublished">2019-07-30</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/etc/">etc</a></p>
+                            <p class="item-title"><a href="/blog/2019/07/30/etc_ie_set_cookie/" class="title">[Etc] IE Set Cookie</a></p>
+                            <p class="item-date"><time datetime="2019-07-30T06:00:00.000Z" itemprop="datePublished">2019-07-30</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/Vue/">Vue</a></p>
+                            <p class="item-title"><a href="/blog/2019/07/30/vue_ie_support/" class="title">[Vue] IE Support</a></p>
+                            <p class="item-date"><time datetime="2019-07-30T05:00:00.000Z" itemprop="datePublished">2019-07-30</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/CSS/">CSS</a></p>
                             <p class="item-title"><a href="/blog/2019/07/03/css_text_overflow/" class="title">[CSS] 말줄임 처리하기</a></p>
                             <p class="item-date"><time datetime="2019-07-03T09:33:00.000Z" itemprop="datePublished">2019-07-03</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/Javascript/">Javascript</a></p>
-                            <p class="item-title"><a href="/blog/2019/07/03/javascript_sse_eventsource/" class="title">[Javascript] EventSource를 이용해서 SSE 받기</a></p>
-                            <p class="item-date"><time datetime="2019-07-03T09:12:00.000Z" itemprop="datePublished">2019-07-03</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/Javascript/">Javascript</a></p>
-                            <p class="item-title"><a href="/blog/2019/07/03/javascript_map_instance_foreach/" class="title">[Javascript] Map 객체의 forEach 구문 주의!!</a></p>
-                            <p class="item-date"><time datetime="2019-07-03T09:08:00.000Z" itemprop="datePublished">2019-07-03</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/GIT/">GIT</a></p>
-                            <p class="item-title"><a href="/blog/2019/02/21/git_command/" class="title">[GIT] GIT 명령어</a></p>
-                            <p class="item-date"><time datetime="2019-02-21T05:21:00.000Z" itemprop="datePublished">2019-02-21</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/blog/categories/Web/">Web</a><i class="fa fa-angle-right"></i><a class="article-category-link" href="/blog/categories/Web/Javascript/">Javascript</a></p>
-                            <p class="item-title"><a href="/blog/2019/01/10/javascript_delete_item_in_object/" class="title">[Javascript] Object의 item 삭제하기</a></p>
-                            <p class="item-date"><time datetime="2019-01-10T06:21:00.000Z" itemprop="datePublished">2019-01-10</time></p>
                         </div>
                     </li>
                 
@@ -1600,7 +1683,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">categories</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/">Web</a><span class="category-list-count">31</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/CSS/">CSS</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/GIT/">GIT</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/HTML/">HTML</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/Hexo/">Hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/Javascript/">Javascript</a><span class="category-list-count">21</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/Javascript/Library/">Library</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/React/">React</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/Vue/">Vue</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/Vue/Vuex/">Vuex</a><span class="category-list-count">1</span></li></ul></li></ul></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/">Web</a><span class="category-list-count">35</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/CSS/">CSS</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/GIT/">GIT</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/HTML/">HTML</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/Hexo/">Hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/Javascript/">Javascript</a><span class="category-list-count">21</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/Javascript/Library/">Library</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/React/">React</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/Vue/">Vue</a><span class="category-list-count">4</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/Vue/Vuex/">Vuex</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Web/etc/">etc</a><span class="category-list-count">1</span></li></ul></li></ul>
         </div>
     </div>
 
@@ -1609,7 +1692,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">archives</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/07/">July 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/02/">February 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/01/">January 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/12/">December 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/10/">October 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/07/">July 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/06/">June 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/09/">September 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/08/">August 2017</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/07/">July 2019</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/02/">February 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/01/">January 2019</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/12/">December 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/10/">October 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/07/">July 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2018/06/">June 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/09/">September 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/08/">August 2017</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -1618,7 +1701,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">tags</h3>
         <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/EventSource를/">EventSource를</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/HTML/">HTML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/IE/">IE</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/SSE/">SSE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ZWSP/">ZWSP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/add-header/">add_header</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/align/">align</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/array/">array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/axios/">axios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/caret/">caret</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/caret-position/">caret_position</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/center/">center</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/closure/">closure</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/command/">command</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/contenteditable/">contenteditable</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/copy-paste/">copy&paste</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cursor/">cursor</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/dateTime/">dateTime</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/delete/">delete</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/execCommand/">execCommand</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/forEach/">forEach</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/getters/">getters</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/key-value/">key/value</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/keycode/">keycode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mouse-click-event/">mouse_click_event</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mouse-cursor-get/">mouse_cursor_get</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mouse-cursor-set/">mouse_cursor_set</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/new-map/">new_map</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/object/">object</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/onBeforeUnload/">onBeforeUnload</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/onTouchTap/">onTouchTap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/params/">params</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/propTypes/">propTypes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/property/">property</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/replace/">replace</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/replaceall/">replaceall</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/setRouteLeaveHook/">setRouteLeaveHook</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/span/">span</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/text/">text</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/text-overflow/">text_overflow</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/this/">this</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/window-open/">window.open</a><span class="tag-list-count">1</span></li></ul>
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/EventSource를/">EventSource를</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/HTML/">HTML</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/IE/">IE</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/SSE/">SSE</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ZWSP/">ZWSP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/add-header/">add_header</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/align/">align</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/array/">array</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/axios/">axios</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/caret/">caret</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/caret-position/">caret_position</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/center/">center</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/closure/">closure</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/command/">command</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/contenteditable/">contenteditable</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cookie/">cookie</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/copy-paste/">copy&paste</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/cursor/">cursor</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/dateTime/">dateTime</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/delete/">delete</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/execCommand/">execCommand</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/forEach/">forEach</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/getters/">getters</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/ie/">ie</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/key-value/">key/value</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/keycode/">keycode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mouse-click-event/">mouse_click_event</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mouse-cursor-get/">mouse_cursor_get</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/mouse-cursor-set/">mouse_cursor_set</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/new-map/">new_map</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/object/">object</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/onBeforeUnload/">onBeforeUnload</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/onTouchTap/">onTouchTap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/params/">params</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/plugin/">plugin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/propTypes/">propTypes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/property/">property</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/recursive/">recursive</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/replace/">replace</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/replaceall/">replaceall</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/setRouteLeaveHook/">setRouteLeaveHook</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/span/">span</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/template/">template</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/text/">text</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/text-overflow/">text_overflow</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/this/">this</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/window-open/">window.open</a><span class="tag-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -1627,7 +1710,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">tag cloud</h3>
         <div class="widget tagcloud">
-            <a href="/blog/tags/EventSource를/" style="font-size: 10px;">EventSource를</a> <a href="/blog/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/blog/tags/IE/" style="font-size: 20px;">IE</a> <a href="/blog/tags/SSE/" style="font-size: 10px;">SSE</a> <a href="/blog/tags/ZWSP/" style="font-size: 10px;">ZWSP</a> <a href="/blog/tags/add-header/" style="font-size: 10px;">add_header</a> <a href="/blog/tags/align/" style="font-size: 10px;">align</a> <a href="/blog/tags/array/" style="font-size: 10px;">array</a> <a href="/blog/tags/axios/" style="font-size: 10px;">axios</a> <a href="/blog/tags/caret/" style="font-size: 12.5px;">caret</a> <a href="/blog/tags/caret-position/" style="font-size: 10px;">caret_position</a> <a href="/blog/tags/center/" style="font-size: 10px;">center</a> <a href="/blog/tags/closure/" style="font-size: 10px;">closure</a> <a href="/blog/tags/command/" style="font-size: 10px;">command</a> <a href="/blog/tags/contenteditable/" style="font-size: 17.5px;">contenteditable</a> <a href="/blog/tags/copy-paste/" style="font-size: 12.5px;">copy&paste</a> <a href="/blog/tags/cursor/" style="font-size: 15px;">cursor</a> <a href="/blog/tags/dateTime/" style="font-size: 10px;">dateTime</a> <a href="/blog/tags/delete/" style="font-size: 10px;">delete</a> <a href="/blog/tags/execCommand/" style="font-size: 12.5px;">execCommand</a> <a href="/blog/tags/forEach/" style="font-size: 10px;">forEach</a> <a href="/blog/tags/getters/" style="font-size: 10px;">getters</a> <a href="/blog/tags/git/" style="font-size: 10px;">git</a> <a href="/blog/tags/key-value/" style="font-size: 10px;">key/value</a> <a href="/blog/tags/keycode/" style="font-size: 10px;">keycode</a> <a href="/blog/tags/mouse-click-event/" style="font-size: 10px;">mouse_click_event</a> <a href="/blog/tags/mouse-cursor-get/" style="font-size: 10px;">mouse_cursor_get</a> <a href="/blog/tags/mouse-cursor-set/" style="font-size: 10px;">mouse_cursor_set</a> <a href="/blog/tags/new-map/" style="font-size: 10px;">new_map</a> <a href="/blog/tags/object/" style="font-size: 12.5px;">object</a> <a href="/blog/tags/onBeforeUnload/" style="font-size: 12.5px;">onBeforeUnload</a> <a href="/blog/tags/onTouchTap/" style="font-size: 10px;">onTouchTap</a> <a href="/blog/tags/params/" style="font-size: 10px;">params</a> <a href="/blog/tags/propTypes/" style="font-size: 10px;">propTypes</a> <a href="/blog/tags/property/" style="font-size: 10px;">property</a> <a href="/blog/tags/replace/" style="font-size: 10px;">replace</a> <a href="/blog/tags/replaceall/" style="font-size: 10px;">replaceall</a> <a href="/blog/tags/setRouteLeaveHook/" style="font-size: 10px;">setRouteLeaveHook</a> <a href="/blog/tags/span/" style="font-size: 12.5px;">span</a> <a href="/blog/tags/text/" style="font-size: 10px;">text</a> <a href="/blog/tags/text-overflow/" style="font-size: 10px;">text_overflow</a> <a href="/blog/tags/this/" style="font-size: 10px;">this</a> <a href="/blog/tags/window-open/" style="font-size: 10px;">window.open</a>
+            <a href="/blog/tags/EventSource를/" style="font-size: 10px;">EventSource를</a> <a href="/blog/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/blog/tags/IE/" style="font-size: 20px;">IE</a> <a href="/blog/tags/SSE/" style="font-size: 10px;">SSE</a> <a href="/blog/tags/ZWSP/" style="font-size: 10px;">ZWSP</a> <a href="/blog/tags/add-header/" style="font-size: 10px;">add_header</a> <a href="/blog/tags/align/" style="font-size: 10px;">align</a> <a href="/blog/tags/array/" style="font-size: 10px;">array</a> <a href="/blog/tags/axios/" style="font-size: 10px;">axios</a> <a href="/blog/tags/caret/" style="font-size: 12.5px;">caret</a> <a href="/blog/tags/caret-position/" style="font-size: 10px;">caret_position</a> <a href="/blog/tags/center/" style="font-size: 10px;">center</a> <a href="/blog/tags/closure/" style="font-size: 10px;">closure</a> <a href="/blog/tags/command/" style="font-size: 10px;">command</a> <a href="/blog/tags/contenteditable/" style="font-size: 17.5px;">contenteditable</a> <a href="/blog/tags/cookie/" style="font-size: 10px;">cookie</a> <a href="/blog/tags/copy-paste/" style="font-size: 12.5px;">copy&paste</a> <a href="/blog/tags/cursor/" style="font-size: 15px;">cursor</a> <a href="/blog/tags/dateTime/" style="font-size: 10px;">dateTime</a> <a href="/blog/tags/delete/" style="font-size: 10px;">delete</a> <a href="/blog/tags/execCommand/" style="font-size: 12.5px;">execCommand</a> <a href="/blog/tags/forEach/" style="font-size: 10px;">forEach</a> <a href="/blog/tags/getters/" style="font-size: 10px;">getters</a> <a href="/blog/tags/git/" style="font-size: 10px;">git</a> <a href="/blog/tags/ie/" style="font-size: 12.5px;">ie</a> <a href="/blog/tags/key-value/" style="font-size: 10px;">key/value</a> <a href="/blog/tags/keycode/" style="font-size: 10px;">keycode</a> <a href="/blog/tags/mouse-click-event/" style="font-size: 10px;">mouse_click_event</a> <a href="/blog/tags/mouse-cursor-get/" style="font-size: 10px;">mouse_cursor_get</a> <a href="/blog/tags/mouse-cursor-set/" style="font-size: 10px;">mouse_cursor_set</a> <a href="/blog/tags/new-map/" style="font-size: 10px;">new_map</a> <a href="/blog/tags/object/" style="font-size: 12.5px;">object</a> <a href="/blog/tags/onBeforeUnload/" style="font-size: 12.5px;">onBeforeUnload</a> <a href="/blog/tags/onTouchTap/" style="font-size: 10px;">onTouchTap</a> <a href="/blog/tags/params/" style="font-size: 10px;">params</a> <a href="/blog/tags/plugin/" style="font-size: 10px;">plugin</a> <a href="/blog/tags/propTypes/" style="font-size: 10px;">propTypes</a> <a href="/blog/tags/property/" style="font-size: 10px;">property</a> <a href="/blog/tags/recursive/" style="font-size: 10px;">recursive</a> <a href="/blog/tags/replace/" style="font-size: 10px;">replace</a> <a href="/blog/tags/replaceall/" style="font-size: 10px;">replaceall</a> <a href="/blog/tags/setRouteLeaveHook/" style="font-size: 10px;">setRouteLeaveHook</a> <a href="/blog/tags/span/" style="font-size: 12.5px;">span</a> <a href="/blog/tags/template/" style="font-size: 10px;">template</a> <a href="/blog/tags/text/" style="font-size: 10px;">text</a> <a href="/blog/tags/text-overflow/" style="font-size: 10px;">text_overflow</a> <a href="/blog/tags/this/" style="font-size: 10px;">this</a> <a href="/blog/tags/window-open/" style="font-size: 10px;">window.open</a>
         </div>
     </div>
 
