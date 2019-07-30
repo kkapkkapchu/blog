@@ -59,6 +59,38 @@ MyPlugin.install = function (Vue, options) {
 4. `new 생성자이름({})` 으로 인스턴스를 만든다.
 5. <span style="color:red">document.body.appendChild(인스턴스의 엘리먼트) 로 dom 위에 올린다.</span>
 
+```html
+<!-- NotificationTemplate.vue -->
+<template>
+  <notifications position="top right" v-bind="$attrs" v-on="$listeners">
+    <slot name="body" />
+  </notifications>
+</template>
+
+<script>
+  import Vue from "vue";
+  import Notifications from "vue-notification";
+
+  Vue.use(Notifications);
+
+  export default {
+    name: "NotificationTemplate",
+    methods: {
+      show(data) {
+        this.$notify(data);
+      }
+    }
+  };
+</script>
+
+<style scoped>
+  .notifications {
+    top: 80px !important;
+    right: 60px !important;
+  }
+</style>
+```
+
 ```js
 // plugins/notification/index.js
 import NotificationTemplate from "@/components/NotificationTemplate.vue";
